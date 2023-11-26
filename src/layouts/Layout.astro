@@ -1,0 +1,41 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import { Header } from "../components/Header";
+
+const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
+
+const pathname = new URL(Astro.request.url).pathname;
+const page = pathname.slice(1);
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <BaseHead title={title} description={description} image={image} />
+  </head>
+  <body class="flex flex-col">
+    <Header page={page} />
+    <slot />
+    <script is:inline>
+      const theme = (() => {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      })();
+
+      if (theme === "light") {
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.documentElement.classList.add("dark");
+      }
+      window.localStorage.setItem("theme", theme);
+    </script>
+  </body>
+</html>

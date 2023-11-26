@@ -1,0 +1,33 @@
+---
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+const posts = (await getCollection("blog")).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main class="flex justify-center">
+    <section class="max-w-5xl">
+      <ul>
+        {
+          posts.map((post) => (
+            <li>
+              <a href={`/posts/${post.slug}/`}>
+                <img
+                  width={720}
+                  height={360}
+                  src={post.data.heroImage}
+                  alt=""
+                />
+                <h4 class="title">{post.data.title}</h4>
+                <p class="date">{post.data.pubDate}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+</Layout>
