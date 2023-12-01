@@ -14,7 +14,7 @@ const page = pathname.slice(1);
     <BaseHead title={title} description={description} image={image} />
   </head>
   <body class="flex flex-col">
-    <Header page={page} />
+    <Header page={page} client:load />
     <slot />
     <script is:inline>
       const theme = (() => {

@@ -1,4 +1,6 @@
 import "./header.css";
+import { LightSwitch } from "./LightSwitch";
+import { Switch } from "./Switch";
 
 export const Header = (props: { page: string }) => {
   const selected = (page: string) =>
@@ -23,8 +25,7 @@ export const Header = (props: { page: string }) => {
           </a>
         </nav>
         <aside class="shrink-0 flex justify-end items-center gap-2 order-2 lg:order-3">
-          <input type="checkbox"></input>
-          <span class="align-center">LIGHT</span>
+          <LightSwitch />
         </aside>
       </div>
     </header>

@@ -1,0 +1,38 @@
+.switch-background {
+  margin: 0rem 1.5rem;
+  width: 2.5rem;
+  height: 1rem;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  cursor: pointer;
+  transition: border-color 0.5s ease-out;
+}
+
+.switch-display {
+  font-size: 1.25rem;
+  text-align: center;
+  line-height: 2rem;
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  transition:
+    border-color 0.5s ease-out,
+    background-color 0.5s ease-out,
+    content 0.5s ease-out,
+    transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.switch-display:not(.enabled) {
+  content: "☀";
+  transform: translate(-1rem, -0.65rem) rotate(-135deg);
+}
+
+.switch-display.enabled {
+  content: "🌙";
+  transform: translate(1.25rem, -0.65rem) rotate(0deg);
+}
