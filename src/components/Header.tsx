@@ -1,10 +1,9 @@
 import "./header.css";
 import { LightSwitch } from "./LightSwitch";
-import { Switch } from "./Switch";
 
 export const Header = (props: { page: string }) => {
   const selected = (page: string) =>
-    props.page == page ? "nav-link link-selected" : "nav-link";
+    props.page.startsWith(page) ? "nav-link link-selected" : "nav-link";
   return (
     <header class="flex justify-center content-center px-6 py-6">
       <div class="grow max-w-[96rem] flex flex-wrap gap-4 lg:gap-16 justify-between lg:justify-start content-center">
