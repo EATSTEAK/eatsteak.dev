@@ -30,9 +30,17 @@ export const LightSwitch: Component<{}> = () => {
         enabled={isDarkTheme()}
         onChange={(e) => setDarkTheme(e.target.checked)}
       >
-        <Show when={isDarkTheme()} fallback="L">
-          D
-        </Show>
+        <div class="w-full h-full flex justify-center items-center">
+          <Show
+            when={isDarkTheme()}
+            fallback={<img src="/images/sun.svg"></img>}
+          >
+            <img
+              src="/images/moon.svg"
+              class="dark:invert transition-[filter]"
+            ></img>
+          </Show>
+        </div>
       </Switch>
       <span class="align-center font-mono w-16">
         <Show when={isDarkTheme()} fallback="LIGHT">
