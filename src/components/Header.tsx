@@ -10,7 +10,10 @@ export const Header = (props: { page: string }) => {
       <div class="grow max-w-[96rem] flex flex-wrap gap-4 lg:gap-16 justify-between lg:justify-start content-center">
         <h2 class="shrink-0 min-w-fit order-1">
           <a href="/">
-            <img src="/logo.png" class="w-[170px]"></img>
+            <img
+              src="/logo.png"
+              class="w-[170px] dark:invert transition-[filter]"
+            ></img>
           </a>
         </h2>
         <nav class="grow flex justify-center lg:justify-start items-center gap-8 order-3 lg:order-2 basis-full lg:basis-1">

@@ -32,8 +32,15 @@ export const Switch: Component<
   };
   return (
     <>
-      <div onClick={handleClick} class="switch-background">
-        <div class={`switch-display${isEnabled() ? " enabled" : ""}`}>
+      <div
+        onClick={handleClick}
+        class="switch-background transition-colors bg-white border-black dark:bg-slate-700 dark:border-white"
+      >
+        <div
+          class={`switch-display transition-colors bg-white border-black dark:bg-slate-700 dark:border-white${
+            isEnabled() ? " enabled" : ""
+          }`}
+        >
           {self.children}
         </div>
         <input
