@@ -23,8 +23,8 @@ h3,
 h4,
 h5,
 h6 {
+  font-weight: 500;
   margin: 0 0 0.5rem 0;
-  color: rgb(var(--black));
   line-height: 1.2;
 }
 h1 {
@@ -49,5 +49,5 @@ b {
 
 hr {
   border: none;
-  border-top: 1px solid rgb(var(--gray-light));
+  border-top: 1px solid #6b7280;
 }
