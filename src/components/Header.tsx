@@ -11,7 +11,7 @@ export const Header = (props: { page: string }) => {
         <h2 class="shrink-0 min-w-fit order-1">
           <a href="/">
             <img
-              src="/logo.png"
+              src="/images/logo.png"
               class="w-[170px] dark:invert transition-[filter]"
             ></img>
           </a>
