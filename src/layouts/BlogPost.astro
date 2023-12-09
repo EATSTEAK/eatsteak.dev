@@ -3,12 +3,19 @@ import type { CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
 import { Profile } from "../components/Profile";
 import { FormattedDate } from "../components/FormattedDate";
-import { Tags } from "../components/Tags";
+import { Topics } from "../components/Topics";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage, category, tags } =
-  Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  category,
+  topics,
+} = Astro.props;
 ---
 
 <Layout title={title} description={description}>
@@ -28,7 +35,7 @@ const { title, description, pubDate, updatedDate, heroImage, category, tags } =
               >{category ?? "Uncategorized"}</legend
             >
             <h1>{title}</h1>
-            {tags && <Tags tags={tags} />}
+            {topics && <Topics topics={topics} />}
             <div class="date text-gray-500">
               <FormattedDate dateTime={pubDate} client:only />
               {
