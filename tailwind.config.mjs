@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -7,8 +7,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['"Monoplex KR"', ...defaultTheme.fontFamily.mono]
-      }
+        head: ['"Jost"', '"Noto Sans KR"', ...defaultTheme.fontFamily.sans],
+        sans: ['"Noto Sans KR"', ...defaultTheme.fontFamily.sans],
+        mono: ['"Monoplex KR"', ...defaultTheme.fontFamily.mono],
+      },
     },
   },
   plugins: [],
