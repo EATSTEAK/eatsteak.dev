@@ -47,6 +47,10 @@ b {
   font-weight: 700;
 }
 
+p {
+  margin-bottom: 2rem;
+}
+
 hr {
   border: none;
   border-top: 1px solid #6b7280;
