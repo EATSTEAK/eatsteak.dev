@@ -26,7 +26,13 @@ export const LightSwitch: Component<{}> = () => {
   });
   return (
     <div class="flex items-center justify-start">
+      <label for="lightswitch" class="align-center font-mono hidden lg:inline">
+        <Show when={isDarkTheme()} fallback="LIGHT">
+          DARK
+        </Show>
+      </label>
       <Switch
+        id="lightswitch"
         enabled={isDarkTheme()}
         onChange={(e) => setDarkTheme(e.target.checked)}
       >
@@ -42,11 +48,6 @@ export const LightSwitch: Component<{}> = () => {
           </Show>
         </div>
       </Switch>
-      <span class="align-center font-mono w-16">
-        <Show when={isDarkTheme()} fallback="LIGHT">
-          DARK
-        </Show>
-      </span>
     </div>
   );
 };
