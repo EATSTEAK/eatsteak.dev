@@ -1,4 +1,6 @@
 .nav-link {
+  @apply font-head;
+
   box-sizing: border-box;
   text-transform: uppercase;
   letter-spacing: 0.1rem;

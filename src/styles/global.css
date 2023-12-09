@@ -1,58 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
-  font-family: "MonoplexKR-Regular";
+  font-family: MonoplexKR-Regular;
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-kr@1.0/MonoplexKR-Regular.woff2")
     format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 
-body {
-  font-family: "Jost", "Noto Sans KR", sans-serif;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  font-size: 16px;
-  line-height: 1.7;
-}
+@layer base {
+  html {
+    @apply font-sans;
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 500;
-  margin: 0 0 0.5rem 0;
-  line-height: 1.2;
-}
-h1 {
-  font-size: 3.052em;
-}
-h2 {
-  font-size: 2.441em;
-}
-h3 {
-  font-size: 1.953em;
-}
-h4 {
-  font-size: 1.563em;
-}
-h5 {
-  font-size: 1.25em;
-}
-strong,
-b {
-  font-weight: 700;
-}
+  body {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 16px;
+    line-height: 1.7;
+  }
 
-p {
-  margin-bottom: 2rem;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-head;
 
-hr {
-  margin: 1rem 25%;
-  border: none;
-  border-top: 1px solid #6b7280;
+    font-weight: 500;
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: 3.052em;
+  }
+
+  h2 {
+    font-size: 2.441em;
+  }
+
+  h3 {
+    font-size: 1.953em;
+  }
+
+  h4 {
+    font-size: 1.563em;
+  }
+
+  h5 {
+    font-size: 1.25em;
+  }
+  
+  strong,
+  b {
+    font-weight: 700;
+  }
+
+  p {
+    margin-bottom: 2rem;
+  }
+
+  hr {
+    margin: 1rem 25%;
+    border: none;
+    border-top: 1px solid #6b7280;
+  }
 }
