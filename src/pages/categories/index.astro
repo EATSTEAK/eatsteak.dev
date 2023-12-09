@@ -1,9 +1,17 @@
 ---
-import { Intro } from "../../components/Intro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <Intro />
+  <main class="flex flex-col items-stretch justify-start">
+    <section class="my-8 mx-12 lg:mx-auto w-full max-w-[96rem]">
+      <h2 class="uppercase">Rust</h2>
+      <div></div>
+    </section>
+    <section class="my-8 mx-12 lg:mx-auto w-full max-w-[96rem]">
+      <h2 class="uppercase">Uncategorized</h2>
+      <div></div>
+    </section>
+  </main>
 </Layout>
