@@ -13,9 +13,11 @@ const { title, description, pubDate, updatedDate, heroImage, category, tags } =
 
 <Layout title={title} description={description}>
   <main
-    class="self-center flex justify-between w-full max-w-[96rem] px-6 lg:px-0 xl:gap-12"
+    class="self-center flex flex-wrap justify-between w-full max-w-[96rem] xl:flex-nowrap px-6 lg:px-0 xl:gap-12"
   >
-    <div class="grow flex justify-center w-full lg:w-auto">
+    <div
+      class="grow flex flex-wrap justify-center w-full basis-full xl:basis-auto lg:w-auto"
+    >
       <article class="w-full max-w-4xl">
         <div class="image min-h-[16rem]">
           {heroImage && <img class="max-w-100%" src={heroImage} alt="" />}
@@ -44,9 +46,12 @@ const { title, description, pubDate, updatedDate, heroImage, category, tags } =
         </div>
       </article>
     </div>
-    <aside class="grow hidden xl:block max-w-sm">
+    <aside
+      class="grow px-12 py-8 xl:p-0 max-w-[96rem] xl:max-w-sm mx-auto xl:mx-0"
+    >
+      <hr class="block xl:hidden" />
       <Profile />
-      <hr />
+      <hr class="hidden xl:block" />
     </aside>
   </main>
 </Layout>
