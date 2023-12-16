@@ -118,12 +118,12 @@
   }
 
   .slide-to-top {
-    animation: slide-to-top 700ms ease-out;
+    animation: slide-to-top 300ms ease-out;
   }
 
   @keyframes slide-to-top {
     0% {
-      transform: translate(0, 20%);
+      transform: translate(0, 10%);
       opacity: 0;
     }
 
