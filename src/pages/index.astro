@@ -3,6 +3,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { Intro } from "../components/Intro";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import { FormattedDate } from "../components/FormattedDate";
+import { Topics } from "../components/Topics";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
@@ -13,20 +15,33 @@ const posts = (await getCollection("blog")).sort(
     <Intro />
     <section class="my-8 px-12 lg:mx-auto w-full max-w-[96rem]">
       <h2 class="uppercase">Recent Posts</h2>
-      <div>
+      <div class="flex flex-wrap gap-2">
         {
           posts.map((post) => (
             <article>
               <a href={`/posts/${post.slug}/`}>
-                <img
-                  width={720}
-                  height={360}
-                  src={post.data.heroImage}
-                  alt=""
-                />
+                {post.data.heroImage && (
+                  <div
+                    style={`max-width:16rem;height:9rem;background-size: cover;background-position:center;background-image: url(${post.data.heroImage})`}
+                  />
+                )}
                 <h4 class="title">{post.data.title}</h4>
-                <p class="date">{post.data.pubDate}</p>
+                <div class="date text-gray-500">
+                  <FormattedDate dateTime={post.data.pubDate} client:only />
+                  {post.data.updatedDate && (
+                    <div class="last-updated-on">
+                      |
+                      <FormattedDate
+                        dateTime={post.data.updatedDate}
+                        client:only
+                      />{" "}
+                      수정
+                    </div>
+                  )}
+                </div>
+                {post.data.topics && <Topics topics={post.data.topics} />}
               </a>
+              <hr />
             </article>
           ))
         }
