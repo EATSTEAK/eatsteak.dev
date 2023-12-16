@@ -1,6 +1,7 @@
+import type { JSX, Component } from "solid-js";
 import { AnimatedLogo } from "./AnimatedLogo";
 
-export const Intro = () => {
+export const Intro: Component<{ recentPosts: Flatten<ContentEntryMap["blog"]>}> = () => {
   return (
     <main class="w-full flex flex-col items-stretch justify-start">
       <section class="relative h-72">
