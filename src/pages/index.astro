@@ -2,8 +2,35 @@
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { Intro } from "../components/Intro";
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <Intro />
+  <main class="w-full flex flex-col items-stretch justify-start">
+    <Intro />
+    <section class="my-8 px-12 lg:mx-auto w-full max-w-[96rem]">
+      <h2 class="uppercase">Recent Posts</h2>
+      <div>
+        {
+          posts.map((post) => (
+            <article>
+              <a href={`/posts/${post.slug}/`}>
+                <img
+                  width={720}
+                  height={360}
+                  src={post.data.heroImage}
+                  alt=""
+                />
+                <h4 class="title">{post.data.title}</h4>
+                <p class="date">{post.data.pubDate}</p>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </main>
 </Layout>
