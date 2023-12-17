@@ -1,5 +1,6 @@
 import type { JSX, Component } from "solid-js";
 import { AnimatedLogo } from "./AnimatedLogo";
+import { Button } from "./Button";
 
 export const Intro: Component<{}> = () => {
   return (
@@ -23,14 +24,10 @@ export const Intro: Component<{}> = () => {
           >
             Burning-Hot Applications
           </p>
-          <a
-            class="py-2 px-4 transition-colors border-2
-              before:bg-white bg-gradient-to-r hover-fill-to-right from-gray-800 to-gray-800 text-gray-800 hover:text-white border-gray-800
-               dark:before:bg-gray-800 dark:from-white dark:to-white dark:text-white dark:hover:text-gray-800 dark:border-white"
-            href="/about"
+          <Button href="/about"
           >
-            더 알아보기
-          </a>
+            프로필 보기
+          </Button>
         </div>
       </div>
     </section>
