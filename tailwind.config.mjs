@@ -9,7 +9,7 @@ export default {
       fontFamily: {
         head: ['"Jost"', '"Noto Sans KR"', ...defaultTheme.fontFamily.sans],
         sans: ['"Noto Sans KR"', ...defaultTheme.fontFamily.sans],
-        mono: ['"Monoplex KR"', ...defaultTheme.fontFamily.mono],
+        mono: ['"MonoplexKR"', ...defaultTheme.fontFamily.mono],
       },
     },
   },
