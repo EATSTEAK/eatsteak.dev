@@ -7,13 +7,15 @@ export async function getStaticPaths() {
   const posts = await getCollection("blog");
   const initial: { [topic: string]: number } = {};
   return Object.entries(
-    posts.reduce((object, post) => {
-      const topics = post.data.topics ?? [];
-      topics.forEach((topic) => {
-        object[topic] += 1;
-      });
-      return object;
-    }, initial)
+    posts
+      .filter((post) => post.data.hidden !== true)
+      .reduce((object, post) => {
+        const topics = post.data.topics ?? [];
+        topics.forEach((topic) => {
+          object[topic] += 1;
+        });
+        return object;
+      }, initial)
   ).map(([topic, count]) => ({
     params: { topic },
     props: { topic, count },
