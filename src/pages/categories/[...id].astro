@@ -13,9 +13,9 @@ export async function getStaticPaths() {
 
 const category = Astro.props;
 
-const posts = (await getCollection("blog")).filter((post) => post.data.hidden !== true).filter(
-  (post) => post.data.category === category.id
-);
+const posts = (await getCollection("blog"))
+  .filter((post) => post.data.hidden !== true)
+  .filter((post) => post.data.category === category.id);
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -47,6 +47,11 @@ const posts = (await getCollection("blog")).filter((post) => post.data.hidden !=
             <PostItem post={post} client:only />
           </>
         ))
+      }
+      {
+        posts.length === 0 && (
+          <p class="mx-auto my-8">읽을 수 있는 글이 없습니다.</p>
+        )
       }
     </section>
   </main>
