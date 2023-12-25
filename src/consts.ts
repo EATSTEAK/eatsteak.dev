@@ -12,11 +12,11 @@ type Category = {
     light: {
       bg: string;
       text: string;
-    }
+    };
     dark: {
       bg: string;
       text: string;
-    }
+    };
   };
 };
 
@@ -28,11 +28,11 @@ export const CATEGORIES: { [category: string]: Category } = {
     color: {
       light: {
         bg: "#991b1b",
-        text: "#fff",
+        text: "#ffffff",
       },
       dark: {
         bg: "#991b1b",
-        text: "#fff",
+        text: "#ffffff",
       },
     },
   },

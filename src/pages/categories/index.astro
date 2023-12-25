@@ -41,7 +41,7 @@ const topics = Object.keys(await getTopics());
               categories.map((category) => (
                 <a
                   href={`/categories/${category.id}`}
-                  class="border-2 p-4 border-slate-700 dark:border-white bg-red-800 text-white basis-full lg:basis-[calc(50%-0.5rem)]"
+                  class={`border-2 p-4 border-slate-700 dark:border-white bg-category-${category.id}-bg text-category-${category.id}-text dark:bg-category-${category.id}-bg-dark dark:text-category-${category.id}-text-dark basis-full lg:basis-[calc(50%-0.5rem)]`}
                 >
                   <h2 class="uppercase">{category.name}</h2>
                   <p>{category.description}</p>

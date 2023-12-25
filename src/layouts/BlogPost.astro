@@ -4,6 +4,7 @@ import Layout from "./Layout.astro";
 import { Profile } from "../components/Profile";
 import { FormattedDate } from "../components/FormattedDate";
 import { Topics } from "../components/Topics";
+import { CategoryLabel } from "../components/CategoryLabel";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -31,9 +32,7 @@ const {
         </div>
         <div class="prose">
           <div class="title mb-8">
-            <legend class="uppercase font-bold tracking-widest mb-2"
-              >{category ?? "Uncategorized"}</legend
-            >
+            <CategoryLabel category={category ?? "uncategorized"} />
             <h1>{title}</h1>
             {topics && <Topics topics={topics} />}
             <div class="date text-gray-500">

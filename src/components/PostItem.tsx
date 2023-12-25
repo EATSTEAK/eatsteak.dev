@@ -2,6 +2,7 @@ import type { CollectionEntry } from "astro:content";
 import { type JSX, type Component, Show } from "solid-js";
 import { FormattedDate } from "./FormattedDate";
 import { Topics } from "./Topics";
+import { CategoryLabel } from "./CategoryLabel";
 
 export const PostItem: Component<{ post: CollectionEntry<"blog"> }> = (
   props
@@ -21,9 +22,7 @@ export const PostItem: Component<{ post: CollectionEntry<"blog"> }> = (
             }}
           ></div>
         </Show>
-        <legend class="uppercase font-bold tracking-widest mb-2">
-          {props.post.data.category ?? "Uncategorized"}
-        </legend>
+        <CategoryLabel category={props.post.data.category ?? "uncategorized"} />
         <h4>
           <span class="nav-link">{props.post.data.title}</span>
         </h4>
