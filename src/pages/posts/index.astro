@@ -3,7 +3,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { PostItem } from "../../components/PostItem";
-const posts = (await getCollection("blog")).sort(
+const posts = (await getCollection("blog")).filter((post) => post.data.hidden !== true).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---

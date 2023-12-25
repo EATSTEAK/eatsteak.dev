@@ -1,6 +1,5 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import { Topics } from "../../components/Topics";
 import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 import { PostItem } from "../../components/PostItem";
@@ -14,7 +13,7 @@ export async function getStaticPaths() {
 
 const category = Astro.props;
 
-const posts = (await getCollection("blog")).filter(
+const posts = (await getCollection("blog")).filter((post) => post.data.hidden !== true).filter(
   (post) => post.data.category === category.id
 );
 ---
