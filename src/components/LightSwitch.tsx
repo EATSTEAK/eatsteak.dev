@@ -1,20 +1,9 @@
 import { createSignal, type Component, Show, createEffect } from "solid-js";
 import { Switch } from "./Switch";
-
-const initializeTheme = () => {
-  let theme;
-  if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-    theme = (localStorage.getItem("theme") as "light" | "dark") === "dark";
-  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    theme = true;
-  } else {
-    theme = false;
-  }
-  return theme;
-};
+import theme from "../utils/theme";
 
 export const LightSwitch: Component<{}> = () => {
-  const [isDarkTheme, setDarkTheme] = createSignal(initializeTheme());
+  const [isDarkTheme, setDarkTheme] = theme;
   createEffect(() => {
     if (isDarkTheme()) {
       document.documentElement.classList.add("dark");
