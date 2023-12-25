@@ -27,11 +27,11 @@ export const CATEGORIES: { [category: string]: Category } = {
     description: "모던한 시스템 프로그래밍 언어",
     color: {
       light: {
-        bg: "#ffff00",
+        bg: "#991b1b",
         text: "#fff",
       },
       dark: {
-        bg: "#ffff00",
+        bg: "#991b1b",
         text: "#fff",
       },
     },
