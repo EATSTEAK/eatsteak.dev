@@ -28,15 +28,20 @@ const topics = Object.keys(await getTopics());
         class="grill-background before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-1 w-full h-full"
       >
         <div
-          class="py-8 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-start justify-start gap-2"
+          class="px-6 py-8 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-start justify-start gap-2"
         >
-          <h2 class="uppercase">Categories</h2>
-          <div class="flex flex-wrap gap-4 w-full">
+          <h2
+            class="px-2 uppercase bg-gray-800 text-white
+          dark:bg-white dark:text-gray-800"
+          >
+            Categories
+          </h2>
+          <div class="flex flex-wrap gap-x-4 w-full">
             {
               categories.map((category) => (
                 <a
                   href={`/categories/${category.id}`}
-                  class="border-2 p-4 border-slate-700 dark:border-white bg-red-800 text-white basis-[calc(50%-0.5rem)]"
+                  class="border-2 p-4 border-slate-700 dark:border-white bg-red-800 text-white basis-full lg:basis-[calc(50%-0.5rem)]"
                 >
                   <h2 class="uppercase">{category.name}</h2>
                   <p>{category.description}</p>
@@ -47,7 +52,7 @@ const topics = Object.keys(await getTopics());
         </div>
       </div>
     </section>
-    <section class="my-8 mx-12 lg:mx-auto w-full max-w-[96rem]">
+    <section class="px-6 my-8 lg:mx-auto w-full max-w-[96rem]">
       <h2 class="uppercase">Topics</h2>
       <div><Topics topics={topics} /></div>
     </section>

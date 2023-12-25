@@ -38,10 +38,20 @@ const posts = await getPostsByTopic(topic);
         class="grill-background before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-1 w-full h-full"
       >
         <div
-          class="py-8 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-start justify-start gap-2"
+          class="px-6 py-8 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-start justify-start gap-2"
         >
-          <h4 class="uppercase">Topic</h4>
-          <h2>{topic}</h2>
+          <h4
+            class="px-2 uppercase bg-gray-800 text-white
+          dark:bg-white dark:text-gray-800"
+          >
+            Topic
+          </h4>
+          <h2
+            class="px-2 bg-gray-800 text-white
+          dark:bg-white dark:text-gray-800"
+          >
+            {topic}
+          </h2>
         </div>
       </div>
     </section>

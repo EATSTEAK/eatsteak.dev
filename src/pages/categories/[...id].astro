@@ -26,14 +26,24 @@ const posts = (await getCollection("blog")).filter(
         class="grill-background before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-1 w-full h-full"
       >
         <div
-          class="py-8 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-start justify-start gap-2"
+          class="px-6 py-2 lg:py-8 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-start justify-start gap-2"
         >
-          <h2 class="uppercase">{category.name}</h2>
-          <p>{category.description}</p>
+          <h2
+            class="px-2 uppercase bg-gray-800 text-white
+          dark:bg-white dark:text-gray-800"
+          >
+            {category.name}
+          </h2>
+          <p
+            class="px-2 bg-gray-800 text-white
+          dark:bg-white dark:text-gray-800"
+          >
+            {category.description}
+          </p>
         </div>
       </div>
     </section>
-    <section class="my-8 flex flex-col gap-4 lg:mx-auto w-full max-w-5xl">
+    <section class="px-6 my-8 flex flex-col gap-4 lg:mx-auto w-full max-w-5xl">
       {
         posts.map((post) => (
           <>

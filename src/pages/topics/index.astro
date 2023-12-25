@@ -6,13 +6,13 @@ import Layout from "../../layouts/Layout.astro";
 
 async function getTopics() {
   const posts = await getCollection("blog");
-  const initial: { [topic: string]: number; } = {};
+  const initial: { [topic: string]: number } = {};
   return posts.reduce((object, post) => {
     const topics = post.data.topics ?? [];
     topics.forEach((topic) => {
       object[topic] += 1;
-    })
-    return object
+    });
+    return object;
   }, initial);
 }
 
@@ -26,7 +26,7 @@ const topics = Object.keys(await getTopics());
         class="grill-background before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-1 w-full h-full"
       >
         <div
-          class="slide-to-top py-8 px-12 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-center justify-center gap-2"
+          class="slide-to-top py-8 px-6 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-center justify-center gap-2"
         >
           <p
             class="py-2 px-2 m-0 font-head font-bold text-5xl bg-gray-800 text-white
