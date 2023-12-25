@@ -4,16 +4,20 @@ import { Intro } from "../components/Intro";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { PostItem } from "../components/PostItem";
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+import { Button } from "../components/Button";
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <main class="w-full flex flex-col items-stretch justify-start">
     <Intro />
     <section class="my-8 px-12 lg:mx-auto w-full max-w-[96rem]">
-      <hr />
+      <div class="mb-4 flex items-center justify-between">
+        <h2 class="uppercase">Recent posts</h2>
+        <Button href="/posts">글 더 보기...</Button>
+      </div>
       <div class="flex flex-col gap-8">
         {posts.map((post) => <PostItem post={post} client:only />)}
       </div>

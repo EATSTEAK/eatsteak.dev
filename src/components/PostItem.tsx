@@ -23,7 +23,7 @@ export const PostItem: Component<{ post: CollectionEntry<"blog"> }> = (
           ></div>
         </Show>
         <CategoryLabel category={props.post.data.category ?? "uncategorized"} />
-        <h4>
+        <h4 class="mt-2">
           <span class="nav-link">{props.post.data.title}</span>
         </h4>
         <div class="date mb-4 text-gray-500">
