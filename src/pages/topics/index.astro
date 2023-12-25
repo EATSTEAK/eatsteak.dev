@@ -1,49 +1,39 @@
 ---
 import { getCollection } from "astro:content";
 import { Topics } from "../../components/Topics";
-import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from "../../consts";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 
 async function getTopics() {
   const posts = await getCollection("blog");
-  const initial: { [topic: string]: number } = {};
+  const initial: { [topic: string]: number; } = {};
   return posts.reduce((object, post) => {
     const topics = post.data.topics ?? [];
     topics.forEach((topic) => {
       object[topic] += 1;
-    });
-    return object;
+    })
+    return object
   }, initial);
 }
-
-const categories = Object.values(CATEGORIES);
 
 const topics = Object.keys(await getTopics());
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <main class="flex flex-col items-stretch justify-start">
-    <section class="relative h-fit">
+    <section class="relative h-72">
       <div
         class="grill-background before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-1 w-full h-full"
       >
         <div
-          class="py-8 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-start justify-start gap-2"
+          class="slide-to-top py-8 px-12 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-center justify-center gap-2"
         >
-          <h2 class="uppercase">Categories</h2>
-          <div class="flex flex-wrap gap-4 w-full">
-            {
-              categories.map((category) => (
-                <a
-                  href={`/categories/${category.id}`}
-                  class="border-2 p-4 border-slate-700 dark:border-white bg-red-800 text-white basis-[calc(50%-0.5rem)]"
-                >
-                  <h2 class="uppercase">{category.name}</h2>
-                  <p>{category.description}</p>
-                </a>
-              ))
-            }
-          </div>
+          <p
+            class="py-2 px-2 m-0 font-head font-bold text-5xl bg-gray-800 text-white
+          dark:bg-white dark:text-gray-800"
+          >
+            Under Construction...
+          </p>
         </div>
       </div>
     </section>

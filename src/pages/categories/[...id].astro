@@ -1,0 +1,46 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Topics } from "../../components/Topics";
+import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from "../../consts";
+import Layout from "../../layouts/Layout.astro";
+import { PostItem } from "../../components/PostItem";
+
+export async function getStaticPaths() {
+  return Object.values(CATEGORIES).map((category) => ({
+    params: { id: category.id },
+    props: category,
+  }));
+}
+
+const category = Astro.props;
+
+const posts = (await getCollection("blog")).filter(
+  (post) => post.data.category === category.id
+);
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main class="flex flex-col items-stretch justify-start">
+    <section class="relative h-fit">
+      <div
+        class="grill-background before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-1 w-full h-full"
+      >
+        <div
+          class="py-8 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-start justify-start gap-2"
+        >
+          <h2 class="uppercase">{category.name}</h2>
+          <p>{category.description}</p>
+        </div>
+      </div>
+    </section>
+    <section class="my-8 flex flex-col gap-4 lg:mx-auto w-full max-w-5xl">
+      {
+        posts.map((post) => (
+          <>
+            <PostItem post={post} client:only />
+          </>
+        ))
+      }
+    </section>
+  </main>
+</Layout>

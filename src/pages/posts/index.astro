@@ -10,8 +10,14 @@ const posts = (await getCollection("blog")).sort(
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <main class="flex justify-center">
-    <section class="flex flex-col gap-4 max-w-5xl">
-      {posts.map((post) => <PostItem post={post} client:only />)}
+    <section class="flex flex-col gap-4 max-w-5xl w-full">
+      {
+        posts.map((post) => (
+          <>
+            <PostItem post={post} client:only />
+          </>
+        ))
+      }
     </section>
   </main>
 </Layout>
