@@ -6,6 +6,7 @@ import { getCollection } from "astro:content";
 import { PostItem } from "../components/PostItem";
 import { Button } from "../components/Button";
 const posts = (await getCollection("blog"))
+  .filter((post) => post.data.hidden !== true)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 ---
