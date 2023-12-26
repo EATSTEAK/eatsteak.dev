@@ -19,10 +19,10 @@ export const Header = (props: { page: string }) => {
           <a class={selected("about")} href="/about">
             About
           </a>
-          <a class={selected("posts")} href="/posts">
+          <a class={selected("post")} href="/post">
             Posts
           </a>
-          <a class={selected("categories")} href="/categories">
+          <a class={selected("category")} href="/category">
             Categories
           </a>
         </nav>

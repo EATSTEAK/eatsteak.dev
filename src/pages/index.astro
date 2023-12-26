@@ -17,7 +17,7 @@ const posts = (await getCollection("blog"))
     <section class="my-8 px-12 lg:mx-auto w-full max-w-[96rem]">
       <div class="mb-4 flex items-center justify-between">
         <h2 class="uppercase">Recent posts</h2>
-        <Button href="/posts">글 더 보기...</Button>
+        <Button href="/post">글 더 보기...</Button>
       </div>
       <div class="flex flex-col gap-8">
         {posts.map((post) => <PostItem post={post} client:only />)}

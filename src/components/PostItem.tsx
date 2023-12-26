@@ -9,7 +9,7 @@ export const PostItem: Component<{ post: CollectionEntry<"blog"> }> = (
 ) => {
   return (
     <article>
-      <a href={`/posts/${props.post.slug}`}>
+      <a href={`/post/${props.post.slug}`}>
         <Show when={props.post.data.heroImage}>
           <div
             class="mb-4"
