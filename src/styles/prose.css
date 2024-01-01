@@ -1,0 +1,65 @@
+.content strong,
+.content b {
+  font-weight: 700;
+}
+
+.content a {
+  @apply text-blue-600;
+}
+
+.content a:hover {
+  @apply text-blue-800;
+}
+
+.content p {
+  margin-bottom: 2em;
+}
+
+.content textarea {
+  width: 100%;
+  font-size: 16px;
+}
+
+.content input {
+  font-size: 16px;
+}
+
+.content table {
+  width: 100%;
+}
+
+.content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.content code {
+  padding: 2px 5px;
+  background-color: rgb(var(--gray-light));
+  border-radius: 2px;
+}
+
+.content pre {
+  padding: 1.5em;
+  border-radius: 8px;
+}
+
+.content pre > code {
+  all: unset;
+}
+
+.content blockquote {
+  border-left: 4px solid var(--accent);
+  padding: 0 0 0 20px;
+  margin: 0;
+  font-size: 1.333em;
+}
+
+.content ol {
+  list-style: decimal inside;
+}
+
+.content ul {
+  list-style: disc inside;
+}

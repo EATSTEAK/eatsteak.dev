@@ -5,6 +5,7 @@ import { Profile } from "../components/Profile";
 import { FormattedDate } from "../components/FormattedDate";
 import { Topics } from "../components/Topics";
 import { CategoryLabel } from "../components/CategoryLabel";
+import "../styles/prose.css";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -34,7 +35,13 @@ const {
           <div class="title mb-8">
             <CategoryLabel category={category ?? "uncategorized"} />
             <h1>{title}</h1>
-            {topics && <Topics topics={topics} />}
+            {
+              topics && (
+                <div class="topics mb-2">
+                  <Topics topics={topics} />
+                </div>
+              )
+            }
             <div class="date text-gray-500">
               <FormattedDate dateTime={pubDate} client:only />
               {
@@ -48,7 +55,9 @@ const {
             </div>
             <hr />
           </div>
-          <slot />
+          <div class="content">
+            <slot />
+          </div>
         </div>
       </article>
     </div>
