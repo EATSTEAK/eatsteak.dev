@@ -2,7 +2,7 @@ import { type JSX, type Component, Show } from "solid-js";
 import { CATEGORIES } from "../consts";
 
 export const CategoryLabel: Component<{ category: string }> = (props) => {
-  const category = CATEGORIES?.[props.category];
+  const category = CATEGORIES?.[props.category] ?? CATEGORIES?.["uncategorized"];
   return (
     <Show
       when={category}
