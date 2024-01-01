@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import { Topics } from "../../components/Topics";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
+import { Container } from "../../components/Container";
 
 async function getTopics() {
   const posts = await getCollection("blog");
@@ -23,9 +24,9 @@ const topics = Object.keys(await getTopics());
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <main class="flex flex-col items-stretch justify-start">
-    <section class="my-8 px-6 lg:mx-auto w-full max-w-[96rem]">
+    <Container varient="wide">
       <h2 class="uppercase">Topics</h2>
       <div><Topics topics={topics} /></div>
-    </section>
+    </Container>
   </main>
 </Layout>

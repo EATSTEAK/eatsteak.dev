@@ -3,6 +3,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { type CollectionEntry, getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { PostItem } from "../../components/PostItem";
+import { GrillContainer } from "../../components/GrillContainer";
+import { Container } from "../../components/Container";
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   const initial: { [topic: string]: number } = {};
@@ -33,29 +35,21 @@ const posts = await getPostsByTopic(topic);
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <main class="flex flex-col items-stretch justify-start">
-    <section class="relative h-fit">
-      <div
-        class="grill-background before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-1 w-full h-full"
+    <GrillContainer parentClassOverride="relative h-fit">
+      <h4
+        class="px-2 uppercase bg-gray-800 text-white
+          dark:bg-white dark:text-gray-800"
       >
-        <div
-          class="slide-to-top px-6 py-8 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-start justify-start gap-2"
-        >
-          <h4
-            class="px-2 uppercase bg-gray-800 text-white
+        Topic
+      </h4>
+      <h2
+        class="px-2 bg-gray-800 text-white
           dark:bg-white dark:text-gray-800"
-          >
-            Topic
-          </h4>
-          <h2
-            class="px-2 bg-gray-800 text-white
-          dark:bg-white dark:text-gray-800"
-          >
-            {topic}
-          </h2>
-        </div>
-      </div>
-    </section>
-    <section class="my-8 flex flex-col gap-4 lg:mx-auto w-full max-w-5xl">
+      >
+        {topic}
+      </h2>
+    </GrillContainer>
+    <Container>
       {
         posts.map((post) => (
           <>
@@ -63,6 +57,6 @@ const posts = await getPostsByTopic(topic);
           </>
         ))
       }
-    </section>
+    </Container>
   </main>
 </Layout>

@@ -36,4 +36,19 @@ export const CATEGORIES: { [category: string]: Category } = {
       },
     },
   },
+  uncategorized: {
+    id: "uncategorized",
+    name: "Uncategorized",
+    description: "분류 없는 글",
+    color: {
+      light: {
+        bg: "#1F2937",
+        text: "#ffffff",
+      },
+      dark: {
+        bg: "#1F2937",
+        text: "#ffffff",
+      },
+    },
+  },
 };

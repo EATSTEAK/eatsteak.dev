@@ -5,6 +5,7 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { PostItem } from "../components/PostItem";
 import { Button } from "../components/Button";
+import { Container } from "../components/Container";
 const posts = (await getCollection("blog"))
   .filter((post) => post.data.hidden !== true)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -14,7 +15,7 @@ const posts = (await getCollection("blog"))
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <main class="w-full flex flex-col items-stretch justify-start">
     <Intro />
-    <section class="my-8 px-12 lg:mx-auto w-full max-w-[96rem]">
+    <Container varient="wide">
       <div class="mb-4 flex items-center justify-between">
         <h2 class="uppercase">Recent posts</h2>
         <Button href="/post">글 더 보기...</Button>
@@ -22,6 +23,6 @@ const posts = (await getCollection("blog"))
       <div class="flex flex-col gap-8">
         {posts.map((post) => <PostItem post={post} client:only />)}
       </div>
-    </section>
+    </Container>
   </main>
 </Layout>
