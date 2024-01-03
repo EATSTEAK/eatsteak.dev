@@ -5,10 +5,25 @@
 
 .content a {
   @apply text-blue-600;
+
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position-y: 100%;
+  transition: background-size 0.25s ease-out;
+}
+
+:not(.dark) .content a {
+  background-image: radial-gradient(black, black);
+}
+
+.dark .content a {
+  background-image: radial-gradient(white, white);
 }
 
 .content a:hover {
   @apply text-blue-800;
+
+  background-size: 100% 2px;
 }
 
 .content p {
@@ -61,5 +76,13 @@
 }
 
 .content ul {
-  list-style: disc inside;
+  list-style: "- " inside;
+}
+
+.content li > ol {
+  padding-left: 1.5rem;
+}
+
+.content li > ul {
+  padding-left: 1.5rem;
 }
