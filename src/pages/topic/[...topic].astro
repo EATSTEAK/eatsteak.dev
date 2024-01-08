@@ -53,7 +53,7 @@ const posts = await getPostsByTopic(topic);
       {
         posts.map((post) => (
           <>
-            <PostItem post={post} client:only />
+            <PostItem post={post} client:only="solid-js" />
           </>
         ))
       }

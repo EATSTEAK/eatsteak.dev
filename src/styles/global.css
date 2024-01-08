@@ -119,6 +119,11 @@
 }
 
 @layer utilities {
+  .line-between-flex-items > *:not(:last-child)::after {
+    content: "|";
+    margin-right: 0.25rem;
+  }
+
   .hover-fill-to-right::before {
     position: absolute;
     content: "";

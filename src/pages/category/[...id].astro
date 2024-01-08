@@ -43,7 +43,7 @@ const posts = (await getCollection("blog"))
       {
         posts.map((post): JSX.Element => (
           <>
-            <PostItem post={post} client:only />
+            <PostItem post={post} client:only="solid-js" />
           </>
         ))
       }

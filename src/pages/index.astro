@@ -21,7 +21,7 @@ const posts = (await getCollection("blog"))
         <Button href="/post">글 더 보기...</Button>
       </div>
       <div class="flex flex-col gap-8">
-        {posts.map((post) => <PostItem post={post} client:only />)}
+        {posts.map((post) => <PostItem post={post} client:only="solid-js" />)}
       </div>
     </Container>
   </main>

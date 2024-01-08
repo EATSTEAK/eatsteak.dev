@@ -21,7 +21,7 @@ const page = pathname.slice(1);
   <body
     class="flex flex-col dark:bg-slate-900 dark:text-white transition-colors"
   >
-    <Header page={page} client:only />
+    <Header page={page} client:only="solid-js" />
     <slot />
     <Footer />
   </body>
