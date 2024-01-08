@@ -51,4 +51,19 @@ export const CATEGORIES: { [category: string]: Category } = {
       },
     },
   },
+  web: {
+    id: "web",
+    name: "Web",
+    description: "인터넷이 세상을 지배한다",
+    color: {
+      light: {
+        bg: "#0e7490",
+        text: "#ffffff",
+      },
+      dark: {
+        bg: "#0e7490",
+        text: "#ffffff",
+      },
+    },
+  },
 };
