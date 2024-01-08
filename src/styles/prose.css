@@ -50,9 +50,26 @@
 }
 
 .content code {
+  @apply font-mono;
+
   padding: 2px 5px;
-  background-color: rgb(var(--gray-light));
   border-radius: 2px;
+}
+
+:not(.dark) .content code {
+  @apply bg-gray-700;
+}
+
+.dark .content code {
+  @apply bg-gray-600;
+}
+
+:not(.dark) .content pre > code {
+  all: unset;
+}
+
+.dark .content pre > code {
+  all: unset;
 }
 
 .content pre {
@@ -60,15 +77,18 @@
   border-radius: 8px;
 }
 
-.content pre > code {
-  all: unset;
+.content blockquote {
+  border-left: 4px solid;
+  padding: 0 0 0 1.5rem;
+  margin: 0;
 }
 
-.content blockquote {
-  border-left: 4px solid var(--accent);
-  padding: 0 0 0 20px;
-  margin: 0;
-  font-size: 1.333em;
+:not(.dark) .content blockquote {
+  @apply border-l-gray-300;
+}
+
+.dark .content blockquote {
+  @apply border-l-gray-500;
 }
 
 .content ol {
@@ -85,4 +105,20 @@
 
 .content li > ul {
   padding-left: 1.5rem;
+}
+
+.content th {
+  border-bottom: 0.125rem solid;
+}
+
+.content td {
+  border-bottom: 0.0625rem solid;
+}
+
+:not(.dark) .content th {
+  @apply border-gray-700;
+}
+
+.dark .content th {
+  @apply border-white;
 }
