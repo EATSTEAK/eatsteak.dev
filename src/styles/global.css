@@ -87,7 +87,7 @@
     top: -50%;
     left: -50%;
     z-index: -1;
-    mask-size: 3vw;
+    mask-size: 2rem;
     mask-image: url("/images/grill.png");
     mask-repeat: repeat;
   }
