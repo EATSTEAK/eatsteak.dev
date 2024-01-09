@@ -57,7 +57,7 @@
 }
 
 :not(.dark) .content code {
-  @apply bg-gray-700;
+  @apply bg-gray-300;
 }
 
 .dark .content code {
