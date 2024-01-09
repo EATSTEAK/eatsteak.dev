@@ -122,6 +122,7 @@
   .line-between-flex-items > *:not(:last-child)::after {
     content: "|";
     margin-right: 0.25rem;
+    line-height: 0;
   }
 
   .hover-fill-to-right::before {
