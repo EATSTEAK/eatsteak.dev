@@ -6,8 +6,9 @@ import {
 } from "solid-js";
 
 const fetchCount = async (path: string): Promise<number> => {
+  const normalizedPath = path.endsWith("/") ? path.substring(0, path.length - 1) : path;
   let json = (await (
-    await fetch(`https://eatsteak.goatcounter.com/counter/${path}.json`)
+    await fetch(`https://eatsteak.goatcounter.com/counter/${normalizedPath}.json`)
   ).json()) as { count: string; count_unique: string };
   return parseInt(json.count);
 };
