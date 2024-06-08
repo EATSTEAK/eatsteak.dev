@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
 import { Profile } from "../components/Profile";
 import { FormattedDate } from "../components/FormattedDate";
@@ -7,6 +7,8 @@ import { Topics } from "../components/Topics";
 import { CategoryLabel } from "../components/CategoryLabel";
 import "../styles/prose.css";
 import { Counter } from "../components/Counter";
+import { CATEGORIES } from "../consts";
+import { PostItem } from "../components/PostItem";
 
 type Props = CollectionEntry<"blog">["data"] & { minutesRead: number };
 
@@ -20,71 +22,90 @@ const {
   topics,
   minutesRead,
 } = Astro.props;
+
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const recentPostsInCategory = allPosts
+  .filter((post) => post.data.hidden !== true)
+  .filter(
+    (post) =>
+      (CATEGORIES[post.data.category ?? "uncategorized"]?.id ??
+        "uncategorized") === (category ?? "uncategorized"),
+  )
+  .slice(0, 3);
 ---
 
 <Layout title={`${title} - EATSTEAK.DEV`} description={description}>
-  <main
-    class="self-center flex flex-wrap justify-between w-full max-w-[96rem] xl:flex-nowrap px-6 lg:px-0 xl:gap-12"
-  >
-    <div
-      class="grow flex flex-wrap justify-center w-full basis-full xl:basis-auto lg:w-auto"
-    >
-      <article class="w-full max-w-4xl">
-        <div class="mb-2 image min-h-[16rem]">
-          {heroImage && <img class="max-w-100%" src={heroImage} alt="" />}
-        </div>
-        <div class="prose">
-          <div class="title mb-8">
-            <CategoryLabel category={category ?? "uncategorized"} />
-            <h1>{title}</h1>
+  <main class="self-center flex flex-col w-full">
+    <article class="self-center w-full max-w-screen-lg pb-16">
+      <section class="mb-2 image min-h-[16rem]">
+        {heroImage && <img class="max-w-100%" src={heroImage} alt="" />}
+      </section>
+      <section class="prose">
+        <div class="title mb-8">
+          <CategoryLabel category={category ?? "uncategorized"} />
+          <h1>{title}</h1>
+          {
+            topics && (
+              <div class="topics mb-2">
+                <Topics topics={topics} />
+              </div>
+            )
+          }
+          <div class="flex flex-wrap line-between-flex-items">
+            <div class="date text-gray-500">
+              <FormattedDate dateTime={pubDate} client:only="solid-js" />
+            </div>
             {
-              topics && (
-                <div class="topics mb-2">
-                  <Topics topics={topics} />
+              updatedDate && (
+                <div class="last-updated-on text-gray-500">
+                  |
+                  <FormattedDate
+                    dateTime={updatedDate}
+                    client:only="solid-js"
+                  />{" "}
+                  수정
                 </div>
               )
             }
-            <div class="flex flex-wrap line-between-flex-items">
-              <div class="date text-gray-500">
-                <FormattedDate dateTime={pubDate} client:only="solid-js" />
-              </div>
-              {
-                updatedDate && (
-                  <div class="last-updated-on text-gray-500">
-                    |
-                    <FormattedDate
-                      dateTime={updatedDate}
-                      client:only="solid-js"
-                    />{" "}
-                    수정
-                  </div>
-                )
-              }
-              {
-                minutesRead && (
-                  <div class="minutes-read text-gray-500">
-                    {minutesRead < 1
-                      ? "1분 미만 소요"
-                      : `약 ${Math.round(minutesRead)}분 소요`}
-                  </div>
-                )
-              }
-              <Counter path={Astro.url.pathname} client:only="solid-js" />
-            </div>
-            <hr />
+            {
+              minutesRead && (
+                <div class="minutes-read text-gray-500">
+                  {minutesRead < 1
+                    ? "1분 미만 소요"
+                    : `약 ${Math.round(minutesRead)}분 소요`}
+                </div>
+              )
+            }
+            <Counter path={Astro.url.pathname} client:only="solid-js" />
           </div>
-          <div class="content">
-            <slot />
+          <hr />
+        </div>
+        <div class="content">
+          <slot />
+        </div>
+      </section>
+    </article>
+    <section
+      class="py-16 flex flex-col items-center bg-slate-50 dark:bg-slate-900 transition-colors"
+    >
+      <div class="flex flex-col gap-8 w-full max-w-screen-lg">
+        <div class="w-full px-1">
+          <Profile />
+        </div>
+        <div class="w-full">
+          <h3>같은 분류의 최신 글</h3>
+          <div class="mt-4 flex flex-col gap-2">
+            {
+              recentPostsInCategory.map((post) => (
+                <PostItem post={post} client:only="solid-js" />
+              ))
+            }
           </div>
         </div>
-      </article>
-    </div>
-    <aside
-      class="grow px-12 py-8 xl:p-0 max-w-[96rem] xl:max-w-sm mx-auto xl:mx-0"
-    >
-      <hr class="block xl:hidden" />
-      <Profile />
-      <hr class="hidden xl:block" />
-    </aside>
+      </div>
+    </section>
   </main>
 </Layout>
