@@ -16,10 +16,10 @@ export const Profile = () => {
       <div>
         <h5>FOLLOW ME AT</h5>
         <div class="flex gap-4 items-center">
-          <a href="https://github.com/eatsteak">
+          <a href="https://github.com/eatsteak" aria-label="@EATSTEAK at GitHub">
             <GitHub class="w-8 hover:text-gray-900 text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 transition-colors" />
           </a>
-          <a href="https://instagram.com/eatsteak.dev">
+          <a href="https://instagram.com/eatsteak.dev" aria-label="@eatsteak.dev at Instagram">
             <Instagram class="w-8 hover:text-gray-900 text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 transition-colors" />
           </a>
         </div>
