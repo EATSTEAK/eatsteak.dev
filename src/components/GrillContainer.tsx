@@ -10,7 +10,7 @@ export const GrillContainer: Component<{
     <section class={props.parentClassOverride ?? "relative h-72"}>
       <Show when={props.absoluteBackground}>
         <div class="absolute top-0 right-0 w-full h-full">
-          <div class="mx-auto max-w-[96rem] w-full h-full flex justify-end overflow-hidden">
+          <div class="mx-auto max-w-screen-xl w-full h-full flex justify-end overflow-hidden">
             {props.absoluteBackground}
           </div>
         </div>
@@ -19,7 +19,7 @@ export const GrillContainer: Component<{
         <div
           class={
             props.containerClassOverride ??
-            "slide-to-top py-8 px-6 lg:mx-auto h-full w-full max-w-[96rem] flex flex-col items-start justify-end gap-2"
+            "slide-to-top py-8 px-6 lg:mx-auto h-full w-full max-w-screen-xl flex flex-col items-start justify-end gap-2"
           }
         >
           {props.children}

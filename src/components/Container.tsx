@@ -9,7 +9,7 @@ export const Container: Component<{ children: any, varient?: ContainerVarient }>
       case "normal":
         return "max-w-5xl"
       default:
-        return "max-w-[96rem]"
+        return "max-w-screen-xl"
     }
   }
   return (

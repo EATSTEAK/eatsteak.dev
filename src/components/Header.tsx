@@ -5,7 +5,7 @@ export const Header = (props: { page: string }) => {
     props.page.startsWith(page) ? "nav-link link-selected" : "nav-link";
   return (
     <header class="flex justify-center content-center px-6 py-6">
-      <div class="grow max-w-[96rem] flex flex-wrap gap-4 lg:gap-16 justify-between lg:justify-start content-center">
+      <div class="grow max-w-screen-xl flex flex-wrap gap-4 lg:gap-16 justify-between lg:justify-start content-center">
         <h2 class="shrink-0 min-w-fit order-1">
           <a href="/">
             <img

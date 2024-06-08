@@ -26,7 +26,7 @@ export const PostItem: Component<{ post: CollectionEntry<"blog"> }> = (
         <h4 class="mt-2">
           <span class="nav-link">{props.post.data.title}</span>
         </h4>
-        <div class="date mb-2 text-gray-500">
+        <div class="text-xs date mb-2 text-gray-500">
           <FormattedDate dateTime={props.post.data.pubDate} />
           {props.post.data.updatedDate && (
             <div class="last-updated-on">

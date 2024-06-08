@@ -19,10 +19,13 @@ const page = pathname.slice(1);
     <BaseHead title={title} description={description} image={image} />
   </head>
   <body
-    class="flex flex-col dark:bg-slate-900 dark:text-white transition-colors"
+    class="relative -z-20 flex flex-col bg-slate-50 dark:bg-slate-900 dark:text-white transition-colors"
   >
-    <Header page={page} client:only="solid-js" />
-    <slot />
+    <div class="relative -z-10 bg-white dark:bg-slate-950">
+      <Header page={page} client:only="solid-js" />
+      <slot />
+    </div>
+
     <Footer />
   </body>
 </html>
