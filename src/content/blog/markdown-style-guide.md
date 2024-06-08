@@ -12,8 +12,6 @@ Here is a sample of some basic Markdown syntax that can be used when writing Mar
 
 The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
 
-# H1
-
 ## H2
 
 ### H3
@@ -32,13 +30,13 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 
 ## Images
 
-#### Syntax
+### Syntax
 
 ```markdown
 ![Alt text](./full/or/relative/path/of/image)
 ```
 
-#### Output
+### Output
 
 ![blog placeholder](/images/logo.png)
 
@@ -78,7 +76,7 @@ The blockquote element represents content that is quoted from another source, op
 
 ## Tables
 
-#### Syntax
+### Syntax
 
 ```markdown
 | Italics   | Bold     | Code   |
@@ -86,7 +84,7 @@ The blockquote element represents content that is quoted from another source, op
 | _italics_ | **bold** | `code` |
 ```
 
-#### Output
+### Output
 
 | Italics   | Bold     | Code   |
 | --------- | -------- | ------ |
@@ -94,7 +92,7 @@ The blockquote element represents content that is quoted from another source, op
 
 ## Code Blocks
 
-#### Syntax
+### Syntax
 
 we can use 3 backticks ``` in new line and write snippet and close with 3 backticks on new line and to highlight language specific syntac, write one word of language name after first 3 backticks, for eg. html, javascript, css, markdown, typescript, txt, bash
 
@@ -188,7 +186,7 @@ Output
 
 ## Other Elements — abbr, sub, sup, kbd, mark
 
-#### Syntax
+### Syntax
 
 ```markdown
 <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
@@ -202,7 +200,7 @@ Press <kbd><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>Delete</kbd></kbd> to end the ses
 Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
 ```
 
-#### Output
+### Output
 
 <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
 
