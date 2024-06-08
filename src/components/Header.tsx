@@ -11,7 +11,7 @@ export const Header = (props: { page: string }) => {
           <a href="/">
             <img
               src="/images/logo.png"
-              class="w-[170px] dark:invert transition-[filter]"
+              class="w-[120px] md:w-[160px] dark:invert transition-[filter]"
             ></img>
           </a>
         </h2>
