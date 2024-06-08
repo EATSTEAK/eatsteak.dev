@@ -6,7 +6,7 @@ export const Profile = () => {
     <section>
       <div class="flex gap-2 items-center mb-2">
         <div class="bg-gray-200 rounded-full w-16 h-16">
-          <img src="/images/profile.png" class="w-16"></img>
+          <img alt="Profile image of EATSTEAK" src="/images/profile.png" class="w-16"></img>
         </div>
         <div class="grow">
           <h5 class="m-0">EATSTEAK</h5>
