@@ -5,6 +5,7 @@ import Layout from "../../layouts/Layout.astro";
 import { PostItem } from "../../components/PostItem";
 import { GrillContainer } from "../../components/GrillContainer";
 import { Container } from "../../components/Container";
+import { getReadingTime } from "../../utils/reading-time";
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   const initial: { [topic: string]: number } = {};
@@ -15,7 +16,7 @@ export async function getStaticPaths() {
         object[topic] += 1;
       });
       return object;
-    }, initial)
+    }, initial),
   ).map(([topic, count]) => ({
     params: { topic },
     props: { topic, count },
@@ -53,7 +54,11 @@ const posts = await getPostsByTopic(topic);
       {
         posts.map((post) => (
           <>
-            <PostItem post={post} client:only="solid-js" />
+            <PostItem
+              post={post}
+              minutesRead={getReadingTime(post.body)}
+              client:only="solid-js"
+            />
           </>
         ))
       }

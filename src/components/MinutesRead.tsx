@@ -1,4 +1,4 @@
-import { type JSX, type Component, For } from "solid-js";
+import type { JSX, Component } from "solid-js";
 
 export const MinutesRead: Component<{ minutesRead: number }> = (props) => {
     return (

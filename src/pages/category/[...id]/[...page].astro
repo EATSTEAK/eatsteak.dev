@@ -13,6 +13,7 @@ import { Container } from "../../../components/Container";
 import type { JSX } from "solid-js";
 import type { Page } from "astro";
 import { Pagination } from "../../../components/Pagination";
+import { getReadingTime } from "../../../utils/reading-time";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = (await getCollection("blog")).sort(
@@ -60,7 +61,11 @@ const { page, category } = Astro.props as Props;
           page.data.map(
             (post): JSX.Element => (
               <>
-                <PostItem post={post} client:only="solid-js" />
+                <PostItem
+                  post={post}
+                  minutesRead={getReadingTime(post.body)}
+                  client:only="solid-js"
+                />
               </>
             ),
           )

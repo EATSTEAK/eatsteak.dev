@@ -1,4 +1,4 @@
-import { createSignal, type Component, Show, createEffect } from "solid-js";
+import { type Component, Show, createEffect } from "solid-js";
 import { Switch } from "./Switch";
 import theme from "../utils/theme";
 

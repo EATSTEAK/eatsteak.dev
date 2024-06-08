@@ -4,7 +4,7 @@ export const Topics: Component<{ topics: string[] }> = (props) => {
   return (
     <div class="flex gap-2 flex-wrap">
       <For each={props.topics}>
-        {(topic, i) => (
+        {(topic) => (
           <a
             href={`/topic/${topic}`}
             class="px-1 font-mono uppercase transition-colors border-2

@@ -2,7 +2,6 @@ import {
   type JSX,
   type Component,
   createResource,
-  createSignal,
 } from "solid-js";
 
 const fetchCount = async (path: string): Promise<number> => {
