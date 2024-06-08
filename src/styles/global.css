@@ -122,6 +122,27 @@
   .nav-link:hover {
     background-size: 100% 2px;
   }
+
+  .link-selected {
+    font-weight: 500;
+    background-size: 100% 100%;
+  }
+
+  :not(.dark) .link-selected {
+    color: white;
+  }
+
+  .dark .link-selected {
+    color: black;
+  }
+
+  :not(.dark) .link-selected:hover {
+    color: black;
+  }
+
+  .dark .link-selected:hover {
+    color: white;
+  }
 }
 
 @layer utilities {

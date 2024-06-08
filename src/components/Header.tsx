@@ -1,4 +1,3 @@
-import "./header.css";
 import { LightSwitch } from "./LightSwitch";
 
 export const Header = (props: { page: string }) => {
