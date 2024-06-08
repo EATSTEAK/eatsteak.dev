@@ -3,8 +3,9 @@ import { type JSX, type Component, Show } from "solid-js";
 import { FormattedDate } from "./FormattedDate";
 import { Topics } from "./Topics";
 import { CategoryLabel } from "./CategoryLabel";
+import { MinutesRead } from "./MinutesRead";
 
-export const PostItem: Component<{ post: CollectionEntry<"blog"> }> = (
+export const PostItem: Component<{ post: CollectionEntry<"blog">, minutesRead: number | undefined }> = (
   props
 ) => {
   return (
@@ -26,15 +27,21 @@ export const PostItem: Component<{ post: CollectionEntry<"blog"> }> = (
         <h4 class="mt-2">
           <span class="nav-link">{props.post.data.title}</span>
         </h4>
-        <div class="text-xs date mb-2 text-gray-500">
-          <FormattedDate dateTime={props.post.data.pubDate} />
-          {props.post.data.updatedDate && (
-            <div class="last-updated-on">
-              |
-              <FormattedDate dateTime={props.post.data.updatedDate} /> 수정
-            </div>
-          )}
+        <div class="text-xs mb-2 text-gray-500 flex line-between-flex-items">
+          <div class="date">
+            <FormattedDate dateTime={props.post.data.pubDate} />
+            {props.post.data.updatedDate && (
+              <div class="last-updated-on">
+                |
+                <FormattedDate dateTime={props.post.data.updatedDate} /> 수정
+              </div>
+            )}
+          </div>
+          <Show when={props.minutesRead != undefined}>
+            <MinutesRead minutesRead={props.minutesRead as number} />
+          </Show>
         </div>
+
         <div class="text-gray-700 dark:text-gray-300 mb-2">
           {props.post.data.description}
         </div>

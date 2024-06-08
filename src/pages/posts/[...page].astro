@@ -6,6 +6,7 @@ import Layout from "../../layouts/Layout.astro";
 import { PostItem } from "../../components/PostItem";
 import { Container } from "../../components/Container";
 import { Pagination } from "../../components/Pagination";
+import { getReadingTime } from "../../utils/reading-time";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = (await getCollection("blog"))
@@ -26,7 +27,7 @@ const { page } = Astro.props as Props;
         {
           page.data.map((post) => (
             <>
-              <PostItem post={post} client:only />
+              <PostItem post={post} minutesRead={getReadingTime(post.body)} client:only />
             </>
           ))
         }

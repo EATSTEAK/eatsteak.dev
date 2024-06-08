@@ -9,6 +9,8 @@ import "../styles/prose.css";
 import { Counter } from "../components/Counter";
 import { CATEGORIES } from "../consts";
 import { PostItem } from "../components/PostItem";
+import { getReadingTime } from "../utils/reading-time";
+import { MinutesRead } from "../components/MinutesRead";
 
 type Props = CollectionEntry<"blog">["data"] & { minutesRead: number };
 
@@ -47,13 +49,6 @@ const recentPostsInCategory = allPosts
         <div class="title mb-8">
           <CategoryLabel category={category ?? "uncategorized"} />
           <h1>{title}</h1>
-          {
-            topics && (
-              <div class="topics mb-2">
-                <Topics topics={topics} />
-              </div>
-            )
-          }
           <div class="flex flex-wrap line-between-flex-items">
             <div class="date text-gray-500">
               <FormattedDate dateTime={pubDate} client:only="solid-js" />
@@ -70,18 +65,16 @@ const recentPostsInCategory = allPosts
                 </div>
               )
             }
+              {minutesRead && <MinutesRead minutesRead={minutesRead} />}
+              <Counter path={Astro.url.pathname} client:only="solid-js" />
+            </div>
             {
-              minutesRead && (
-                <div class="minutes-read text-gray-500">
-                  {minutesRead < 1
-                    ? "1분 미만 소요"
-                    : `약 ${Math.round(minutesRead)}분 소요`}
+              topics && (
+                <div class="topics mt-2 mb-8">
+                  <Topics topics={topics} />
                 </div>
               )
             }
-            <Counter path={Astro.url.pathname} client:only="solid-js" />
-          </div>
-          <hr />
         </div>
         <div class="content">
           <slot />
@@ -100,8 +93,17 @@ const recentPostsInCategory = allPosts
           <div class="mt-4 flex flex-col gap-2">
             {
               recentPostsInCategory.map((post) => (
-                <PostItem post={post} client:only="solid-js" />
+                <PostItem
+                  post={post}
+                  minutesRead={getReadingTime(post.body)}
+                  client:only="solid-js"
+                />
               ))
+            }
+            {
+              recentPostsInCategory.length === 0 && (
+                <p class="mx-auto my-8">읽을 수 있는 글이 없습니다.</p>
+              )
             }
           </div>
         </div>
