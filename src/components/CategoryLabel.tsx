@@ -7,7 +7,7 @@ export const CategoryLabel: Component<{ category: string }> = (props) => {
     <Show
       when={category}
       fallback={
-        <legend class="uppercase font-bold tracking-widest mb-2">
+        <legend class="uppercase font-bold tracking-widest mb-2 transition-all hover:brightness-125 focus:brightness-125">
           Uncategorized
         </legend>
       }
@@ -17,7 +17,7 @@ export const CategoryLabel: Component<{ category: string }> = (props) => {
         href={`/category/${category.id}`}
       >
         <span
-          class={`px-1 bg-category-${category.id}-bg dark:bg-category-${category.id}-bg-dark text-category-${category.id}-text dark:text-category-${category.id}-text-dark`}
+          class={`transition-all hover:brightness-125 focus:brightness-125 px-1 bg-category-${category.id}-bg dark:bg-category-${category.id}-bg-dark text-category-${category.id}-text dark:text-category-${category.id}-text-dark`}
         >
           {category.name}
         </span>
