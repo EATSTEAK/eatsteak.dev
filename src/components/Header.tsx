@@ -18,7 +18,7 @@ export const Header = (props: { page: string }) => {
           <a class={selected("about")} href="/about">
             About
           </a>
-          <a class={selected("post")} href="/post">
+          <a class={selected("post")} href="/posts">
             Posts
           </a>
           <a class={selected("category")} href="/category">

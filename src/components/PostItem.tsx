@@ -8,11 +8,11 @@ export const PostItem: Component<{ post: CollectionEntry<"blog"> }> = (
   props
 ) => {
   return (
-    <article>
+    <section>
       <a href={`/post/${props.post.slug}`}>
         <Show when={props.post.data.heroImage}>
           <div
-            class="mb-4"
+            class="mb-2"
             style={{
               "background-size": "cover",
               "background-position": "center",
@@ -26,7 +26,7 @@ export const PostItem: Component<{ post: CollectionEntry<"blog"> }> = (
         <h4 class="mt-2">
           <span class="nav-link">{props.post.data.title}</span>
         </h4>
-        <div class="date mb-4 text-gray-500">
+        <div class="date mb-2 text-gray-500">
           <FormattedDate dateTime={props.post.data.pubDate} />
           {props.post.data.updatedDate && (
             <div class="last-updated-on">
@@ -35,11 +35,12 @@ export const PostItem: Component<{ post: CollectionEntry<"blog"> }> = (
             </div>
           )}
         </div>
-        <div class="text-gray-700 dark:text-gray-300 mb-4">
+        <div class="text-gray-700 dark:text-gray-300 mb-2">
           {props.post.data.description}
         </div>
       </a>
       {props.post.data.topics && <Topics topics={props.post.data.topics} />}
-    </article>
+      <hr class="mb-1" />
+    </section>
   );
 };

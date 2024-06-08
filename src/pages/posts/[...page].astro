@@ -1,0 +1,41 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { PostItem } from "../../components/PostItem";
+import { Container } from "../../components/Container";
+import { Pagination } from "../../components/Pagination";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection("blog"))
+    .filter((post) => post.data.hidden !== true)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  return paginate(posts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page } = Astro.props as Props;
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main class="flex justify-center">
+    <Container>
+      <div class="flex flex-col gap-2">
+        {
+          page.data.map((post) => (
+            <>
+              <PostItem post={post} client:only />
+            </>
+          ))
+        }
+      </div>
+      <Pagination
+        baseUrl="/posts"
+        lastPage={page.lastPage}
+        currentPage={page.currentPage}
+      />
+    </Container>
+  </main>
+</Layout>
