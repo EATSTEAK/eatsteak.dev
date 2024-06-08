@@ -28,9 +28,10 @@ export const LightSwitch: Component<{}> = () => {
         <div class="w-full h-full flex justify-center items-center">
           <Show
             when={isDarkTheme()}
-            fallback={<img src="/images/sun.svg"></img>}
+            fallback={<img alt="Light mode" src="/images/sun.svg"></img>}
           >
             <img
+              alt="Dark mode"
               src="/images/moon.svg"
               class="dark:invert transition-[filter]"
             ></img>
