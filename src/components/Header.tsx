@@ -7,9 +7,10 @@ export const Header = (props: { page: string }) => {
     <header class="flex justify-center content-center px-6 py-6">
       <div class="grow max-w-screen-xl flex flex-wrap gap-4 lg:gap-16 justify-between lg:justify-start content-center">
         <h2 class="shrink-0 min-w-fit order-1">
-          <a href="/">
+          <a href="/" aria-label="Go to the main page">
             <img
               src="/images/logo.png"
+              alt="eatsteak.dev"
               class="w-[120px] md:w-[160px] dark:invert transition-[filter]"
             ></img>
           </a>
