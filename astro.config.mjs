@@ -6,11 +6,15 @@ import tailwind from "@astrojs/tailwind";
 
 import compress from "astro-compress";
 
+import sectionize from "@hbsnow/rehype-sectionize";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://eatsteak.dev",
   integrations: [mdx(), sitemap(), solidJs(), tailwind(), compress({
     CSS: false,
   })],
-  markdown: {}
+  markdown: {
+    rehypePlugins: [sectionize]
+  }
 });

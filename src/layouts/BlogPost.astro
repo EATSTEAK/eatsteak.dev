@@ -109,12 +109,10 @@ const toc = buildToc(headings);
         </section>
       </article>
       <section class="hidden self-stretch lg:block pt-[16rem] max-w-xs">
-        <div class="py-8 pl-8 sticky top-0">
+        <nav class="py-8 pl-8 sticky top-0">
           <hr />
-          <ul>
-            {toc.map((heading) => <TocHeading tocHeading={heading} />)}
-          </ul>
-        </div>
+          <TocHeading tocHeadings={toc} />
+        </nav>
       </section>
     </section>
     <section
