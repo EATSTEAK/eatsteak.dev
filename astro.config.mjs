@@ -9,6 +9,8 @@ import compress from "astro-compress";
 // https://astro.build/config
 export default defineConfig({
   site: "https://eatsteak.dev",
-  integrations: [mdx(), sitemap(), solidJs(), tailwind(), compress()],
+  integrations: [mdx(), sitemap(), solidJs(), tailwind(), compress({
+    CSS: false,
+  })],
   markdown: {}
 });
