@@ -21,26 +21,9 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  rel="preload"
-  href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
-  as="style"
-  onload="this.onload=null; this.rel='stylesheet';"
-/>
-<noscript>
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
-  />
-</noscript>
-
-<!-- GoatCounter -->
-<script
-  data-goatcounter="https://eatsteak.goatcounter.com/count"
-  async
-  src="//gc.zgo.at/count.js"></script>
+<link rel="preload" href="/fonts/MonoplexKR-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/Jost-Latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/Jost-Italic-Latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -83,3 +66,9 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
   }
   window.localStorage.setItem("theme", theme);
 </script>
+
+<!-- GoatCounter -->
+<script
+  data-goatcounter="https://eatsteak.goatcounter.com/count"
+  async
+  src="//gc.zgo.at/count.js"></script>
