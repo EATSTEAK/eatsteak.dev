@@ -9,6 +9,15 @@
   font-style: normal;
 }
 
+/* noto-sans-kr-korean-wght-normal */
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(@fontsource-variable/noto-sans-kr/files/noto-sans-kr-korean-wght-normal.woff2) format('woff2-variations');
+}
+
 /* latin */
 @font-face {
   font-family: 'Jost';

@@ -12,7 +12,7 @@ import { PostItem } from "../components/PostItem";
 import { getReadingTime } from "../utils/reading-time";
 import { MinutesRead } from "../components/MinutesRead";
 import type { MarkdownHeading } from "astro";
-import { TocHeading } from "../components/TocHeading";
+import { TableOfContents } from "../components/TableOfContents";
 
 type Props = CollectionEntry<"blog">["data"] & {
   slug: string;
@@ -111,7 +111,7 @@ const toc = buildToc(headings);
       <section class="hidden self-stretch lg:block pt-[16rem] max-w-xs">
         <nav class="py-8 pl-8 sticky top-0">
           <hr />
-          <TocHeading tocHeadings={toc} />
+          <TableOfContents tocHeadings={toc} client:only="solid-js" />
         </nav>
       </section>
     </section>

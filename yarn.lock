@@ -990,6 +990,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.0.tgz#a5417ae8427873f1dd08b70b3574b453e67b5f7f"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
 
+"@fontsource-variable/noto-sans-kr@^5.0.6":
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/noto-sans-kr/-/noto-sans-kr-5.0.6.tgz#3dce5c576ea403832fc29942a4ab34cc5064d68f"
+  integrity sha512-BaSaI2Bxv0YQupgDYolxMWv8abe/XyxuWkyO0dtwY/yzDWHeToy2qK2vPqp347TTDdUlnj/Qs3NsPTfJwEZbiw==
+
 "@hbsnow/rehype-sectionize@^1.0.7":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@hbsnow/rehype-sectionize/-/rehype-sectionize-1.0.7.tgz#fe1d77b78ecfff731a222ab134d3924646faea98"
