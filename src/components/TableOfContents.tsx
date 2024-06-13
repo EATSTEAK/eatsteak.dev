@@ -36,6 +36,7 @@ export const TableOfContents: Component<{ tocHeadings: TocHeading[] }> = (props)
     })
     return (
         <nav>
+            <p class="text-center font-head font-semibold">CONTENTS</p>
             <TocHeading tocHeadings={props.tocHeadings} activeHeadings={activeSections()} />
         </nav>
     );
