@@ -3,6 +3,7 @@ title: 블로그 제작 중
 description: 개인 블로그를 구축하고 있습니다.
 category: uncategorized
 pubDate: 2023-12-25 18:52
+hidden: true
 topics: ["Blog", "Metaposting"]
 ---
 
