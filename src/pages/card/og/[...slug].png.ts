@@ -135,6 +135,7 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
                 textTransform: "uppercase",
                 lineHeight: "1",
                 margin: "0 0 8px 0",
+                wordBreak: "keep-all"
               }
             }
           },

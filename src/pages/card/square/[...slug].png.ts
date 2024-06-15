@@ -154,11 +154,12 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
               children: `${props.data.title}`,
               style: {
                 fontFamily: "Jost, 'Noto Sans KR'",
-                fontSize: "72px",
+                fontSize: "96px",
                 fontWeight: "500",
                 textTransform: "uppercase",
                 lineHeight: "1",
                 margin: "0 0 8px 0",
+                wordBreak: "keep-all"
               }
             }
           },
