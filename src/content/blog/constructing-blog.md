@@ -2,7 +2,7 @@
 title: Astro로 블로그 구축하기 - 기술 스택 선정
 description: 블로그 구축을 위해 컨텐츠 웹사이트 프레임워크인 Astro를 이용하게 된 과정을 공유합니다.
 category: web
-pubDate: 2024-06-15T17:05:00
+pubDate: 2024-06-15T17:05:00+09:00
 hidden: false
 topics:
   - Blog
