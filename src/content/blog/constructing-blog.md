@@ -11,7 +11,8 @@ topics:
   - TailwindCSS
   - SolidJS
 ---
-지금보고 계시는 이 블로그([velog](https://velog.io/@eatsteak)에서 보고 계신다면 [이곳](https://eatsteak.dev/post/constructing-blog))은 Astro와 Solidjs, Tailwindcss를 활용하여 GitHub Pages에 정적 배포된 것인데요. 블로그를 구축하면서 중요시했던 것들과 여러 기술들을 선택한 이유를 이야기해보려 합니다.
+**지금보고 계시는 이 블로그([velog](https://velog.io/@eatsteak)에서 보고 계신다면 [이곳](https://eatsteak.dev/post/constructing-blog))은 Astro와 Solidjs, Tailwindcss를 활용하여 GitHub Pages에 정적 배포된 것인데요. 블로그를 구축하면서 중요시했던 것들과 여러 기술들을 선택한 이유를 이야기해보려 합니다.**
+
 ## 어디서 시작해야 하지? - 요구사항 결정
 처음에 블로그를 만들어봐야겠다 생각했을 때엔 다양한 선택지가 있었는데요. 당연히 고려해봄직한 네이버 블로그나 티스토리와 같은 기성 블로그 플랫폼부터, Jekyll과 같은 SSG(Static site generator)까지 여러 방면에서 고려해 보았었습니다.
 
