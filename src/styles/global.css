@@ -1240,13 +1240,13 @@
     text-align: left;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    font-size: 12pt;
+    font-size: 18px;
     line-height: 1.7;
   }
 
   @media screen and (max-width: 768px) {
     body {
-      font-size: 10pt;
+      font-size: 16px;
     }
   }
 
