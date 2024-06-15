@@ -3,8 +3,8 @@ import { getCollection } from "astro:content";
 import satori from "satori";
 import sharp from "sharp";
 import type { APIRoute } from "astro";
-import { CATEGORIES } from "../../consts";
-import { getReadingTime } from "../../utils/reading-time";
+import { CATEGORIES } from "../../../consts";
+import { getReadingTime } from "../../../utils/reading-time";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -21,6 +21,10 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
   const notoSansKRData = await fs.readFile(
     "./fonts/NotoSansKR-Medium.ttf"
   );
+
+  const monoplexData = await fs.readFile(
+    "./fonts/MonoplexKR-Regular.ttf"
+  );
   const grillPath = [
     "M0,59 h1500 v2 h-1500 z",
     "M0,119 h1500 v2 h-1500 z",
@@ -36,26 +40,32 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
     "M0,719 h1500 v2 h-1500 z",
     "M0,779 h1500 v2 h-1500 z",
     "M0,839 h1500 v2 h-1500 z",
-    "M59,0 v900 h2 v-900 z",
-    "M119,0 v900 h2 v-900 z",
-    "M179,0 v900 h2 v-900 z",
-    "M239,0 v900 h2 v-900 z",
-    "M299,0 v900 h2 v-900 z",
-    "M359,0 v900 h2 v-900 z",
-    "M419,0 v900 h2 v-900 z",
-    "M479,0 v900 h2 v-900 z",
-    "M539,0 v900 h2 v-900 z",
-    "M599,0 v900 h2 v-900 z",
-    "M659,0 v900 h2 v-900 z",
-    "M719,0 v900 h2 v-900 z",
-    "M779,0 v900 h2 v-900 z",
-    "M839,0 v900 h2 v-900 z",
-    "M899,0 v900 h2 v-900 z",
-    "M959,0 v900 h2 v-900 z",
-    "M1019,0 v900 h2 v-900 z",
-    "M1079,0 v900 h2 v-900 z",
-    "M1139,0 v900 h2 v-900 z",
-    "M1199,0 v900 h2 v-900 z",
+    "M0,899 h1500 v2 h-1500 z",
+    "M0,959 h1500 v2 h-1500 z",
+    "M0,1019 h1500 v2 h-1500 z",
+    "M0,1079 h1500 v2 h-1500 z",
+    "M0,1139 h1500 v2 h-1500 z",
+    "M0,1199 h1500 v2 h-1500 z",
+    "M59,0 v1500 h2 v-1500 z",
+    "M119,0 v1500 h2 v-1500 z",
+    "M179,0 v1500 h2 v-1500 z",
+    "M239,0 v1500 h2 v-1500 z",
+    "M299,0 v1500 h2 v-1500 z",
+    "M359,0 v1500 h2 v-1500 z",
+    "M419,0 v1500 h2 v-1500 z",
+    "M479,0 v1500 h2 v-1500 z",
+    "M539,0 v1500 h2 v-1500 z",
+    "M599,0 v1500 h2 v-1500 z",
+    "M659,0 v1500 h2 v-1500 z",
+    "M719,0 v1500 h2 v-1500 z",
+    "M779,0 v1500 h2 v-1500 z",
+    "M839,0 v1500 h2 v-1500 z",
+    "M899,0 v1500 h2 v-1500 z",
+    "M959,0 v1500 h2 v-1500 z",
+    "M1019,0 v1500 h2 v-1500 z",
+    "M1079,0 v1500 h2 v-1500 z",
+    "M1139,0 v1500 h2 v-1500 z",
+    "M1199,0 v1500 h2 v-1500 z",
   ].join(" ");
   const logoData = await fs.readFile(
     "./public/images/logo.png"
@@ -77,6 +87,20 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
     
   const bgRgb = hexToRgb(category.color.light.bg);
   const minutesToRead = getReadingTime(props.body) ?? 0;
+  const topics = (props.data.topics ?? []).map((topic: string) => ({
+    type: "div",
+    props: {
+      children: topic,
+      style: {
+        fontSize: "32px",
+        border: "3px solid black",
+        padding: "4px 8px 0px 8px",
+        textTransform: "uppercase",
+        fontFamily: "MonoplexKR, monospace",
+        backgroundColor: "#fff"
+      }
+    }
+  }))
   const svg = await satori(
     {
       type: "div",
@@ -91,7 +115,7 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
                 top: "0",
                 left: "0",
                 width: "1500px",
-                height: "900px",
+                height: "1500px",
                 background: `linear-gradient(4deg, rgba(${bgRgb?.[0] ?? 0},${bgRgb?.[1] ?? 0},${bgRgb?.[2] ?? 0},0) 35%, rgba(${bgRgb?.[0] ?? 0},${bgRgb?.[1] ?? 0},${bgRgb?.[2] ?? 0},0.1) 72%, rgba(${bgRgb?.[0] ?? 0},${bgRgb?.[1] ?? 0},${bgRgb?.[2] ?? 0},1) 80%)`,
                 clipPath: `path("${grillPath}")`,
                 transform: "translateY(-120px) rotate(-8deg)"
@@ -130,11 +154,11 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
               children: `${props.data.title}`,
               style: {
                 fontFamily: "Jost, 'Noto Sans KR'",
-                fontSize: "64px",
+                fontSize: "72px",
                 fontWeight: "500",
                 textTransform: "uppercase",
                 lineHeight: "1",
-                margin: "0 0",
+                margin: "0 0 8px 0",
               }
             }
           },
@@ -150,6 +174,16 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
                 fontSize: "24px",
                 fontWeight: "500",
                 margin: "0 0",
+              }
+            }
+          },
+          {
+            type: "div",
+            props: {
+              children: topics,
+              style: {
+                display: "flex",
+                gap: "8px",
               }
             }
           },
@@ -191,8 +225,8 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
           position: "relative",
           display: "flex",
           width: "1200px",
-          height: "600px",
-          padding: "80px 80px 60px 80px",
+          height: "1200px",
+          padding: "240px 80px 60px 80px",
           gap: "8px",
           flexDirection: "column",
           alignItems: "stretch",
@@ -202,7 +236,7 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
     },
     {
       width: 1200,
-      height: 600,
+      height: 1200,
       fonts: [
         {
           name: "Jost",
@@ -215,6 +249,12 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
           data: notoSansKRData,
           weight: 500,
           style: "normal",
+        },
+        {
+          name: "MonoplexKR",
+          data: monoplexData,
+          weight: 300,
+          style: "normal"
         }
       ],
     }
