@@ -16,7 +16,7 @@ topics:
 ## 디자인 컨셉: 불판
 처음에 제 블로그에 대한 구상을 시작했을 때, 제 활동명이 고기인 만큼 고기를 굽는 불판을 모티브로 디자인하고자 노력했습니다. 그 모티브를 바탕으로 Figma를 통해 간단한 목업을 구상했고, 이를 가지고 실제 블로그 웹 사이트를 퍼블리싱하였습니다.
 
-<img src="/public/images/designing-blog/prototype.png" alt="블로그 디자인 프로토타입" />
+<img src="/images/designing-blog/prototype.png" alt="블로그 디자인 프로토타입" />
 
 > _최초로 피그마에서 완성한 프로토타입입니다. 두가지 시안 중 고민하다 현재의 디자인으로 결정했습니다._
 
@@ -31,7 +31,7 @@ topics:
 
 `Jost` 서체는 1920년대 독일에서 만들어진 [Futura](https://en.wikipedia.org/wiki/Futura_(typeface))에 영감을 받아 만들어진 서체입니다. 영화감독 스탠리 큐브릭이 자주 사용했기로 유명하기도 하고, 모던함의 시초가 되는 Typeface인데, 앞서 말한 불판과 프로그래밍의 연결 고리가 약하단 점을 좀 더 모던한 이미지를 통해 보강하기 위해 선택했습니다. 제가 큐브릭 영화들을 좋아하는 것도 조금은 있고요.
 
-![2001: A Space Odyssey 포스터에서 사용된 Futura 서체](/public/images/designing-blog/space-odyssey.png)
+![2001: A Space Odyssey 포스터에서 사용된 Futura 서체](/images/designing-blog/space-odyssey.png)
 
 > 스탠리 큐브릭 감독의 1968년작 영화 _2001: A Space Odyssey_의 메인 포스터에 사용된 Futura 서체. <sup>[출처](https://en.wikipedia.org/wiki/File:2001_A_Space_Odyssey_(1968).png)</sup>
 
@@ -40,11 +40,11 @@ topics:
 ### 국밥같은 Noto Sans
 본문 서체로 선택한 `Noto Sans KR`은 굳이 채용한 이유를 묻지 않아도 알 것입니다. 다만 _왜 않 Pretendard임?_ 라고 묻는 사람이 있을 것 같아서, 이에 대한 부연을 조금 하고자 합니다.
 
-![Noto Sans KR의 예시 문장](/public/images/designing-blog/notokr.png)
+![Noto Sans KR의 예시 문장](/images/designing-blog/notokr.png)
 
 > 16px 기준 `Noto Sans KR`로 본 예시 문장
 
-![Pretendard의 예시 문장](/public/images/designing-blog/pretendard.png)
+![Pretendard의 예시 문장](/images/designing-blog/pretendard.png)
 
 > 16px 기준 `Pretendard`로 본 예시 문장. 어떤 폰트가 더 읽기 편해 보이는가요?
 
@@ -66,7 +66,7 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 이 폰트는 마치 컬러 시스템의 액센트 컬러처럼 UI 엘리먼트 사이의 차별점을 주고, 텍스트 위주의 엘리먼트(토픽 태그, 다크 모드 스위치 라벨 등)에 주로 사용함으로써 포인트 서체처럼 활용하고자 했습니다. 물론 코드 블록에서도 고정폭 글꼴로써 본래 역할을 하기도 합니다.
 
 ## 로고 디자인
-<img src="/public/images/logo.png" style="background-color: #ddd; padding: 16px;" alt="블로그 로고"/>
+<img src="/images/logo.png" style="background-color: #ddd; padding: 16px;" alt="블로그 로고"/>
 
 > _블로그 로고입니다. 왼쪽 상단에서 항상 볼 수 있습니다._
 
