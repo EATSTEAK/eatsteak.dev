@@ -33,7 +33,7 @@ topics:
 
 ![2001: A Space Odyssey 포스터에서 사용된 Futura 서체](/images/designing-blog/space-odyssey.png)
 
-> 스탠리 큐브릭 감독의 1968년작 영화 _2001: A Space Odyssey_의 메인 포스터에 사용된 Futura 서체. <sup>[출처](https://en.wikipedia.org/wiki/File:2001_A_Space_Odyssey_(1968).png)</sup>
+> 스탠리 큐브릭 감독의 1968년작 영화 _2001: A Space Odyssey_ 의 메인 포스터에 사용된 Futura 서체. <sup>[출처](https://en.wikipedia.org/wiki/File:2001_A_Space_Odyssey_(1968).png)</sup>
 
 다만 Jost 서체의 형태가 대문자 `J`가 소문자처럼 디센더로 디자인되어 있거나, 너무 높은 weight에 가면 `V`와 같은 예리한 각도의 글자체들이 너무 날카롭게 디자인되어 있다 보니 베이스라인이 정렬되어 있지 않아 보이는 경우가 있습니다. 그래서 제목용 서체나 디자인적인 요소에만 주로 이 서체를 이용하고, 가독성이 요구되는(글 본문 혹은 글자가 주 정보 전달원인 UI 요소) 요소의 경우 다른 서체를 이용하고자 했습니다.
 
@@ -74,3 +74,27 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 
 ## 가장 중요한 것: 가독성
 블로그는 내가 쓴 글을 읽게 만들기 위한 사이트입니다. 따라서 잘 읽히는 것이 무엇보다 중요합니다. 
+가독성을 위해서는 타이포그라피부터 레이아웃까지 사소하지만 신경써야 할 것들이 있습니다.
+
+### 가독성을 위한 타이포그라피
+웹 디자인에서 글꼴과 문단 배치는 가장 기본적인 것이면서도 중요한 것입니다. 몇줄의 CSS만 있으면 쉽게 글의 가독성을 향상시킬 수 있습니다.
+```css
+// 글꼴 크기 및 줄 간격 설정
+font-size: 16px;
+line-height: 1.7;
+// 문장 길이를 위한 최대 길이 설정
+max-width: 768px;
+
+// 합자
+text-rendering: optimizeLegibility;
+
+// 폰트 안티엘리어싱
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+
+// (한국어)단어 줄 넘김 방지
+word-break: keep-all;
+```
+
+#### 글꼴 크기와 줄 간격: `font-size`와 `line-height`
+글꼴 크기는 가독성의 가장 중요한 요소 중 하나입니다. 브라우저의 기본 글꼴 크기는 `16px`인데요. 
