@@ -1,26 +1,24 @@
 import { type JSX, type Component, Show } from "solid-js";
 import { CATEGORIES } from "../consts";
 
+import "./category_label.css";
+
 export const CategoryLabel: Component<{ category: string }> = (props) => {
   const category = CATEGORIES?.[props.category] ?? CATEGORIES?.["uncategorized"];
   return (
     <Show
       when={category}
       fallback={
-        <legend class="uppercase font-bold tracking-widest mb-2 transition-all hover:brightness-125 focus:brightness-125">
+        <legend class="category-label">
           Uncategorized
         </legend>
       }
     >
       <a
-        class="uppercase font-bold tracking-widest mb-2"
+        class={`category-label bg-category-${category.id}-bg dark:bg-category-${category.id}-bg-dark text-category-${category.id}-text dark:text-category-${category.id}-text-dark`}
         href={`/category/${category.id}`}
       >
-        <span
-          class={`transition-all hover:brightness-125 focus:brightness-125 px-1 bg-category-${category.id}-bg dark:bg-category-${category.id}-bg-dark text-category-${category.id}-text dark:text-category-${category.id}-text-dark`}
-        >
-          {category.name}
-        </span>
+        {category.name}
       </a>
     </Show>
   );

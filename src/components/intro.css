@@ -1,0 +1,4 @@
+.box-text {
+    @apply py-2 px-2 m-0 font-head font-bold text-5xl bg-gray-800 text-white
+    dark:bg-white dark:text-gray-800;
+}

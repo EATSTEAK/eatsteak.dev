@@ -1,4 +1,5 @@
 import type { JSX, Component } from "solid-js";
+import "./container.css";
 
 type ContainerVarient = "normal" | "wide";
 
@@ -13,7 +14,7 @@ export const Container: Component<{ children: any, varient?: ContainerVarient }>
     }
   }
   return (
-    <section class={`px-6 my-8 flex flex-col gap-4 lg:mx-auto w-full ${getVarientClass(props.varient ?? "normal")}`}>
+    <section class={`container ${getVarientClass(props.varient ?? "normal")}`}>
       {props.children}
     </section>
   );

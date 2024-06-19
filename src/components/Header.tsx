@@ -1,21 +1,21 @@
 import { LightSwitch } from "./LightSwitch";
-
+import "./header.css";
 export const Header = (props: { page: string }) => {
   const selected = (page: string) =>
     props.page.startsWith(page) ? "nav-link link-selected" : "nav-link";
   return (
-    <header class="flex justify-center content-center px-6 py-6">
-      <div class="grow max-w-screen-xl flex flex-wrap gap-4 lg:gap-16 justify-between lg:justify-start content-center">
-        <h2 class="shrink-0 min-w-fit order-1">
+    <header>
+      <div class="navbar-container">
+        <h2 class="logo-container">
           <a href="/" aria-label="Go to the main page">
             <img
               src="/images/logo.png"
               alt="eatsteak.dev"
-              class="w-[120px] md:w-[160px] dark:invert transition-[filter]"
+              class="logo-image"
             ></img>
           </a>
         </h2>
-        <nav class="grow flex justify-center lg:justify-start items-center gap-8 order-3 lg:order-2 basis-full lg:basis-1">
+        <nav class="navbar">
           <a class={selected("about")} href="/about">
             About
           </a>
@@ -26,7 +26,7 @@ export const Header = (props: { page: string }) => {
             Categories
           </a>
         </nav>
-        <aside class="shrink-0 flex justify-end items-center gap-2 order-2 lg:order-3">
+        <aside class="switch-container">
           <LightSwitch />
         </aside>
       </div>

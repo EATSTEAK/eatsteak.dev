@@ -1,4 +1,5 @@
 import { type JSX, type Component, Show } from "solid-js";
+import "./grill_container.css";
 
 export const GrillContainer: Component<{
   absoluteBackground?: JSX.Element;
@@ -9,17 +10,17 @@ export const GrillContainer: Component<{
   return (
     <section class={props.parentClassOverride ?? "relative h-72"}>
       <Show when={props.absoluteBackground}>
-        <div class="absolute top-0 right-0 w-full h-full">
-          <div class="mx-auto max-w-screen-xl w-full h-full flex justify-end overflow-hidden">
+        <div class="background-container">
+          <div class="background-element">
             {props.absoluteBackground}
           </div>
         </div>
       </Show>
-      <div class="grill-background before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-3 w-full h-full">
+      <div class="grill-background before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-3 size-full">
         <div
           class={
             props.containerClassOverride ??
-            "slide-to-top py-8 px-6 lg:mx-auto h-full w-full max-w-screen-xl flex flex-col items-start justify-end gap-2"
+            "slide-to-top grill-content"
           }
         >
           {props.children}
