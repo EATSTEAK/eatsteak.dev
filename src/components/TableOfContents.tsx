@@ -35,7 +35,7 @@ export const TableOfContents: Component<{ tocHeadings: TocHeading[] }> = (props)
         observer.observe(section);
     })
     return (
-        <nav>
+        <nav class="w-80">
             <p class="text-center font-head font-semibold">CONTENTS</p>
             <TocHeading tocHeadings={props.tocHeadings} activeHeadings={activeSections()} />
         </nav>
