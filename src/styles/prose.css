@@ -1,3 +1,7 @@
+.content {
+  @apply md:text-xl md:leading-9;
+}
+
 .content h1,.content h2,.content h3,.content h4,.content h5,.content h6 {
   word-break: keep-all;
   margin-bottom: .5em;
@@ -34,6 +38,7 @@
 .content p {
   margin-bottom: 2em;
   word-break: keep-all;
+  max-width: 75ch;
 }
 
 .content textarea {
@@ -130,4 +135,8 @@
 
 .dark .content th {
   @apply border-white;
+}
+
+.content p>img {
+  margin-bottom: -1.5em;
 }
