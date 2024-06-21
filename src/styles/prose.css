@@ -1,10 +1,11 @@
 .content {
-  @apply md:text-xl md:leading-9;
+  font-size: clamp(1rem, 0.957rem + 0.217vw, 1.125rem);
+  line-height: clamp(1.5, 1.413 + 0.435vw, 1.75);
 }
 
 .content h1,.content h2,.content h3,.content h4,.content h5,.content h6 {
   word-break: keep-all;
-  margin-bottom: .5em;
+  margin-bottom: .25em;
 }
 
 .content strong,
