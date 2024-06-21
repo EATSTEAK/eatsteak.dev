@@ -15,6 +15,10 @@ export default defineConfig({
     CSS: false,
   })],
   markdown: {
-    rehypePlugins: [sectionize]
+    rehypePlugins: [sectionize],
+    remarkRehype: {
+      footnoteLabel: "각주",
+      footnoteBackLabel: "원문 보기",
+    }
   }
 });
