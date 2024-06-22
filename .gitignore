@@ -20,9 +20,6 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# yarnrc
-.yarnrc.yml
-
 # yarn zero-installs
 .yarn/*
 !.yarn/cache
