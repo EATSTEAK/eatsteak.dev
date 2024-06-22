@@ -113,7 +113,6 @@
 
 .content pre code .line {
   display: inline-block;
-  padding-right: 1.5em;
 }
 
 .content pre code .line::before {
