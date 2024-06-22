@@ -87,9 +87,39 @@
 }
 
 .content pre {
-  padding: 1.5em;
+  padding: 2em 1.5em 1.5em 0;
   border-radius: 8px;
   margin-bottom: 2em;
+  position: relative;
+}
+
+.content pre[data-language]::before {
+  content: attr(data-language);
+  display: block;
+  font-size: 0.75em;
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+  @apply text-gray-400;
+}
+
+.content pre {
+  counter-reset: step;
+  counter-increment: step 0;
+}
+
+.content pre code .line::before {
+  counter-increment: step 1;
+  content: counter(step);
+  margin-right: .75em;
+  padding-right: .75em;
+  border-right: 1px;
+  border-style: solid;
+  border-color: black;
+  display: inline-block;
+  width: 3em;
+  text-align: right;
+  @apply border-gray-600 text-gray-400;
 }
 
 .content blockquote {
