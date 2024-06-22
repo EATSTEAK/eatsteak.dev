@@ -30,13 +30,12 @@ export const PostItem: Component<{ post: CollectionEntry<"blog">, minutesRead: n
         <div class="text-xs mb-2 text-gray-500 flex line-between-flex-items">
           <div class="date">
             <FormattedDate dateTime={props.post.data.pubDate} />
-            {props.post.data.updatedDate && (
-              <div class="last-updated-on">
-                |
+          </div>
+          <Show when={props.post.data.updatedDate}>
+              <div class="updated-date">
                 <FormattedDate dateTime={props.post.data.updatedDate} /> 수정
               </div>
-            )}
-          </div>
+            </Show>
           <Show when={props.minutesRead != undefined}>
             <MinutesRead minutesRead={props.minutesRead as number} />
           </Show>
