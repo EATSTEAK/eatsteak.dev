@@ -96,10 +96,14 @@
 .content pre[data-language]::before {
   content: attr(data-language);
   display: block;
+  width: 100%;
+  text-align: right;
   font-size: 0.75em;
-  position: absolute;
-  top: 0.5em;
-  right: 1em;
+  position: sticky;
+  margin-top: -2em;
+  top: -2em;
+  left: 1em;
+  margin-right: -1em;
   @apply text-gray-400;
 }
 
