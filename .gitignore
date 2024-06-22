@@ -22,3 +22,12 @@ pnpm-debug.log*
 
 # yarnrc
 .yarnrc.yml
+
+# yarn zero-installs
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
