@@ -7,6 +7,7 @@ import tailwind from "@astrojs/tailwind";
 import compress from "astro-compress";
 
 import sectionize from "@hbsnow/rehype-sectionize";
+import { transformerNotationDiff, transformerNotationHighlight, transformerNotationWordHighlight } from "@shikijs/transformers";
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,6 +20,13 @@ export default defineConfig({
     remarkRehype: {
       footnoteLabel: "각주",
       footnoteBackLabel: "원문 보기",
+    },
+    shikiConfig: {
+      transformers: [
+        transformerNotationDiff(),
+        transformerNotationHighlight(),
+        transformerNotationWordHighlight(),
+      ]
     }
   }
 });

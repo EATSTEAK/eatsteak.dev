@@ -18,6 +18,7 @@
     "@astrojs/solid-js": "^4.4.0",
     "@astrojs/tailwind": "5.1.0",
     "@fontsource-variable/noto-sans-kr": "^5.0.6",
+    "@shikijs/transformers": "^1.9.0",
     "astro": "4.11.0",
     "astro-compress": "^2.2.28",
     "satori": "^0.10.13",

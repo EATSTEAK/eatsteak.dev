@@ -132,7 +132,15 @@ word-break: keep-all;
 > `clamp()` 함수는 2020년 6월 이후로 모든 주요 브라우저에서 구현되어 있습니다.
 
 #### 글자 크기 설정 시 주의사항
+이렇게 글자 크기를 설정할 때 주의해야 할 사항이 몇가지 있습니다. 놓치기 쉽다 보니 간단하게 정리해 봅시다.
 
+##### 최상위 요소(`:root`, `html`, `body`)에 고정 단위 크기 설정 하지 않기
+```css
+:root {
+  font-size: 18px; /* [!code --] */
+  font-size: 1.125rem; /* [!code ++] */
+}
+```
 
 [^1]: [PimpMyType, What's the right font size in web design?, 21. Sep 2021](https://pimpmytype.com/font-size/) 등 다양한 사이트, 논문에서 적어도 16px 이상을 데스크톱 웹 사이트의 폰트 크기로 하기를 권장합니다.
 

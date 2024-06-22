@@ -87,7 +87,7 @@
 }
 
 .content pre {
-  padding: 2em 1.5em 1.5em 0;
+  padding: 2em 0 1.5em 0;
   border-radius: 8px;
   margin-bottom: 2em;
   position: relative;
@@ -102,8 +102,7 @@
   position: sticky;
   margin-top: -2em;
   top: -2em;
-  left: 1em;
-  margin-right: -1em;
+  padding-right: 1em;
   @apply text-gray-400;
 }
 
@@ -112,9 +111,13 @@
   counter-increment: step 0;
 }
 
+.content pre code .line {
+  display: inline-block;
+  padding-right: 1.5em;
+}
+
 .content pre code .line::before {
   counter-increment: step 1;
-  content: counter(step);
   margin-right: .75em;
   padding-right: .75em;
   border-right: 1px;
@@ -124,6 +127,31 @@
   width: 3em;
   text-align: right;
   @apply border-gray-600 text-gray-400;
+}
+
+.content pre code .line::before {
+  content: counter(step);
+}
+
+.content pre code .line.diff.add::before {
+  content: "+ " counter(step);
+  counter-increment: step 0;
+}
+
+.content pre code .line.diff.remove::before{
+  content: "- " counter(step);
+}
+
+.content pre code .line.diff.remove {
+  @apply w-full bg-red-800 bg-opacity-50;
+}
+
+.content pre code .line.diff.add {
+  @apply w-full bg-green-800 bg-opacity-50;
+}
+
+.content pre code .line.highlighted {
+  @apply w-full bg-gray-600 bg-opacity-50;
 }
 
 .content blockquote {

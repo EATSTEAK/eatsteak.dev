@@ -1672,6 +1672,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@shikijs/transformers@npm:^1.9.0":
+  version: 1.9.0
+  resolution: "@shikijs/transformers@npm:1.9.0"
+  dependencies:
+    shiki: "npm:1.9.0"
+  checksum: 10c0/d4e9bb5f10cb531409ada53866effbb002b64a48cfadb3e670a5f607f11337a4790974d02757ed1c67c2b73cdd61a44a6c0406631e756eef0bd2bfbd0cd3d1f1
+  languageName: node
+  linkType: hard
+
 "@shuding/opentype.js@npm:1.4.0-beta.0":
   version: 1.4.0-beta.0
   resolution: "@shuding/opentype.js@npm:1.4.0-beta.0"
@@ -3363,6 +3372,7 @@ __metadata:
     "@astrojs/tailwind": "npm:5.1.0"
     "@fontsource-variable/noto-sans-kr": "npm:^5.0.6"
     "@hbsnow/rehype-sectionize": "npm:^1.0.7"
+    "@shikijs/transformers": "npm:^1.9.0"
     "@typescript-eslint/parser": "npm:^7.13.1"
     astro: "npm:4.11.0"
     astro-compress: "npm:^2.2.28"
@@ -7771,21 +7781,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"shiki@npm:1.9.0, shiki@npm:^1.6.5":
+  version: 1.9.0
+  resolution: "shiki@npm:1.9.0"
+  dependencies:
+    "@shikijs/core": "npm:1.9.0"
+  checksum: 10c0/bc2dd4547a2afec62e2ecba8f2e85bf48d99c5b3b3fb7247f9159f7437a8f83d20afdca75fe5a6ceffe409b5c008671f09dd5546b66a35d895c7dd1eaf1b261b
+  languageName: node
+  linkType: hard
+
 "shiki@npm:^1.1.2, shiki@npm:^1.6.1":
   version: 1.6.3
   resolution: "shiki@npm:1.6.3"
   dependencies:
     "@shikijs/core": "npm:1.6.3"
   checksum: 10c0/3a5f421536b2d77f2973fa4459dc58ec154f8831acd177ec1b21bf33d876895b501263c7bcf58f6ad65541262ece485acd38e29ad271796dbf7f5743c8615485
-  languageName: node
-  linkType: hard
-
-"shiki@npm:^1.6.5":
-  version: 1.9.0
-  resolution: "shiki@npm:1.9.0"
-  dependencies:
-    "@shikijs/core": "npm:1.9.0"
-  checksum: 10c0/bc2dd4547a2afec62e2ecba8f2e85bf48d99c5b3b3fb7247f9159f7437a8f83d20afdca75fe5a6ceffe409b5c008671f09dd5546b66a35d895c7dd1eaf1b261b
   languageName: node
   linkType: hard
 
