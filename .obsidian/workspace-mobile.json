@@ -117,9 +117,17 @@
             "file": "src/content/blog/constructing-blog.md"
           }
         }
+      },
+      {
+        "id": "deb287aa96e8a8e5",
+        "type": "leaf",
+        "state": {
+          "type": "git-history-view",
+          "state": {}
+        }
       }
     ],
-    "currentTab": 0
+    "currentTab": 3
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -133,35 +141,37 @@
   },
   "active": "37a8211a6b11d476",
   "lastOpenFiles": [
-    "src/pages/category/[...id].astro",
-    "src/pages/category",
-    "src/components/GrillContainer.tsx",
-    "src/pages/topic",
-    "src/pages/category/index.astro",
-    "src/components/Container.tsx",
-    "src/pages/topic/[...topic].astro",
-    "src/pages/post/[...slug].astro",
-    "src/pages/post/index.astro",
-    "src/pages/post",
-    "src/pages/topic/index.astro",
+    "src/content/blog/designing-blog.md",
+    "src/content/blog/constructing-blog.md",
+    "public/images/designing-blog/notokr.png",
+    "src/components/header.css",
+    "src/styles/fonts.css",
+    "src/components/button.css",
+    "public/images/designing-blog/optimizelegibility.png",
+    "public/images/designing-blog/pretendard.png",
+    "src/pages/card/square/[...slug].png.ts",
+    "src/components/intro.css",
+    "public/images/designing-blog/space-odyssey.png",
+    "src/components/container.css",
+    "src/components/grill_container.css",
+    "public/images/designing-blog/prototype.png",
+    "src/components/category_label.css",
+    "src/pages/card/og/[...slug].png.ts",
+    "src/components/footer.css",
+    "/src/content/blog/starting-blog.md",
+    "/src/content/blog/designing-blog.md",
+    "/src/content/blog/constructing-blog.md",
+    "/public/images/designing-blog/space-odyssey.png",
+    "/public/images/designing-blog/prototype.png",
+    "/public/images/designing-blog/pretendard.png",
+    "/public/images/designing-blog/optimizelegibility.png",
+    "/public/images/designing-blog/notokr.png",
+    "/src/content/blog/markdown-style-guide.md",
     "src/content/blog/multiplatform-rust.md",
     "src/content/blog/starting-blog.md",
-    "src/content/blog/constructing-blog.md",
-    "/src/content/blog/starting-blog.md",
     "/src/content/blog/multiplatform-rust.md",
-    "/src/content/blog/markdown-style-guide.md",
-    "/src/content/blog/constructing-blog.md",
     "README.md",
-    "/public/images/grill.png",
     "src/content/blog/markdown-style-guide.md",
-    "(./full/or/relative/path/of/image).md",
-    "public/images/profile.svg",
-    "public/images/logo.png",
-    "public/images/blog-placeholder-1.jpg",
-    "public/favicon.svg",
-    "public/images/grill.png",
-    "public/images/sun.svg",
-    "public/images/profile.png",
-    "public/images/moon.svg"
+    "(./full/or/relative/path/of/image).md"
   ]
 }
