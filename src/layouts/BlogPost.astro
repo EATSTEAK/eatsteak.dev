@@ -8,7 +8,7 @@ import { CategoryLabel } from "../components/CategoryLabel";
 import "../styles/prose.css";
 import { Counter } from "../components/Counter";
 import { CATEGORIES } from "../consts";
-import { PostItem } from "../components/PostItem";
+import PostItem from "../components/PostItem.astro";
 import { getReadingTime } from "../utils/reading-time";
 import { MinutesRead } from "../components/MinutesRead";
 import type { MarkdownHeading } from "astro";
@@ -132,7 +132,6 @@ const toc = buildToc(headings);
                 <PostItem
                   post={post}
                   minutesRead={getReadingTime(post.body)}
-                  client:only="solid-js"
                 />
               ))
             }

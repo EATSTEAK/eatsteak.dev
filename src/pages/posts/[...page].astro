@@ -3,7 +3,7 @@ import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import { PostItem } from "../../components/PostItem";
+import PostItem from "../../components/PostItem.astro";
 import { Container } from "../../components/Container";
 import { Pagination } from "../../components/Pagination";
 import { getReadingTime } from "../../utils/reading-time";
@@ -30,7 +30,6 @@ const { page } = Astro.props as Props;
               <PostItem
                 post={post}
                 minutesRead={getReadingTime(post.body)}
-                client:only="solid-js"
               />
             </>
           ))

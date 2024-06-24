@@ -1,7 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
+import Header from "../components/Header.astro";
 
 const {
   title,
@@ -22,7 +22,7 @@ const page = pathname.slice(1);
     class="relative -z-20 flex flex-col bg-slate-50 dark:bg-slate-900 dark:text-white transition-colors"
   >
     <div class="relative -z-10 bg-white dark:bg-slate-950 transition-colors">
-      <Header page={page} client:only="solid-js" />
+      <Header page={page} />
       <slot />
     </div>
 

@@ -1,0 +1,67 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { CategoryLabel } from "./CategoryLabel";
+import { FormattedDate } from "./FormattedDate";
+import { MinutesRead } from "./MinutesRead";
+import { Topics } from "./Topics";
+
+interface Props {
+    post: CollectionEntry<"blog">;
+    minutesRead: number | undefined;
+}
+
+const { post, minutesRead } = Astro.props;
+---
+
+<section>
+    <a href={`/post/${post.slug}`}>
+        {
+            post.data.heroImage && (
+                <div
+                    class="mb-2"
+                    style={{
+                        "background-size": "cover",
+                        "background-position": "center",
+                        "background-image": `url(${post.data.heroImage})`,
+                        width: "100%",
+                        height: "16rem",
+                    }}
+                />
+            )
+        }
+        <CategoryLabel category={post.data.category ?? "uncategorized"} />
+        <h4 class="mt-2">
+            <span class="nav-link">{post.data.title}</span>
+        </h4>
+        <div class="text-xs mb-2 text-gray-500 flex line-between-flex-items">
+            <div class="date">
+                <FormattedDate
+                    dateTime={post.data.pubDate}
+                    client:only="solid-js"
+                />
+            </div>
+            {
+                post.data.updatedDate && (
+                    <div class="updated-date">
+                        <FormattedDate
+                            dateTime={post.data.updatedDate as Date}
+                            client:only="solid-js"
+                        />{" "}
+                        수정
+                    </div>
+                )
+            }
+            {
+                minutesRead != undefined && (
+                    <MinutesRead minutesRead={minutesRead as number} />
+                )
+            }
+        </div>
+
+        <div class="text-gray-700 dark:text-gray-300 mb-2">
+            {post.data.description}
+        </div>
+    </a>
+    {post.data.topics && <Topics topics={post.data.topics} />}
+    <hr class="mb-1" />
+</section>

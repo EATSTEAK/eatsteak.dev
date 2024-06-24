@@ -3,7 +3,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { Intro } from "../components/Intro";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { PostItem } from "../components/PostItem";
+import PostItem from "../components/PostItem.astro";
 import { Button } from "../components/Button";
 import { Container } from "../components/Container";
 import { getReadingTime } from "../utils/reading-time";
@@ -24,11 +24,7 @@ const posts = (await getCollection("blog"))
       <div class="flex flex-col gap-4">
         {
           posts.map((post) => (
-            <PostItem
-              post={post}
-              minutesRead={getReadingTime(post.body)}
-              client:only="solid-js"
-            />
+            <PostItem post={post} minutesRead={getReadingTime(post.body)} />
           ))
         }
       </div>

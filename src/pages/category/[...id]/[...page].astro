@@ -7,7 +7,7 @@ import type {
 import { getCollection, type CollectionEntry } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from "../../../consts";
 import Layout from "../../../layouts/Layout.astro";
-import { PostItem } from "../../../components/PostItem";
+import PostItem from "../../../components/PostItem.astro";
 import { GrillContainer } from "../../../components/GrillContainer";
 import { Container } from "../../../components/Container";
 import type { JSX } from "solid-js";
@@ -64,7 +64,6 @@ const { page, category } = Astro.props as Props;
                 <PostItem
                   post={post}
                   minutesRead={getReadingTime(post.body)}
-                  client:only="solid-js"
                 />
               </>
             ),
