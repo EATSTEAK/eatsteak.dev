@@ -1704,12 +1704,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@solid-primitives/set@npm:^0.4.11":
+  version: 0.4.11
+  resolution: "@solid-primitives/set@npm:0.4.11"
+  dependencies:
+    "@solid-primitives/trigger": "npm:^1.0.11"
+  peerDependencies:
+    solid-js: ^1.6.12
+  checksum: 10c0/3ef1d2e53e436fe9a4c697bba4af17839ca2129ae305d853e5016353bd1fbe6a94d8bbf22b75c186e89733659b92d55e2c41c38624f2cad347a2663bf2314b98
+  languageName: node
+  linkType: hard
+
 "@solid-primitives/transition-group@npm:^1.0.2":
   version: 1.0.5
   resolution: "@solid-primitives/transition-group@npm:1.0.5"
   peerDependencies:
     solid-js: ^1.6.12
   checksum: 10c0/37e8ed87a0b67e83fcb4399adc5000f92797d9c9472e24be32e6d87cf85899f02ad3718f8eca0b96e18ea00ce28bd71db5469e94b2bb75292afcec633a3c71e9
+  languageName: node
+  linkType: hard
+
+"@solid-primitives/trigger@npm:^1.0.11":
+  version: 1.0.11
+  resolution: "@solid-primitives/trigger@npm:1.0.11"
+  dependencies:
+    "@solid-primitives/utils": "npm:^6.2.3"
+  peerDependencies:
+    solid-js: ^1.6.12
+  checksum: 10c0/621a26ea6fb78ef24b07de343f3485ccc3db496bb54929996dbb830ee89b9d06d3b3f3ef30cb34b670624f6a4f640b07ad84e55860e3112ae487905ef9949c6c
   languageName: node
   linkType: hard
 
@@ -3373,6 +3395,7 @@ __metadata:
     "@fontsource-variable/noto-sans-kr": "npm:^5.0.6"
     "@hbsnow/rehype-sectionize": "npm:^1.0.7"
     "@shikijs/transformers": "npm:^1.9.0"
+    "@solid-primitives/set": "npm:^0.4.11"
     "@typescript-eslint/parser": "npm:^7.13.1"
     astro: "npm:4.11.0"
     astro-compress: "npm:^2.2.28"
