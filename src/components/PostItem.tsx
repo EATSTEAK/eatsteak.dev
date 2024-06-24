@@ -33,7 +33,7 @@ export const PostItem: Component<{ post: CollectionEntry<"blog">, minutesRead: n
           </div>
           <Show when={props.post.data.updatedDate}>
               <div class="updated-date">
-                <FormattedDate dateTime={props.post.data.updatedDate} /> 수정
+                <FormattedDate dateTime={props.post.data.updatedDate as Date} /> 수정
               </div>
             </Show>
           <Show when={props.minutesRead != undefined}>
