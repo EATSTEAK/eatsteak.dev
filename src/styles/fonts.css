@@ -1,8 +1,9 @@
 @font-face {
     font-family: MonoplexKR;
-    src: url("/fonts/MonoplexKR-Regular.woff2") format("woff2");
-    font-weight: 400;
     font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url("/fonts/MonoplexKR-Regular.woff2") format("woff2");
   }
   
   /* noto-sans-kr-[0]-wght-normal */
