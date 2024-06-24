@@ -1,5 +1,5 @@
 import { Transition } from "solid-transition-group";
-import "./toc_heading.css";
+import "./toc.css";
 import { type Component, For, Show } from "solid-js";
 
 export const TocHeading: Component<{ tocHeadings: TocHeading[], activeHeadings: string[] }> = (props) => {
@@ -7,7 +7,7 @@ export const TocHeading: Component<{ tocHeadings: TocHeading[], activeHeadings: 
     return (
         <ul>
             <For each={props.tocHeadings}>
-                {(heading) => <li>
+                {(heading) => <li class="toc">
                     <a class={`nav-link ${props.activeHeadings.includes(heading.slug) ? "link-selected" : ""}`} href={`#${heading.slug}`}>
                         {heading.text}
                     </a>
