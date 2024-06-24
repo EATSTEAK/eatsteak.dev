@@ -1,6 +1,6 @@
 import { ReactiveSet } from "@solid-primitives/set";
 import { TocHeading } from "./TocHeading";
-import { type JSX, type Component, createSignal } from "solid-js";
+import { type Component } from "solid-js";
 
 export const TableOfContents: Component<{ tocHeadings: TocHeading[] }> = (props) => {
     const activeSections = new ReactiveSet<string>([]);

@@ -1,4 +1,4 @@
-import type { JSX, Component } from "solid-js";
+import type { Component } from "solid-js";
 
 export const FormattedDate: Component<{ dateTime: Date }> = (props) => {
   const langCode = document.documentElement.lang || navigator.language;

@@ -1,17 +1,15 @@
 ---
 import type {
-  InferGetStaticParamsType,
   InferGetStaticPropsType,
   GetStaticPaths,
 } from "astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from "../../../consts";
 import Layout from "../../../layouts/Layout.astro";
 import PostItem from "../../../components/PostItem.astro";
 import { GrillContainer } from "../../../components/GrillContainer";
 import { Container } from "../../../components/Container";
 import type { JSX } from "solid-js";
-import type { Page } from "astro";
 import { Pagination } from "../../../components/Pagination";
 import { getReadingTime } from "../../../utils/reading-time";
 

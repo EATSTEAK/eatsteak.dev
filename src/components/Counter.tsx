@@ -1,5 +1,4 @@
 import {
-  type JSX,
   type Component,
   createResource,
 } from "solid-js";

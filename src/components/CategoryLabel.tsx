@@ -1,4 +1,4 @@
-import { type JSX, type Component, Show } from "solid-js";
+import { type Component, Show } from "solid-js";
 import { CATEGORIES } from "../consts";
 
 import "./category_label.css";

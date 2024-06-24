@@ -23,7 +23,7 @@ export async function getStaticPaths() {
   }));
 }
 
-const { topic, count } = Astro.props;
+const { topic } = Astro.props;
 
 async function getPostsByTopic(topic: string) {
   return (await getCollection("blog"))

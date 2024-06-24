@@ -1,4 +1,4 @@
-import { type JSX, type Component, For } from "solid-js";
+import { type Component, For } from "solid-js";
 
 export const Topics: Component<{ topics: string[] }> = (props) => {
   return (

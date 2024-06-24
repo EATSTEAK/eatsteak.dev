@@ -1,4 +1,4 @@
-import type { JSX, Component } from "solid-js";
+import type { Component } from "solid-js";
 import "./container.css";
 
 type ContainerVarient = "normal" | "wide";

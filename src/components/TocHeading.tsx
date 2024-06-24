@@ -1,9 +1,8 @@
 import { Transition } from "solid-transition-group";
 import "./toc_heading.css";
-import { type JSX, type Component, For, Show, createSignal } from "solid-js";
+import { type Component, For, Show } from "solid-js";
 
 export const TocHeading: Component<{ tocHeadings: TocHeading[], activeHeadings: string[] }> = (props) => {
-
 
     return (
         <ul>

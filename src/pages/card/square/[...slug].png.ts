@@ -14,7 +14,7 @@ export async function getStaticPaths() {
   }));
 }
 
-export const GET: APIRoute = async function GET({ params, request, props }) {
+export const GET: APIRoute = async function GET({ props }) {
   const jostData = await fs.readFile(
     "./fonts/Jost-Medium.ttf"
   );
@@ -79,7 +79,7 @@ export const GET: APIRoute = async function GET({ params, request, props }) {
 
   const hexToRgb = (hex: string) => {
     let hexsplit = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
-               ,(m, r, g, b) => '#' + r + r + g + g + b + b)
+               ,(_m, r, g, b) => '#' + r + r + g + g + b + b)
       .substring(1).match(/.{2}/g);
       if(hexsplit == null) return null;
       return hexsplit.map(x => parseInt(x, 16));

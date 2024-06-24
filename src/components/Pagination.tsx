@@ -1,4 +1,4 @@
-import { type JSX, type Component, For, Show } from "solid-js";
+import { type Component, For, Show } from "solid-js";
 
 export const Pagination: Component<{ baseUrl: string, lastPage: number, currentPage: number }> = (props) => {
     const currentPageStartingZero = props.currentPage - 1;
