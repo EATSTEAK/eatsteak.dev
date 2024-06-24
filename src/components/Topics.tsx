@@ -1,5 +1,5 @@
 import { type Component, For } from "solid-js";
-
+import "./topics.css";
 export const Topics: Component<{ topics: string[] }> = (props) => {
   return (
     <div class="flex gap-2 flex-wrap">
@@ -7,9 +7,7 @@ export const Topics: Component<{ topics: string[] }> = (props) => {
         {(topic) => (
           <a
             href={`/topic/${topic}`}
-            class="px-1 font-mono uppercase transition-colors border-2
-  before:bg-white bg-gradient-to-r hover-fill-to-right from-gray-800 to-gray-800 text-gray-800 hover:text-white border-gray-800
-   dark:before:bg-gray-800 dark:from-white dark:to-white dark:text-white dark:hover:text-gray-800 dark:border-white"
+            class="topic-btn transition-colors"
           >
             {topic}
           </a>
