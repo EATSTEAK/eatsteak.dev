@@ -27,7 +27,11 @@ const { page } = Astro.props as Props;
         {
           page.data.map((post) => (
             <>
-              <PostItem post={post} minutesRead={getReadingTime(post.body)} client:only />
+              <PostItem
+                post={post}
+                minutesRead={getReadingTime(post.body)}
+                client:only="solid-js"
+              />
             </>
           ))
         }
