@@ -19,13 +19,13 @@ const selected = (value: string) =>
         <img src="/images/logo.png" alt="eatsteak.dev" class="logo-image" /></a
       >
     </h2>
+    <nav class="navbar">
+      <a class={selected("about")} href="/about"> About </a>
+      <a class={selected("post")} href="/posts"> Posts </a>
+      <a class={selected("category")} href="/category"> Categories </a>
+    </nav>
+    <aside class="switch-container">
+      <LightSwitch client:only="solid-js" />
+    </aside>
   </div>
-  <nav class="navbar">
-    <a class={selected("about")} href="/about"> About </a>
-    <a class={selected("post")} href="/posts"> Posts </a>
-    <a class={selected("category")} href="/category"> Categories </a>
-  </nav>
-  <aside class="switch-container">
-    <LightSwitch client:only="solid-js" />
-  </aside>
 </header>
