@@ -21,21 +21,21 @@ type Category = {
 };
 
 export const CATEGORIES: { [category: string]: Category } = {
-  // rust: {
-  //   id: "rust",
-  //   name: "Rust",
-  //   description: "모던한 시스템 프로그래밍 언어",
-  //   color: {
-  //     light: {
-  //       bg: "#991b1b",
-  //       text: "#ffffff",
-  //     },
-  //     dark: {
-  //       bg: "#991b1b",
-  //       text: "#ffffff",
-  //     },
-  //   },
-  // },
+  rust: {
+    id: "rust",
+    name: "Rust",
+    description: "모던한 시스템 프로그래밍 언어",
+    color: {
+      light: {
+        bg: "#991b1b",
+        text: "#ffffff",
+      },
+      dark: {
+        bg: "#991b1b",
+        text: "#ffffff",
+      },
+    },
+  },
   web: {
     id: "web",
     name: "Web",
