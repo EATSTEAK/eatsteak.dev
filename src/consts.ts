@@ -39,7 +39,7 @@ export const CATEGORIES: { [category: string]: Category } = {
   web: {
     id: "web",
     name: "Web",
-    description: "웹 UX부터 풀스택 웹개발까지",
+    description: "웹 UX부터 풀스택 웹 개발까지",
     color: {
       light: {
         bg: "#0e7490",

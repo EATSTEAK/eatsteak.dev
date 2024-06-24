@@ -1,6 +1,7 @@
 .content {
   font-size: clamp(1rem, 0.957rem + 0.217vw, 1.125rem);
   line-height: clamp(1.5, 1.413 + 0.435vw, 1.75);
+  font-weight: 400;
 }
 
 .content h1,.content h2,.content h3,.content h4,.content h5,.content h6 {
