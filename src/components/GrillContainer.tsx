@@ -10,13 +10,6 @@ export const GrillContainer: Component<{
 }> = (props) => {
   return (
     <section class={props.parentClassOverride ?? "relative h-72"}>
-      <Show when={props.absoluteBackground}>
-        <div class="background-container">
-          <div class="background-element">
-            {props.absoluteBackground}
-          </div>
-        </div>
-      </Show>
       <div class={`grill-background size-full ${props.grillClassOverride ?? "before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-3"}`}>
         <div
           class={
@@ -27,6 +20,13 @@ export const GrillContainer: Component<{
           {props.children}
         </div>
       </div>
+      <Show when={props.absoluteBackground}>
+        <div class="background-container">
+          <div class="background-element">
+            {props.absoluteBackground}
+          </div>
+        </div>
+      </Show>
     </section>
   );
 };

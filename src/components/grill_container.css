@@ -1,5 +1,5 @@
 .background-container {
-    @apply absolute top-0 right-0 w-full h-full;
+    @apply absolute top-0 right-0 w-full h-full -z-10;
 }
 
 .background-element {

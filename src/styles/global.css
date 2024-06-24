@@ -88,7 +88,7 @@
     height: 200%;
     top: -50%;
     left: -50%;
-    z-index: -1;
+    z-index: -10;
     mask-size: 2rem;
     mask-image: url("/images/grill.png");
     mask-repeat: repeat;
