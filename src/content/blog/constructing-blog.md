@@ -7,7 +7,6 @@ updatedDate: 2024-06-22T14:34:00+09:00
 hidden: false
 topics:
   - Blog
-  - Metaposting
   - Astro
   - TailwindCSS
   - SolidJS
