@@ -5,9 +5,11 @@ import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 import { GrillContainer } from "../../components/GrillContainer";
 import { Container } from "../../components/Container";
+import type { CollectionEntry } from "astro:content";
 
-async function getTopics() {
-  const posts = await getCollection("blog");
+const posts = await getCollection("blog");
+
+function getTopics(posts: CollectionEntry<"blog">[]) {
   const initial: { [topic: string]: number } = {};
   return posts
     .filter((post) => post.data.hidden !== true)
@@ -20,9 +22,14 @@ async function getTopics() {
     }, initial);
 }
 
-const categories = Object.values(CATEGORIES);
+const categories = Object.values(CATEGORIES).filter(
+  (category) =>
+    posts.find(
+      (post) => post.data.hidden != true && post.data.category == category.id,
+    ) != undefined,
+);
 
-const topics = Object.keys(await getTopics());
+const topics = Object.keys(getTopics(posts));
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
