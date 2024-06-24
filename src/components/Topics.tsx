@@ -7,7 +7,7 @@ export const Topics: Component<{ topics: string[] }> = (props) => {
         {(topic) => (
           <a
             href={`/topic/${topic}`}
-            class="topic-btn transition-colors"
+            class="topic-btn hover-fill-to-right transition-colors"
           >
             {topic}
           </a>
