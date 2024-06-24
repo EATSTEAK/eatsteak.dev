@@ -5,6 +5,7 @@ export const GrillContainer: Component<{
   absoluteBackground?: JSX.Element;
   children: JSX.Element;
   parentClassOverride?: string;
+  grillClassOverride?: string;
   containerClassOverride?: string;
 }> = (props) => {
   return (
@@ -16,7 +17,7 @@ export const GrillContainer: Component<{
           </div>
         </div>
       </Show>
-      <div class="grill-background before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-3 size-full">
+      <div class={`grill-background size-full ${props.grillClassOverride ?? "before:bg-slate-700 dark:before:bg-slate-400 before:bg-opacity-30 before:rotate-3"}`}>
         <div
           class={
             props.containerClassOverride ??
