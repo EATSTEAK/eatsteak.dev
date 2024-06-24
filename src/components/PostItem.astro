@@ -29,7 +29,9 @@ const { post, minutesRead } = Astro.props;
                 />
             )
         }
-        <CategoryLabel category={post.data.category ?? "uncategorized"} />
+    </a>
+    <CategoryLabel category={post.data.category ?? "uncategorized"} />
+    <a href={`/post/${post.slug}`}>
         <h4 class="mt-2">
             <span class="nav-link">{post.data.title}</span>
         </h4>
