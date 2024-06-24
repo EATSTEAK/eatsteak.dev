@@ -36,6 +36,21 @@ export const CATEGORIES: { [category: string]: Category } = {
   //     },
   //   },
   // },
+  web: {
+    id: "web",
+    name: "Web",
+    description: "웹 UX부터 풀스택 웹개발까지",
+    color: {
+      light: {
+        bg: "#0e7490",
+        text: "#ffffff",
+      },
+      dark: {
+        bg: "#0e7490",
+        text: "#ffffff",
+      },
+    },
+  },
   uncategorized: {
     id: "uncategorized",
     name: "Uncategorized",
@@ -47,21 +62,6 @@ export const CATEGORIES: { [category: string]: Category } = {
       },
       dark: {
         bg: "#1F2937",
-        text: "#ffffff",
-      },
-    },
-  },
-  web: {
-    id: "web",
-    name: "Web",
-    description: "인터넷이 세상을 지배한다",
-    color: {
-      light: {
-        bg: "#0e7490",
-        text: "#ffffff",
-      },
-      dark: {
-        bg: "#0e7490",
         text: "#ffffff",
       },
     },
