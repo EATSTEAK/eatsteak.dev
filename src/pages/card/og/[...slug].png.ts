@@ -165,6 +165,7 @@ export const GET: APIRoute = async function GET({ props }) {
                 fontWeight: "500",
                 lineHeight: "1.4",
                 margin: "0 0",
+                wordBreak: "keep-all",
               }
             }
           },

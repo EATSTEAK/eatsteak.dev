@@ -198,6 +198,7 @@ export const GET: APIRoute = async function GET({ props }) {
                 fontSize: "36px",
                 fontWeight: "500",
                 lineHeight: "1.4",
+                wordBreak: "keep-all",
               }
             }
           },
