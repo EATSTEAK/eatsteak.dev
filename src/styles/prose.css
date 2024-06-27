@@ -104,7 +104,7 @@
   left: 0;
   margin-top: -2.25em;
   padding-left: 1em;
-  @apply text-gray-400 font-head uppercase;
+  @apply text-gray-400 font-head font-semibold uppercase;
 }
 
 .content pre {
