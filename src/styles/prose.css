@@ -97,14 +97,14 @@
 .content pre[data-language]::before {
   content: attr(data-language);
   display: block;
-  width: 100%;
-  text-align: right;
-  font-size: 0.75em;
+  text-align: left;
+  font-size: 1em;
   position: sticky;
-  margin-top: -2em;
   top: -2em;
-  padding-right: 1em;
-  @apply text-gray-400;
+  left: 0;
+  margin-top: -2em;
+  padding-left: 1em;
+  @apply text-gray-400 font-head;
 }
 
 .content pre {
