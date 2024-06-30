@@ -2561,7 +2561,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.4.15":
+"autoprefixer@npm:^10.4.15, autoprefixer@npm:^10.4.19":
   version: 10.4.19
   resolution: "autoprefixer@npm:10.4.19"
   dependencies:
@@ -3502,6 +3502,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^7.13.1"
     astro: "npm:4.11.0"
     astro-compress: "npm:^2.2.28"
+    autoprefixer: "npm:^10.4.19"
     cssnano: "npm:^7.0.3"
     eslint: "npm:^9.5.0"
     eslint-plugin-astro: "npm:^1.2.2"

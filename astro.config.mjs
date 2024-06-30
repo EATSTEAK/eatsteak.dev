@@ -17,7 +17,7 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     compress({
-    CSS: false,
+    CSS: true,
   })],
   markdown: {
     rehypePlugins: [sectionize],

@@ -6,5 +6,5 @@
     "jsxImportSource": "solid-js",
     "outDir": "dist"
   },
-  "exclude": ["*.mjs"]
+  "exclude": ["**/*.cjs", "**/*.js", "**/*.mjs"]
 }
