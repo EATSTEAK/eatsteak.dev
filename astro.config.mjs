@@ -12,7 +12,11 @@ import { transformerNotationDiff, transformerNotationHighlight, transformerNotat
 // https://astro.build/config
 export default defineConfig({
   site: "https://eatsteak.dev",
-  integrations: [mdx(), sitemap(), solidJs(), tailwind(), compress({
+  integrations: [mdx(), sitemap(), solidJs(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    compress({
     CSS: false,
   })],
   markdown: {
