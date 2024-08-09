@@ -35,21 +35,21 @@ import "../styles/about_print.css";
                 <Button href="mailto:me@eatsteak.dev" target="_blank"
                 >
                     <span class="text-nowrap">
-                        <Mail class="inline w-6"/>
+                        <Mail class="inline w-6 h-6"/>
                         me@eatsteak.dev
                     </span>
                 </Button>
                 <Button href="https://github.com/eatsteak" target="_blank"
                 >
                     <span class="text-nowrap">
-                        <GitHub class="inline w-6"/>
+                        <GitHub class="inline w-6 h-6"/>
                         eatsteak
                     </span>
                 </Button>
                 <Button href="https://instagram.com/eatsteak.dev" target="_blank"
                 >
                     <span class="text-nowrap">
-                        <Instagram class="inline w-6"/>
+                        <Instagram class="inline w-6 h-6"/>
                         eatsteak.dev
                     </span>
                 </Button>
@@ -57,15 +57,15 @@ import "../styles/about_print.css";
         </GrillContainer>
         <Container varient="wide">
             <section aria-label="요약">
-                <p class="text-xl break-keep leading-10">
+                <p class="text-xl break-keep leading-10 mb-0">
                     <strong>업으로, 그리고 취미로도 개발하는 개발자 구효민(a.k.a. EATSTEAK)입니다.</strong> 다양한 분야에서 새로운 기술을 사용하는 경험을 즐기며,
                     <br/>
                     모두의 불편함을 해소할 수 있는 따끈한 프로덕트를 만들고자, 항상 Best Practice를 찾으며 개발하고자 노력합니다.
                 </p>
             </section>
             <section aria-labelledby="work_history" class="flex flex-col gap-4">
-                <h1 id="work_history" class="uppercase text-2xl">경력 / Work History</h1>
-                <ExperienceCard title="우마공크리에이티브" subtitle="연구개발부 / CTO" from="2021.06" to="2022.12" hasBorder>
+                <h1 id="work_history" class="uppercase text-2xl mt-4">경력 / Work History</h1>
+                <ExperienceCard title="우마공크리에이티브" subtitle="연구개발부 / CTO" from="2021.04" to="2021.12" hasBorder>
                     <div class="flex flex-col gap-4">
                         <SubExperienceCard title="2021 유튜브 크리에이터 타운"
                                            subtitle="개발 팀장" from="2021.06"
@@ -92,7 +92,7 @@ import "../styles/about_print.css";
                         </SubExperienceCard>
                     </div>
                 </ExperienceCard>
-                <ExperienceCard title="우마공" subtitle="개발자" from="2020.03" to="2021.04" hasBorder={true}>
+                <ExperienceCard title="우마공" subtitle="개발자" from="2020.07" to="2021.03" hasBorder={true}>
                     <div class="flex flex-col gap-4">
                         <SubExperienceCard title="우마공 유저 DB"
                                            subtitle="풀스택 1인 개발 / Vue.js(v2), Nuxt.js(v2), Express.js, Mongoose, MongoDB"
@@ -134,7 +134,7 @@ import "../styles/about_print.css";
                     </div>
                 </ExperienceCard>
             </section>
-            <section aria-labelledby="education" class="flex flex-col gap-4">
+            <section aria-labelledby="education" class="flex flex-col gap-4 pt-4">
                 <h1 id="education" class="uppercase text-2xl">학력 / Education</h1>
                 <ExperienceCard title="숭실대학교" subtitle="글로벌미디어학부" from="2021.03" hasBorder>
                     <p class="mb-2">3학년 휴학 / GPA 3.92</p>
@@ -154,7 +154,7 @@ import "../styles/about_print.css";
                     </SubExperienceCard>
                 </ExperienceCard>
             </section>
-            <section aria-labelledby="projects" class="flex flex-col gap-4">
+            <section aria-labelledby="projects" class="flex flex-col gap-4 pt-4">
                 <h1 id="projects" class="uppercase text-2xl">프로젝트 / Projects</h1>
                 <ExperienceCard title="ARCINFO"
                                 subtitle="개인 프로젝트 / Vue.js(v2), Nuxt.js(v2), Vuex, Express.js, MongoDB"
@@ -223,7 +223,7 @@ import "../styles/about_print.css";
                     </ul>
                 </ExperienceCard>
             </section>
-            <section aria-labelledby="others" class="flex flex-col">
+            <section aria-labelledby="others" class="flex flex-col pt-4">
                 <h1 id="others" class="uppercase text-2xl">기타 이력 / Others</h1>
                 <ExperienceCard title="육군 병장 만기 전역" subtitle="체계관리병(전산병) 특기" from="2023.02"
                                 to="2024.08"></ExperienceCard>
