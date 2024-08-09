@@ -67,6 +67,7 @@ jobs:
       - name: Setup supportedArchitectures
         run: |
           if [ "${{ steps.detect-package-manager.outputs.manager }}" == "yarn" ]; then
+            yarn config set nodeLinker node-modules
             yarn config set supportedArchitectures.os linux
             yarn config set supportedArchitectures.cpu x64
             yarn config set supportedArchitectures.libc glibc
