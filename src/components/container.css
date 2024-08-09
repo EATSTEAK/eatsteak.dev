@@ -1,3 +1,7 @@
-.container {
-    @apply px-6 my-8 flex flex-col gap-4 lg:mx-auto w-full;
+@tailwind components;
+
+@layer components {
+    .container {
+        @apply px-6 my-8 flex flex-col gap-4 lg:mx-auto w-full;
+    }
 }

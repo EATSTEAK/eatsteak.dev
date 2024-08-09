@@ -21,31 +21,37 @@ import "../styles/about_print.css";
             <AnimatedLogo class="-mt-16 w-[32rem] h-[32rem]" slot="absoluteBackground"/>
             <p
                     class="py-2 px-2 m-0 font-head font-bold text-5xl bg-gray-800 text-white
-          dark:bg-white dark:text-gray-800"
+          dark:bg-white dark:text-gray-800 break-keep"
             >
-                구효민 / Hyomin Koo
+                구효민 <span class="text-xl">Hyomin Koo</span>
             </p>
             <p
                     class="py-2 px-2 m-0 font-head font-bold text-5xl bg-gray-800 text-white
-          dark:bg-white dark:text-gray-800"
+          dark:bg-white dark:text-gray-800 break-keep"
             >
                 개발을 합니다. 업으로, 그리고 취미로.
             </p>
-            <address class="flex gap-2">
+            <address class="flex gap-2 flex-wrap">
                 <Button href="mailto:me@eatsteak.dev" target="_blank"
                 >
-                    <Mail class="inline w-6"/>
-                    me@eatsteak.dev
+                    <span class="text-nowrap">
+                        <Mail class="inline w-6"/>
+                        me@eatsteak.dev
+                    </span>
                 </Button>
                 <Button href="https://github.com/eatsteak" target="_blank"
                 >
-                    <GitHub class="inline w-6"/>
-                    eatsteak
+                    <span class="text-nowrap">
+                        <GitHub class="inline w-6"/>
+                        eatsteak
+                    </span>
                 </Button>
                 <Button href="https://instagram.com/eatsteak.dev" target="_blank"
                 >
-                    <Instagram class="inline w-6"/>
-                    eatsteak.dev
+                    <span class="text-nowrap">
+                        <Instagram class="inline w-6"/>
+                        eatsteak.dev
+                    </span>
                 </Button>
             </address>
         </GrillContainer>

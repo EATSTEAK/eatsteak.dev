@@ -1,23 +1,29 @@
 @keyframes burning {
-  0% {
-    background-position: 0% 0%;
-  }
+    0% {
+        background-position: 0% 0%;
+    }
 
-  50% {
-    background-position: 170% 70%;
-  }
+    50% {
+        background-position: 170% 70%;
+    }
 
-  100% {
-    background-position: 0% 0%;
-  }
+    100% {
+        background-position: 0% 0%;
+    }
 }
 
-.animated-logo {
-  background: linear-gradient(270deg, #ca5010, #d13438, #ff8c00, #ca5010);
-  background-size: 200% 200%;
-  background-repeat: repeat;
-  mask-image: url("/images/profile.svg");
-  mask-repeat: no-repeat;
-  mask-size: cover;
-  animation: burning 5s ease infinite;
+@tailwind components;
+
+@layer components {
+    .animated-logo {
+        background: linear-gradient(270deg, #ca5010, #d13438, #ff8c00, #ca5010);
+        background-size: 200% 200%;
+        background-repeat: repeat;
+        mask-image: url("/images/profile.svg");
+        mask-repeat: no-repeat;
+        mask-size: cover;
+        animation: burning 5s ease infinite;
+    }
 }
+
+

@@ -1,30 +1,35 @@
-.contents-btn {
-    @apply flex justify-between w-full font-semibold font-head py-1 px-2 uppercase border-2 text-gray-800 hover:text-white border-gray-800 dark:text-white dark:hover:text-gray-800 dark:border-white dark:before:bg-gray-800 dark:from-white dark:to-white before:bg-white bg-gradient-to-r from-gray-800 to-gray-800;
-}
+@tailwind components;
 
-li.toc {
-    line-height: 1.7rem;
-    margin: 0.5rem 0.25rem;
-}
 
-li.toc>ul {
-    padding-left: 1.5rem;
-}
+@layer components {
+    .contents-btn {
+        @apply flex justify-between w-full font-semibold font-head py-1 px-2 uppercase border-2 text-gray-800 hover:text-white border-gray-800 dark:text-white dark:hover:text-gray-800 dark:border-white dark:before:bg-gray-800 dark:from-white dark:to-white before:bg-white bg-gradient-to-r from-gray-800 to-gray-800;
+    }
 
-.slide-fade-enter-active {
-    transition: all 0.3s ease;
-}
+    li.toc {
+        line-height: 1.7rem;
+        margin: 0.5rem 0.25rem;
+    }
 
-.slide-fade-exit-active {
-    transition: all 0.3s ease;
-}
+    li.toc > ul {
+        padding-left: 1.5rem;
+    }
 
-.slide-fade-enter,
-.slide-fade-exit-to {
-    transform: translateY(10px);
-    opacity: 0;
-}
+    .slide-fade-enter-active {
+        transition: all 0.3s ease;
+    }
 
-svg.toc-active {
-    transform: rotate(180deg);
+    .slide-fade-exit-active {
+        transition: all 0.3s ease;
+    }
+
+    .slide-fade-enter,
+    .slide-fade-exit-to {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+    svg.toc-active {
+        transform: rotate(180deg);
+    }
 }
