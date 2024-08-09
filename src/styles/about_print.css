@@ -1,0 +1,26 @@
+@media print {
+    :root {
+        font-size: 10px;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    section:not(.container) {
+        break-inside: avoid;
+    }
+
+    header {
+        display: none;
+    }
+
+    footer {
+        display: none;
+    }
+
+    .no-print {
+        display: none;
+    }
+}
