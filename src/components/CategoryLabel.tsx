@@ -14,6 +14,7 @@ export const CategoryLabel: Component<{ category: string }> = (props) => {
       <a
         class={`category-label bg-category-${category.id}-bg dark:bg-category-${category.id}-bg-dark text-category-${category.id}-text dark:text-category-${category.id}-text-dark`}
         href={`/category/${category.id}`}
+        aria-label={category.name}
       >
         {category.name}
       </a>
