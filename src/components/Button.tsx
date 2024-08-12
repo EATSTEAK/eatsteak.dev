@@ -8,7 +8,7 @@ export const Button: Component<
   return (
     <a
       {...anchorAttributes}
-      class="hover-fill-to-right button"
+      class="button"
     >
       {self.children}
     </a>
