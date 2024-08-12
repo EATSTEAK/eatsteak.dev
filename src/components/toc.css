@@ -1,5 +1,19 @@
 @tailwind components;
 
+.slide-fade-enter-active {
+    transition: all 0.3s ease;
+}
+
+.slide-fade-exit-active {
+    transition: all 0.3s ease;
+}
+
+.slide-fade-enter,
+.slide-fade-exit-to {
+    transform: translateY(-10px);
+    opacity: 0;
+}
+
 
 @layer components {
     .contents-btn {
@@ -13,20 +27,6 @@
 
     li.toc > ul {
         padding-left: 1.5rem;
-    }
-
-    .slide-fade-enter-active {
-        transition: all 0.3s ease;
-    }
-
-    .slide-fade-exit-active {
-        transition: all 0.3s ease;
-    }
-
-    .slide-fade-enter,
-    .slide-fade-exit-to {
-        transform: translateY(10px);
-        opacity: 0;
     }
 
     svg.toc-active {
