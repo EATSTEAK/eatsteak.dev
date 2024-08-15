@@ -8,7 +8,7 @@
         print-color-adjust: exact;
     }
 
-    section:not(.container) {
+    section:not(.container) article {
         break-inside: avoid;
     }
 
