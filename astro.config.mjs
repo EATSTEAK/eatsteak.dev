@@ -7,19 +7,29 @@ import tailwind from "@astrojs/tailwind";
 import compress from "astro-compress";
 
 import sectionize from "@hbsnow/rehype-sectionize";
-import { transformerNotationDiff, transformerNotationHighlight, transformerNotationWordHighlight } from "@shikijs/transformers";
+import {
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+} from "@shikijs/transformers";
+import { remarkCallout } from "@r4ai/remark-callout";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://eatsteak.dev",
-  integrations: [mdx(), sitemap(), solidJs(),
+  integrations: [
+    mdx(),
+    sitemap(),
+    solidJs(),
     tailwind({
       applyBaseStyles: false,
     }),
     compress({
-    CSS: true,
-  })],
+      CSS: true,
+    }),
+  ],
   markdown: {
+    remarkPlugins: [remarkCallout],
     rehypePlugins: [sectionize],
     remarkRehype: {
       footnoteLabel: "각주",
@@ -30,7 +40,7 @@ export default defineConfig({
         transformerNotationDiff(),
         transformerNotationHighlight(),
         transformerNotationWordHighlight(),
-      ]
-    }
-  }
+      ],
+    },
+  },
 });
