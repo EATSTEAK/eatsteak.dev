@@ -79,7 +79,11 @@
     }
 }
 
-.content pre > code {
+:not(.dark) .content pre > code {
+    all: unset;
+}
+
+.dark .content pre > code {
     all: unset;
 }
 
@@ -248,6 +252,41 @@
 
             .dark & {
                 @apply text-blue-300;
+            }
+        }
+    }
+}
+
+.content [data-callout-type="tip"] {
+    :not(.dark) & {
+        @apply border-l-green-600 bg-green-100;
+    }
+
+    .dark & {
+        @apply border-l-green-400 bg-green-950;
+    }
+
+    & [data-callout-title] {
+        @apply font-bold;
+
+        :not(.dark) & {
+            @apply text-green-600;
+        }
+
+        .dark & {
+            @apply text-green-300;
+        }
+
+        &::before {
+            content: "💡";
+            margin: 0 0.5rem 0 0;
+
+            :not(.dark) & {
+                @apply text-green-600;
+            }
+
+            .dark & {
+                @apply text-green-300;
             }
         }
     }
