@@ -10,7 +10,8 @@ Here is a sample of some basic Markdown syntax that can be used when writing Mar
 
 ## Headings
 
-The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
+The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level
+while `<h6>` is the lowest.
 
 ## H2
 
@@ -24,9 +25,15 @@ The following HTML `<h1>`—`<h6>` elements represent six levels of section head
 
 ## Paragraph
 
-Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
+Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut
+dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna
+tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem
+aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos
+nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores
+editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
 
-Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
+Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que
+aut hariosam ex eat.
 
 ## Images
 
@@ -42,7 +49,8 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 
 ## Blockquotes
 
-The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and abbreviations.
+The blockquote element represents content that is quoted from another source, optionally with a citation which must be
+within a `footer` or `cite` element, and optionally with in-line changes such as annotations and abbreviations.
 
 ### Blockquote without attribution
 
@@ -72,7 +80,80 @@ The blockquote element represents content that is quoted from another source, op
 > Don't communicate by sharing memory, share memory by communicating.<br>
 > — <cite>Rob Pike[^1]</cite>
 
-[^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
+[^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during
+Gopherfest, November 18, 2015.
+
+## Callouts
+
+### Note
+
+#### Syntax
+
+```markdown
+> [!NOTE] Note
+> Content
+```
+
+#### Output
+
+> [!NOTE] Note
+> Content
+
+### Tip
+
+#### Syntax
+
+```markdown
+> [!TIP] Tip
+> Content
+```
+
+#### Output
+
+> [!TIP] Tip
+> Content
+
+### Important
+
+#### Syntax
+
+```markdown
+> [!IMPORTANT] Important
+> Content
+```
+
+#### Output
+
+> [!IMPORTANT] Important
+> Content
+
+### Warning
+
+#### Syntax
+
+```markdown
+> [!WARNING] Warning
+> Content
+```
+
+#### Output
+
+> [!WARNING] Warning
+> Content
+
+### Caution
+
+#### Syntax
+
+```markdown
+> [!CAUTION] Caution
+> Content
+```
+
+#### Output
+
+> [!CAUTION] Caution
+> Content
 
 ## Tables
 
@@ -87,14 +168,16 @@ The blockquote element represents content that is quoted from another source, op
 ### Output
 
 | Italics   | Bold     | Code   |
-| --------- | -------- | ------ |
+|-----------|----------|--------|
 | _italics_ | **bold** | `code` |
 
 ## Code Blocks
 
 ### Syntax
 
-we can use 3 backticks ``` in new line and write snippet and close with 3 backticks on new line and to highlight language specific syntac, write one word of language name after first 3 backticks, for eg. html, javascript, css, markdown, typescript, txt, bash
+we can use 3 backticks ``` in new line and write snippet and close with 3 backticks on new line and to highlight
+language specific syntac, write one word of language name after first 3 backticks, for eg. html, javascript, css,
+markdown, typescript, txt, bash
 
 ````markdown
 ```html
@@ -116,13 +199,13 @@ Output
 ```html
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8"/>
     <title>Example HTML5 Document</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
+</head>
+<body>
+<p>Test</p>
+</body>
 </html>
 ```
 
@@ -166,23 +249,23 @@ Output
 
 ```markdown
 - Fruit
-  - Apple
-  - Orange
-  - Banana
+    - Apple
+    - Orange
+    - Banana
 - Dairy
-  - Milk
-  - Cheese
+    - Milk
+    - Cheese
 ```
 
 #### Output
 
 - Fruit
-  - Apple
-  - Orange
-  - Banana
+    - Apple
+    - Orange
+    - Banana
 - Dairy
-  - Milk
-  - Cheese
+    - Milk
+    - Cheese
 
 ## Other Elements — abbr, sub, sup, kbd, mark
 

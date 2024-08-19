@@ -216,8 +216,12 @@
 
 .content [data-callout] {
     border-left: 4px solid;
-    padding: 1rem 0.5rem 1rem 1.5rem;
+    padding: 1rem 0.5rem 0.5rem 1.5rem;
     margin: .5em 0;
+
+    & [data-callout-title]::before {
+        margin: 0 0.25rem 0 0;
+    }
 }
 
 /* Note Callouts */
@@ -244,7 +248,6 @@
 
         &::before {
             content: "🖋️";
-            margin: 0 0.5rem 0 0;
 
             :not(.dark) & {
                 @apply text-blue-600;
@@ -279,7 +282,6 @@
 
         &::before {
             content: "💡";
-            margin: 0 0.5rem 0 0;
 
             :not(.dark) & {
                 @apply text-green-600;
@@ -287,6 +289,108 @@
 
             .dark & {
                 @apply text-green-300;
+            }
+        }
+    }
+}
+
+.content [data-callout-type="important"] {
+    :not(.dark) & {
+        @apply border-l-purple-600 bg-purple-100;
+    }
+
+    .dark & {
+        @apply border-l-purple-400 bg-purple-950;
+    }
+
+    & [data-callout-title] {
+        @apply font-bold;
+
+        :not(.dark) & {
+            @apply text-purple-600;
+        }
+
+        .dark & {
+            @apply text-purple-300;
+        }
+
+        &::before {
+            content: "📌";
+
+            :not(.dark) & {
+                @apply text-purple-600;
+            }
+
+            .dark & {
+                @apply text-purple-300;
+            }
+        }
+    }
+}
+
+.content [data-callout-type="warning"] {
+    :not(.dark) & {
+        @apply border-l-yellow-600 bg-yellow-100;
+    }
+
+    .dark & {
+        @apply border-l-yellow-400 bg-yellow-950;
+    }
+
+    & [data-callout-title] {
+        @apply font-bold;
+
+        :not(.dark) & {
+            @apply text-yellow-600;
+        }
+
+        .dark & {
+            @apply text-yellow-300;
+        }
+
+        &::before {
+            content: "⚠️";
+
+            :not(.dark) & {
+                @apply text-yellow-600;
+            }
+
+            .dark & {
+                @apply text-yellow-300;
+            }
+        }
+    }
+}
+
+.content [data-callout-type="caution"] {
+    :not(.dark) & {
+        @apply border-l-red-600 bg-red-100;
+    }
+
+    .dark & {
+        @apply border-l-red-400 bg-red-950;
+    }
+
+    & [data-callout-title] {
+        @apply font-bold;
+
+        :not(.dark) & {
+            @apply text-red-600;
+        }
+
+        .dark & {
+            @apply text-red-300;
+        }
+
+        &::before {
+            content: "⛔";
+
+            :not(.dark) & {
+                @apply text-red-600;
+            }
+
+            .dark & {
+                @apply text-red-300;
             }
         }
     }
