@@ -228,7 +228,7 @@
 
 .content [data-callout-type="note"] {
     :not(.dark) & {
-        @apply border-l-blue-600 bg-blue-100;
+        @apply border-l-blue-800 bg-blue-100;
     }
 
     .dark & {
@@ -239,7 +239,7 @@
         @apply font-bold;
 
         :not(.dark) & {
-            @apply text-blue-600;
+            @apply text-blue-800;
         }
 
         .dark & {
@@ -250,7 +250,7 @@
             content: "🖋️";
 
             :not(.dark) & {
-                @apply text-blue-600;
+                @apply text-blue-800;
             }
 
             .dark & {
@@ -262,7 +262,7 @@
 
 .content [data-callout-type="tip"] {
     :not(.dark) & {
-        @apply border-l-green-600 bg-green-100;
+        @apply border-l-green-800 bg-green-100;
     }
 
     .dark & {
@@ -273,7 +273,7 @@
         @apply font-bold;
 
         :not(.dark) & {
-            @apply text-green-600;
+            @apply text-green-800;
         }
 
         .dark & {
@@ -284,7 +284,7 @@
             content: "💡";
 
             :not(.dark) & {
-                @apply text-green-600;
+                @apply text-green-800;
             }
 
             .dark & {
@@ -296,7 +296,7 @@
 
 .content [data-callout-type="important"] {
     :not(.dark) & {
-        @apply border-l-purple-600 bg-purple-100;
+        @apply border-l-purple-800 bg-purple-100;
     }
 
     .dark & {
@@ -307,7 +307,7 @@
         @apply font-bold;
 
         :not(.dark) & {
-            @apply text-purple-600;
+            @apply text-purple-800;
         }
 
         .dark & {
@@ -318,7 +318,7 @@
             content: "📌";
 
             :not(.dark) & {
-                @apply text-purple-600;
+                @apply text-purple-800;
             }
 
             .dark & {
@@ -330,7 +330,7 @@
 
 .content [data-callout-type="warning"] {
     :not(.dark) & {
-        @apply border-l-yellow-600 bg-yellow-100;
+        @apply border-l-yellow-800 bg-yellow-100;
     }
 
     .dark & {
@@ -341,7 +341,7 @@
         @apply font-bold;
 
         :not(.dark) & {
-            @apply text-yellow-600;
+            @apply text-yellow-800;
         }
 
         .dark & {
@@ -352,7 +352,7 @@
             content: "⚠️";
 
             :not(.dark) & {
-                @apply text-yellow-600;
+                @apply text-yellow-800;
             }
 
             .dark & {
@@ -364,7 +364,7 @@
 
 .content [data-callout-type="caution"] {
     :not(.dark) & {
-        @apply border-l-red-600 bg-red-100;
+        @apply border-l-red-800 bg-red-100;
     }
 
     .dark & {
@@ -375,7 +375,7 @@
         @apply font-bold;
 
         :not(.dark) & {
-            @apply text-red-600;
+            @apply text-red-800;
         }
 
         .dark & {
@@ -386,7 +386,7 @@
             content: "⛔";
 
             :not(.dark) & {
-                @apply text-red-600;
+                @apply text-red-800;
             }
 
             .dark & {
