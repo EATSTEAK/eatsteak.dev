@@ -1,6 +1,6 @@
 .content {
-    font-size: clamp(1rem, 0.957rem + 0.217vw, 1.125rem);
-    line-height: clamp(1.5, 1.413 + 0.435vw, 1.75);
+    font-size: clamp(1rem, 0.768rem + 0.893vw, 1.125rem);
+    line-height: clamp(1.4, 0.75 + 2.5vw, 1.75);
     font-weight: 400;
 }
 

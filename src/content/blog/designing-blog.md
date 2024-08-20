@@ -96,8 +96,8 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 ```css
 * {
     /* 글꼴 크기 및 줄 간격 설정 */
-    font-size: clamp(1rem, 0.957rem + 0.217vw, 1.125rem);
-    line-height: clamp(1.5, 1.413 + 0.435vw, 1.75);
+    font-size: clamp(1rem, 0.768rem + 0.893vw, 1.125rem);
+    line-height: clamp(1.4, 0.75 + 2.5vw, 1.75);
     /* 문장 길이를 위한 최대 길이 설정 */
     max-width: 75ch;
 
@@ -152,8 +152,8 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 ```css
 /* clamp()를 활용하여 동적으로 글자 크기 조정하기 */
 .content {
-    font-size: clamp(1rem, 0.957rem + 0.217vw, 1.125rem);
-    line-height: clamp(1.5, 1.413 + 0.435vw, 1.75);
+    font-size: clamp(1rem, 0.768rem + 0.893vw, 1.125rem);
+    line-height: clamp(1.4, 0.75 + 2.5vw, 1.75);
 }
 ```
 
