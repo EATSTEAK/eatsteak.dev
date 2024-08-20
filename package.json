@@ -36,6 +36,7 @@
     "@hbsnow/rehype-sectionize": "^1.0.7",
     "@r4ai/remark-callout": "^0.6.0",
     "@typescript-eslint/parser": "^7.18.0",
+    "classcat": "^5.0.5",
     "eslint": "^8.57.0",
     "eslint-plugin-astro": "^1.2.3",
     "mdast-util-to-string": "^4.0.0",
