@@ -2,7 +2,7 @@
 title: 숭실대학교 u-saint 파싱하기 - 기본 정보 파악하기
 description: 숭실대학교 u-saint를 파싱하는 효율적인 방법은 무엇일까요? 직접 u-saint를 뜯으면서 알아봅시다.
 category: web
-pubDate: 2024-08-20 05:20:58
+pubDate: 2024-08-20T05:20:58+09:00
 hidden: false
 topics:
   - ssu
@@ -10,8 +10,8 @@ topics:
   - html
   - parsing
   - scraping
+updatedDate: 2024-08-20T14:32+09:00
 ---
-
 **숭실대 u-saint 학사 시스템은 SAP에서 제작한 솔루션을 사용하고 있습니다. u-saint가 가진 불편함 때문에 많은 학생들이 이를 쉽게 열람하기 위해
 파싱하고자 하였고, 최근 들어 [SSUrade](https://github.com/nnnlog/ssurade)
 나 [숨쉴때 성적표](https://apps.apple.com/kr/app/%EC%88%A8%EC%89%B4%EB%95%8C-%EC%84%B1%EC%A0%81%ED%91%9C/id1601044486) 등 그 결과물이
@@ -27,7 +27,7 @@ topics:
 
 ### u-saint는 u-saint가 아니다
 
-이미 알고 계신 분들이 많겠지만(최소 u-saint를 뜯어보려 노력했던 사람이라면) u-saint의 주소인 `saint.ssu.ac.kr`은 실제 u-saint 애플리케이션이 서빙되는 주소가 아닙니다. 모든
+u-saint의 주소인 `saint.ssu.ac.kr`은 실제 u-saint 애플리케이션이 서빙되는 주소가 아닙니다. 모든
 애플리케이션의 뷰는 `ecc.ssu.ac.kr:8443` 주소 아래에서 서빙됩니다. 실제 `saint.ssu.ac.kr` 주소의 경우 네비게이션 바와 `<iframe>`만 제공하는 셈이죠.
 
 ![u-saint의 네비게이션 바 영역](../../assets/examining-ssu-u-saint/real-u-saint.png)
@@ -56,4 +56,7 @@ topics:
 그리고 URL에 반복되는 `sap`나 `webdynpro` 같은 키워드를 통해 검색을 좀 해보면 [SAP WebDynpro](https://help.sap.com/doc/saphelp_scm700_ehp02/7.0.2/en-US/a6/41b6a207c7427582c480c654c2e3f7/content.htm?no_cache=true)는 [SAP](https://en.wikipedia.org/wiki/SAP)의 ABAP 프로그램을 웹에 전시하는 프레임워크의 일종임을 알 수 있습니다.
 
 ## SAP WebDynpro를 파해쳐라
-앞서 알아낸 URL을 통해 u-saint가 WebDynpro로 만들어진 페이지임을 알 수 있습니다. 이것이 의미하는 바는 바로 u-saint를 스크래핑 한다는 건 WebDynpro 페이지를 스크래핑 한다는 말과 같습니다. 이제 우리가 해야 할 일은 u-saint 스크래핑이 아닌 WebDynpro 프레임워크로 만들어진 페이지를 스크래핑 하는 겁니다. 이 관점 변환이 뭘 의미하는지 모르겠다고요? 다음 포스트에서 이 정보가 어떤 역할을 하는지 살펴봅시다.
+앞서 알아낸 URL을 통해 u-saint가 WebDynpro로 만들어진 페이지임을 알 수 있습니다. 이것이 의미하는 바는 바로 u-saint를 스크래핑 한다는 건 WebDynpro 페이지를 스크래핑 한다는 말과 같습니다. 즉, 우리가 해야 할 일은 이제 u-saint 스크래핑이 아닌 WebDynpro 프레임워크로 만들어진 페이지를 스크래핑 하는 겁니다. SAP WebDynpro가 이미 많은 곳에서 사용되는 프레임워크인 만큼, 이 정보를 안다는 사실 만으로 알아낼 수 있는 것들이 많습니다.
+
+## 다음 글
+다음 글에서 본격적으로 SAP WebDynpro를 스크래핑하는 데 어떤 어려움이 있는지 알아보고, 초기 u-saint 파싱 라이브러리인 [pysaint](https://github.com/gomjellie/pysaint)를 살펴보며 어떻게 더 접근하여야 문제를 해결할 수 있을지 알아봅시다.
