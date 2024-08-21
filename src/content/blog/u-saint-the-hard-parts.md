@@ -11,10 +11,9 @@ topics:
   - parsing
   - scraping
   - rusaint
-updatedDate: 2024-08-20T16:13+09:00
+updatedDate: 2024-08-21T18:08+09:00
 series: u-saint 스크래핑
 ---
-
 **[앞선 글](/post/examining-ssu-u-saint)에서 u-saint의 간략한 외부 구조와, SAP WebDynpro 프레임워크로 u-saint가 만들어졌다는 점을 알아봤습니다. 그렇다면 일반적인 웹
 스크래핑처럼 u-saint도 동일한 방법으로 DOM을 파싱하고 데이터를 가져오면 되지 않을까요? 왜 다양한 라이브러리, 앱들이 나오고 이렇게 글도 쓰는 걸까요? 일반적인 웹 페이지 스크래핑과 u-saint 스크래핑의
 차이와, 어떤 부분이 u-saint 스크래핑을 어렵게 하는지 알아봅니다.**
@@ -66,5 +65,109 @@ series: u-saint 스크래핑
 > - 브라우저 런타임이 자원+시간을 많이 소모한다.
 > - 브라우저를 실행할 수 있는 환경에서만 사용할 수 있다.
 
+스크래핑의 기본을 알아보았으니, 이제 본론으로 들어가 봅시다.
 ## u-saint 스크래핑의 적
-스크래핑의 기본을 알아보았으니, 본론으로 들어가 봅시다. 
+u-saint 를 스크래핑 하고자 하는 사람들의 주 관심사는 아마 시간표 정보, 성적 정보들일 겁니다. 그렇다면 이런 정보를 가져오는 데 정확히 어떤 어려움이 있을까요?
+
+### 정보를 언제 가져와서 사용할 것인가?
+보통 스크래핑의 경우 필요한 데이터를 수집하기 위해 사용합니다. [여기어때](https://www.donga.com/news/It/article/all/20230404/118678619/1)의 경우처럼 공개된 데이터를 가져와 저장해 두고 활용하는 경우가 있을 것이고, [초기 뱅크샐러드](https://steemit.com/banksalad/@zard/3hjdcb)의 경우처럼 개인 정보를 수집하여 서비스를 만들 수도 있죠. 조금 더 가까운 예시를 활용하면, [에브리타임](https://everytime.kr)의 시간표 기능은 일반적인 정보를 스크래핑하는 영역이고, [SSUrade](https://github.com/nnnlog/SSUrade)의 경우 개인의 정보를 실시간으로 업데이트 하는 것이 중요합니다.
+
+이 차이에 따라 스크래핑 방법에서 고려해야 할 점이 달라지는데요. 에타 시간표의 경우 어떤 방법이든, 얼마의 시간이 걸리든 데이터를 수집하여 저장해 두면 서비스에 활용하기 쉽습니다(주기적으로 업데이트 해야 하지만요). 하지만 성적 정보의 경우 각 개인마다의 인증이 필요하므로 개인 기기마다 스크래핑을 새로 수행해야 합니다. 그러다 보니 스크래핑 시간에 제한이 생기고(사용자가 요청했을 때부터 스크래핑 해야 하기 때문에 빠르게 정보를 가져오는 것이 중요하죠), 기능에 따라 방법에도 제한이 생길 수 있습니다(iOS같은 모바일 플랫폼에서는 백그라운드에서 할 수 있는 작업을 제한하기도 합니다).
+
+따라서 우리가 관심있는 성적 정보를 가져와 서비스에 활용하기 위해서는 어느 정도의 스크래핑 방법과 시간이 제한될 수 밖에 없음을 이해하면 되겠습니다. 그렇다면 당연히 **정적 스크래핑** 방법으로 스크래핑을 한다면 많은 장점을 얻을 수 있을 겁니다. 하지만 u-saint가 정적 스크래핑이 가능할까요? u-saint의 구조를 살펴보면서 스크래핑 전략을 세워 봅시다.
+
+### 문제 1. 인증
+우리가 원하는 정보는 개인마다 다른 **개인 정보**입니다. 이 말인 즉슨 각자의 숭실대 ID로 로그인 한 후 정보를 가져와야 한다는 말이죠. 그러기 위해서는 세션이 필요합니다. 이 부분은 굉장히 쉽습니다. [숭실대 통합로그인](https://smartid.ssu.ac.kr/Symtra_sso/smln.asp) 페이지를 통해 토큰을 얻어오고, [u-saint SSO 엔드포인트](https://saint.ssu.ac.kr/webSSO/sso.jsp)에서 해당 토큰을 넘겨주면 SAP 세션 쿠키를 얻어올 수 있죠. 이 부분은 정적 스크래핑으로도 충분히 할 수 있는 부분입니다.
+
+### 문제 2. 동적 ID
+[앞선 문단](#정적-스크래핑)에서 보통 스크래핑을 할 때 HTML 의 `id` 어트리뷰트와 같은 고유 식별자를 기준으로 스크래핑을 많이 수행한다고 이야기했습니다. 하지만 u-saint의 경우 `id` 어트리뷰트가 존재하지만, 매 렌더링때마다 같은 엘리먼트가 같은 `id`를 가짐을 **보장할 수 없습니다.** 즉, `id`가 한 페이지 내에서는 고유하지만, 요청 때마다 고유하지는 않다는 의미입니다. 페이지가 약간 변경되거나, 사용자의 동작 순서가 바뀌기만 해도 같은 엘리먼트의 ID는 바뀔 수 있습니다.
+
+![WD01DF ID를 가진 엘리먼트](../../assets/u-saint-the-hard-parts/wd01df.png)
+![위와 같은 엘리먼트지만 WD01FB ID를 가진 엘리먼트](../../assets/u-saint-the-hard-parts/wd01fb.png)
+> 같은 엘리먼트임에도 불구하고 ID가 `WD01DF`와 `WD01FB`로 다름을 확인할 수 있습니다.
+#### WebDynpro는 ID를 어떻게 결정할까?
+그렇다면 이 ID들은 어디서 오고, 어떻게 결정될까요? 그 비밀을 알면 ID로 파싱할 수 있지 않을까요? 안타깝게도 그렇게 쉽지는 않습니다. 각 엘리먼트의 ID는 서버에서 결정되고, 서버에서는 엘리먼트가 생성되는 순서대로 ID를 결정합니다. 즉, 어떤 고유 의미가 존재하는 게 아닌, incremental한 ID라는 의미죠. 따라서 ID를 이용해 엘리먼트를 선택한다면 애플리케이션이 변하지 않는다는 가정 하에는 완전히 동일한 동작을 해야만 동일한 ID로 접근할 수 있음을 알 수 있습니다. 따라서 ID를 이용해 파싱하기란 어렵고, 다른 방법을 이용해야만 합니다.
+
+### 문제 3. 부분 SSR 렌더링
+WebDynpro 프레임워크는 기본적으로 SSR 프레임워크입니다. 서버 사이드에서 HTML을 렌더하여, 클라이언트에 전송해 주는 방식이죠. 하지만 사용자 입력을 처리하고 실시간으로 업데이트(AJAX)하기 위해 WebDynpro에서는 부분 렌더링을 사용합니다. 기본 베이스 페이지를 HTML로 내려주고, 클라이언트의 액션이 발생할 때마다 서버에서 변경된 부분의 HTML을 보내주어 클라이언트에서 해당 부분만 교체하는 방식입니다. 이를 담당하는 클라이언트 측 라이브러리가 `Lightspeed` 라이브러리입니다. 클라이언트의 액션을 서버에 전송하고, 서버에서 내려준 HTML을 교체, 렌더링하는 역할을 합니다. 그렇기 때문에 POST 요청을 통해 HTML의 부분을 서버로부터 받아야만 제대로 된 데이터를 읽을 수 있습니다.
+
+이 SSR 렌더링 로직을 파악하는 것이 WebDynpro 페이지 스크래핑의 가장 큰 과제일 것입니다. 동적 스크래핑의 경우 정확한 엘리먼트를 찾아내기만 하면 이외 내용은 사용자의 입력을 모사하기만 하면 되므로 간단해지지만, 앞선 [요구사항](#정보를-언제-가져와서-사용할-것인가?)을 생각한다면 정적 스크래핑을 하는 것이 최선이고, 이러한 로직을 정적으로 구현하는 것은 까다로운 일입니다. 하지만 앞서 설명한 로직에 따르면 서버에서 미리 HTML을 렌더하여 클라이언트에 보내 주므로 정적 스크래핑이 불가능하지는 않습니다! 일련의 업데이트 로직에 JS 코드의 개입이 거의 없기 때문이죠.
+
+> [!NOTE] 정리
+> 1. 성적 정보 등은 사용자의 요청 이후에 스크래핑을 시작해야 하므로 환경과 시간에 제약이 있다.
+> 2. u-saint에 로그인하는 사용자 인증을 구현해야 한다.
+> 3. 매번 ID가 바뀌므로 보이는 정보를 통해 엘리먼트를 선택할 수 밖에 없다.
+> 4. 자체적인 SSR 로직을 클라이언트에서 구현하는 데 어려움이 있다.
+
+## [pysaint](https://github.com/gomjellie/pysaint)는 어떻게 했을까?
+이제 어떤 문제가 u-saint 스크래핑을 어렵게 하는지 알았으니, u-saint 스크래핑을 구현했던 초기 공개 라이브러리인 [pysaint](https://github.com/gomjellie/pysaint)에서 어떤 방식으로 크롤링을 구현했는지 알아봅시다. `pysaint`는 정적 크롤러입니다. Python의 `BeautifulSoup`과 `requests`모듈을 통해 HTML DOM을 파싱하고, GET, POST 요청을 핸들링합니다.
+
+> [!TIP] 파이썬으로 웹 스크래핑
+> Python의 경우 웹 스크래핑 생태계가 아주 좋은 편입니다. 보통은 데이터를 전체 스크래핑 하여 자체 데이터베이스에 저장해 두고 활용하는 편인 만큼, 빠르게 개발할 수 있는 Python을 많이 활용하고 있습니다.
+
+### 문제 1. 인증
+pysaint가 개발 될 당시에는 [숭실대학교 통합 로그인](https://smartid.ssu.ac.kr)이 도입되지 않았을 시기였습니다. 단순히 u-saint 내의 로그인 엔드포인트로 ID와 비밀번호를 보내면 세션을 얻을 수 있었죠. 지금은 의미 없는 코드이지만, 참고를 위해 살펴봅시다.
+
+```python
+# pysaint/saint.py:34-69
+    def login(self, j_username, j_password):
+        # u-saint URL로부터 기본 세션 쿠키를 가져옵니다. # [!code highlight]
+        self.sess.get(SAINT_URL, headers=REQUEST_HEADERS) # [!code highlight]
+        res = self.sess.get(PORTAL_URL)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        j_salt = soup.find('input', {'name': 'j_salt'}).get('value')
+        # necessary to get JSESSIONID
+        self.sess.get(POPUP_URL)
+
+        # POST 요청 Body를 만듭니다. # [!code highlight]
+        login_data = sap_event_queue.get_login_data(j_salt,  # [!code highlight]
+        j_username, j_password) # [!code highlight]
+        # 요청을 서버에 보냅니다. # [!code highlight]
+        self.sess.post(PORTAL_URL, # [!code highlight]
+                       headers={'Referer': PORTAL_URL}, # [!code highlight]
+                       data=login_data) # [!code highlight]
+        
+        login_get = self.sess.get(
+            'http://saint.ssu.ac.kr/irj/portal',
+            headers={
+                'Referer': PORTAL_URL,
+                'Host': 'saint.ssu.ac.kr'
+            })
+        self.soup_jar['login_soup'] = BeautifulSoup(login_get.text, 'lxml')
+
+        # 메인 페이지에서 사용자 이름이 표시되는지 검증합니다. # [!code highlight]
+        user_name = get_login_user_name(self.soup_jar['login_soup']) # [!code highlight]
+        if user_name == 'fail':
+            print("failed to login")
+        else:
+            print("log in success! user_name: {}".format(user_name))
+```
+> 강조된 주석은 설명을 위해 임의로 추가하였습니다.
+
+이 코드가 현재 u-saint 시스템에서 사용되지는 않지만, 일반적인 로그인 방법을 따르므로 설명에 포함했습니다. 보통 로그인의 경우 사용자로부터 [폼](https://developer.mozilla.org/ko/docs/Learn/Forms) 입력을 받아 서버에 `POST` 요청을 하면, 그에 맞는 세션 정보(쿠키 등)을 제공하는 방식입니다. 위 코드의 경우 처음에 로그인 페이지에 접속하여 폼 정보를 가져온 뒤(`salt`와 같이 검증을 위해 필요한 정보) 사용자 정보를 포함해 `POST`요청을 보냅니다. 그리고 그 응답으로 온 쿠키를 저장합니다. 그리고 쿠키가 저장된 세션으로 각 애플리케이션에 요청을 보내면 서버가 정상적으로 응답합니다.
+
+### 문제 2. 동적 ID
+pysaint에서는 각 엘리먼트들의 고유한 부분을 검색하여 엘리먼트를 찾습니다. 인풋의 길이나 어트리뷰트 데이터 등을 정규식으로 검색합니다.
+
+```python
+# pysaint/parser.py:449-461
+def get_section_id(base_soup):
+    """
+    학부전공별, 교양필수, 교양선택 등 항목을 선택하는데 필요한 id를 얻는다
+    :param base_soup:
+    SoupParser.soup_jar['base']
+    :return:
+    """
+    table = base_soup.find('table', {
+        'lsevents': "{TabSelect:[{ResponseData:'delta',ClientAction:'submit'},{}]," +
+                    "Scroll:[{ResponseData:'delta',EnqueueCardinality:'single'},{}]," +
+                    "Hotkey:[{ResponseData:'delta',ClientAction:'submit'},{}]}"
+    })
+    return table.get('id')
+```
+> 여기서는 `lsevents` 어트리뷰트 값이 같은 `table` 만 선택하는 방법으로 섹션을 찾습니다.
+
+정말 가능한 모든 고유 정보를 끌어모아 검색합니다. 하지만 이 방법은 사이트의 테마, 레이아웃 등이 바뀌거나 업데이트가 된다면 파싱을 보장할 수 없는 불안정한 방법입니다. 유지보수에 어려움이 있으리라 생각됩니다.
+
+### 문제 3. 부분 SSR 렌더링
+사이트에서 정보를 얻어오기 위해서는 엘리먼트 조작(콤보박스 선택, 버튼 클릭, 텍스트 입력 등)이 필요합니다. 예를 들어 IT대학 글로벌미디어학부의 전공과목을 시간표 WebDynpro 애플리케이션에서 가져오려면 먼저 단과대를 선택한 뒤, 학부를 선택하고, 검색 버튼을 누르는 식이죠.

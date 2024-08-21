@@ -9,6 +9,7 @@ topics:
   - UX
   - CSS
   - Typography
+updatedDate: 2024-08-20T17:08+09:00
 ---
 
 **[앞의 글](/post/constructing-blog)에서 어떤 기술 스택으로 블로그를 만들지 결정했으니, 이젠 어떤 모습의 블로그를 만들지 결정해야 합니다. 사실 제 닉네임이 EATSTEAK(스테이크 먹기)인

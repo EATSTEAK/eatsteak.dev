@@ -8,4 +8,5 @@ topics:
   - Rust
   - async
   - async-trait
+updatedDate: 2024-08-20T17:08+09:00
 ---
