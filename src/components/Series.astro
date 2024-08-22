@@ -10,7 +10,7 @@ interface Props {
 
 const {posts, series, selectedSlug} = Astro.props;
 
-const filteredPosts = posts.filter((post) => post.data.series === series && post.data.hidden === false)
+const filteredPosts = posts.filter((post) => post.data.series === series && post.data.hidden !== true)
     .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 ---
 <section class="bg-gray-200 dark:bg-gray-800 p-4">
