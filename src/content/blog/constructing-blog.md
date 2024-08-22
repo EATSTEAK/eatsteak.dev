@@ -2,14 +2,16 @@
 title: Astro로 블로그 구축하기 - 기술 스택 선정
 description: 블로그 구축을 위해 컨텐츠 웹사이트 프레임워크인 Astro를 이용하게 된 과정을 공유합니다.
 category: web
-pubDate: 2024-06-15T17:05:00+09:00
-updatedDate: 2024-06-22T14:34:00+09:00
+pubDate: 2024-06-15T17:05+09:00
+updatedDate: 2024-08-23T02:06+09:00
 hidden: false
 topics:
   - Blog
   - Astro
   - TailwindCSS
   - SolidJS
+series: 블로그 구축하기
+internalUpdatedDate: 2024-08-23T02:06+09:00
 ---
 **지금보고 계시는 이 블로그([velog](https://velog.io/@eatsteak)에서 보고 계신다면 [이곳](https://eatsteak.dev/post/constructing-blog))은 Astro와 Solidjs, Tailwindcss를 활용하여 GitHub Pages에 정적 배포된 것인데요. 블로그를 구축하면서 중요시했던 것들과 여러 기술들을 선택한 이유를 이야기해보려 합니다.**
 
