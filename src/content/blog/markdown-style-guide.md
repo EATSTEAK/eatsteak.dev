@@ -5,6 +5,7 @@ description: Here is a sample of some basic Markdown syntax that can be used whe
 pubDate: Jul 01 2022
 hidden: true
 updatedDate: 2024-08-20T17:08+09:00
+internalUpdatedDate: 2024-08-23T02:13+09:00
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.

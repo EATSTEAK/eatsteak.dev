@@ -1,6 +1,6 @@
 ---
-title: 숭실대학교 u-saint 파싱하기 - 기본 정보 파악하기
-description: 숭실대학교 u-saint를 파싱하는 효율적인 방법은 무엇일까요? 직접 u-saint를 뜯으면서 알아봅시다.
+title: 숭실대학교 u-saint 스크래핑하기 - 기본 정보 파악하기
+description: 숭실대학교 u-saint를 스크래핑하는 효율적인 방법은 무엇일까요? 직접 u-saint를 뜯으면서 알아봅시다.
 category: web
 pubDate: 2024-08-20T05:20:58+09:00
 hidden: false
@@ -13,6 +13,7 @@ topics:
   - rusaint
 updatedDate: 2024-08-20T15:44+09:00
 series: u-saint 스크래핑
+internalUpdatedDate: 2024-08-23T02:14+09:00
 ---
 
 **숭실대 u-saint 학사 시스템은 SAP에서 제작한 솔루션을 사용하고 있습니다. u-saint가 가진 불편함 때문에 많은 학생들이 이를 쉽게 열람하기 위해
