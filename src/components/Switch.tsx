@@ -1,4 +1,4 @@
-import type { JSX, Component } from "solid-js";
+import type { Component, JSX } from "solid-js";
 import { createSignal, splitProps } from "solid-js";
 import "./switch.css";
 
@@ -30,11 +30,23 @@ export const Switch: Component<
   const handleClick = () => {
     toggle();
   };
+
+  const handleKeyUp = (
+    e: KeyboardEvent & { currentTarget: HTMLDivElement; target: Element },
+  ) => {
+    console.log(e.key);
+    if (e.key === "Enter") {
+      e.preventDefault();
+      toggle();
+    }
+  };
   return (
     <>
       <div
         onClick={handleClick}
         class="switch-background transition-colors bg-white border-black dark:bg-slate-700 dark:border-white"
+        tabindex="0"
+        onKeyUp={handleKeyUp}
       >
         <div
           class={`switch-display transition-colors bg-white border-black dark:bg-slate-700 dark:border-white${
