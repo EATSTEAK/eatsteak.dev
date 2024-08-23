@@ -79,14 +79,6 @@
     }
 }
 
-:not(.dark) .content pre > code {
-    all: unset;
-}
-
-.dark .content pre > code {
-    all: unset;
-}
-
 /* Code block */
 
 .content pre {
@@ -111,9 +103,21 @@
         @apply text-gray-400 font-head font-semibold uppercase;
     }
 
-    & code .line {
-        display: inline-block;
+    :not(.dark) & > code {
+        all: unset;
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+    }
 
+    .dark & > code {
+        all: unset;
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+    }
+
+    & code .line {
         &::before {
             content: counter(step);
             counter-increment: step 1;
