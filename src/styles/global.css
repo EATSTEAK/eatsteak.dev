@@ -101,7 +101,7 @@
         text-transform: uppercase;
         letter-spacing: 0.1rem;
         padding-left: 0.1rem;
-        background-size: 0% 2px;
+        background-size: 0 2px;
         background-repeat: no-repeat;
         background-position-y: 100%;
         transition: background-size 0.25s ease-out;
@@ -160,7 +160,7 @@
 
     .hover-fill-to-right {
         position: relative;
-        background-size: 0% 100%;
+        background-size: 0 100%;
         background-repeat: no-repeat;
         background-position-y: 100%;
         transition: background-size 0.25s ease-out;

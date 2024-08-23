@@ -4,10 +4,8 @@ const initializeTheme = () => {
   let theme;
   if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
     theme = (localStorage.getItem("theme") as "light" | "dark") === "dark";
-  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    theme = true;
   } else {
-    theme = false;
+    theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
   }
   return theme;
 };

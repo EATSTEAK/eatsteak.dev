@@ -1,11 +1,11 @@
 ---
 import {SITE_TITLE, SITE_DESCRIPTION} from "../../consts";
 import {getCollection} from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import PostItem from "../../components/post/PostItem.astro";
-import {GrillContainer} from "../../components/shell/GrillContainer";
-import {Container} from "../../components/shell/Container";
-import {getReadingTime} from "../../utils/reading-time";
+import Layout from "@layouts/Layout.astro";
+import PostItem from "@components/post/PostItem.astro";
+import {GrillContainer} from "@components/shell/GrillContainer";
+import {Container} from "@components/shell/Container";
+import {getReadingTime} from "@utils/reading-time";
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
     const initial: { [topic: string]: number } = {};

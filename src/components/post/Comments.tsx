@@ -1,7 +1,7 @@
 import { type Component, createEffect } from "solid-js";
-import theme from "../../signals/theme.ts";
+import theme from "@signals/theme.ts";
 
-export const Comments: Component<{}> = () => {
+export const Comments: Component = () => {
   const [isDarkTheme, _] = theme;
   let sectionRef: HTMLDivElement;
   const utterances = () => {

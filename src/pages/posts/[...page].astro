@@ -2,11 +2,11 @@
 import type {GetStaticPaths, InferGetStaticPropsType} from "astro";
 import {SITE_TITLE, SITE_DESCRIPTION} from "../../consts";
 import {getCollection} from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import PostItem from "../../components/post/PostItem.astro";
-import {Container} from "../../components/shell/Container";
-import {Pagination} from "../../components/ui/Pagination";
-import {getReadingTime} from "../../utils/reading-time";
+import Layout from "@layouts/Layout.astro";
+import PostItem from "@components/post/PostItem.astro";
+import {Container} from "@components/shell/Container";
+import {Pagination} from "@components/ui/Pagination";
+import {getReadingTime} from "@utils/reading-time";
 
 export const getStaticPaths = (async ({paginate}) => {
     const posts = (await getCollection("blog"))

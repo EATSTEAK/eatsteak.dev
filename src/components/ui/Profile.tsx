@@ -1,5 +1,5 @@
-import { GitHub } from "../../icons/GitHub.tsx";
-import { Threads } from "../../icons/Threads.tsx";
+import { GitHub } from "@icons/GitHub.tsx";
+import { Threads } from "@icons/Threads.tsx";
 
 export const Profile = () => {
   return (

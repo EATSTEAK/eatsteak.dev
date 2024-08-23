@@ -4,7 +4,38 @@
     "strictNullChecks": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@icons/*": [
+        "src/icons/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@signals/*": [
+        "src/signals/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@consts": [
+        "src/consts.ts"
+      ]
+    }
   },
-  "exclude": ["**/*.cjs", "**/*.js", "**/*.mjs"]
+  "exclude": [
+    "**/*.cjs",
+    "**/*.js",
+    "**/*.mjs"
+  ]
 }

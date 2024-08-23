@@ -1,9 +1,9 @@
 ---
 import {getCollection} from "astro:content";
-import {Topics} from "../../components/ui/Topics";
+import {Topics} from "@components/ui/Topics";
 import {SITE_TITLE, SITE_DESCRIPTION} from "../../consts";
-import Layout from "../../layouts/Layout.astro";
-import {Container} from "../../components/shell/Container";
+import Layout from "@layouts/Layout.astro";
+import {Container} from "@components/shell/Container";
 
 async function getTopics() {
     const posts = await getCollection("blog");

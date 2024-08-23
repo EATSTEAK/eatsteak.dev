@@ -4,7 +4,7 @@ import { Button } from "../ui/Button.tsx";
 import { GrillContainer } from "../shell/GrillContainer.tsx";
 import "./intro.css";
 
-export const Intro: Component<{}> = () => {
+export const Intro: Component = () => {
   return (
     <GrillContainer
       absoluteBackground={<AnimatedLogo class="-mt-16 w-[32rem] h-[32rem]" />}

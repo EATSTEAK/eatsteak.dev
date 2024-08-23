@@ -1,12 +1,12 @@
 ---
-import BaseHead from "../components/shell/BaseHead.astro";
-import {Footer} from "../components/shell/Footer";
-import Header from "../components/shell/Header.astro";
+import BaseHead from "@components/shell/BaseHead.astro";
+import {Footer} from "@components/shell/Footer";
+import Header from "@components/shell/Header.astro";
 
 const {
     title,
     description,
-    image = "/images/blog-placeholder-1.jpg",
+    image = "/images/logo.png",
 } = Astro.props;
 
 const pathname = new URL(Astro.request.url).pathname;

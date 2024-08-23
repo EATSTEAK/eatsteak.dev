@@ -1,6 +1,6 @@
 @keyframes burning {
     0% {
-        background-position: 0% 0%;
+        background-position: 0 0;
     }
 
     50% {
@@ -8,7 +8,7 @@
     }
 
     100% {
-        background-position: 0% 0%;
+        background-position: 0 0;
     }
 }
 
@@ -16,9 +16,8 @@
 
 @layer components {
     .animated-logo {
-        background: linear-gradient(270deg, #ca5010, #d13438, #ff8c00, #ca5010);
+        background: linear-gradient(270deg, #ca5010, #d13438, #ff8c00, #ca5010) repeat;
         background-size: 200% 200%;
-        background-repeat: repeat;
         mask-image: url("/images/profile.svg");
         mask-repeat: no-repeat;
         mask-size: cover;
