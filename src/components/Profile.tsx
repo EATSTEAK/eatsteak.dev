@@ -1,5 +1,5 @@
 import { GitHub } from "../icons/GitHub";
-import { Instagram } from "../icons/Instagram";
+import { Threads } from "../icons/Threads.tsx";
 
 export const Profile = () => {
   return (
@@ -28,9 +28,9 @@ export const Profile = () => {
           </a>
           <a
             href="https://instagram.com/eatsteak.dev"
-            aria-label="@eatsteak.dev at Instagram"
+            aria-label="@eatsteak.dev at Threads"
           >
-            <Instagram class="w-8 hover:text-gray-900 text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 transition-colors" />
+            <Threads class="w-8 hover:text-gray-900 text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 transition-colors" />
           </a>
         </div>
       </div>
