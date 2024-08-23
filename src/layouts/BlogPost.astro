@@ -1,20 +1,20 @@
 ---
 import {getCollection, type CollectionEntry} from "astro:content";
 import Layout from "./Layout.astro";
-import {Profile} from "../components/Profile";
-import {FormattedDate} from "../components/FormattedDate";
-import {Topics} from "../components/Topics";
-import {CategoryLabel} from "../components/CategoryLabel";
+import {Profile} from "../components/ui/Profile";
+import {FormattedDate} from "../components/post/FormattedDate";
+import {Topics} from "../components/ui/Topics";
+import {CategoryLabel} from "../components/ui/CategoryLabel";
 import "../styles/prose.css";
-import {Counter} from "../components/Counter";
-import {Comments} from "../components/Comments";
+import {Counter} from "../components/post/Counter";
+import {Comments} from "../components/post/Comments";
 import {CATEGORIES} from "../consts";
-import PostItem from "../components/PostItem.astro";
+import PostItem from "../components/post/PostItem.astro";
 import {getReadingTime} from "../utils/reading-time";
-import {MinutesRead} from "../components/MinutesRead";
+import {MinutesRead} from "../components/post/MinutesRead";
 import type {MarkdownHeading} from "astro";
-import {TableOfContents} from "../components/TableOfContents";
-import Series from "../components/Series.astro";
+import {TableOfContents} from "../components/post/TableOfContents";
+import Series from "../components/post/Series.astro";
 
 type Props = CollectionEntry<"blog">["data"] & {
     slug: string;

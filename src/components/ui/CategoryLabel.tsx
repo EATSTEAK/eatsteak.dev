@@ -1,5 +1,5 @@
 import { type Component, Show } from "solid-js";
-import { CATEGORIES } from "../consts";
+import { CATEGORIES } from "../../consts.ts";
 
 import "./category_label.css";
 

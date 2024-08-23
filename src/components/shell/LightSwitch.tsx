@@ -1,6 +1,6 @@
 import { type Component, createEffect, Show } from "solid-js";
-import { Switch } from "./Switch";
-import theme from "../utils/theme";
+import { Switch } from "../ui/Switch.tsx";
+import theme from "../../signals/theme.ts";
 
 export const LightSwitch: Component<{}> = () => {
   const [isDarkTheme, setDarkTheme] = theme;

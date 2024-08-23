@@ -1,63 +1,65 @@
 ---
-import { getCollection } from "astro:content";
-import { Topics } from "../../components/Topics";
-import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from "../../consts";
+import {getCollection} from "astro:content";
+import {Topics} from "../../components/ui/Topics";
+import {SITE_TITLE, SITE_DESCRIPTION, CATEGORIES} from "../../consts";
 import Layout from "../../layouts/Layout.astro";
-import { GrillContainer } from "../../components/GrillContainer";
-import { Container } from "../../components/Container";
-import type { CollectionEntry } from "astro:content";
+import {GrillContainer} from "../../components/shell/GrillContainer";
+import {Container} from "../../components/shell/Container";
+import type {CollectionEntry} from "astro:content";
 
 const posts = await getCollection("blog");
 
 function getTopics(posts: CollectionEntry<"blog">[]) {
-  const initial: { [topic: string]: number } = {};
-  return posts
-    .filter((post) => post.data.hidden !== true)
-    .reduce((object, post) => {
-      const topics = post.data.topics ?? [];
-      topics.forEach((topic: string | number) => {
-        object[topic] += 1;
-      });
-      return object;
-    }, initial);
+    const initial: { [topic: string]: number } = {};
+    return posts
+        .filter((post) => post.data.hidden !== true)
+        .reduce((object, post) => {
+            const topics = post.data.topics ?? [];
+            topics.forEach((topic: string | number) => {
+                object[topic] += 1;
+            });
+            return object;
+        }, initial);
 }
 
 const categories = Object.values(CATEGORIES).filter(
-  (category) =>
-    posts.find(
-      (post) => post.data.hidden != true && post.data.category == category.id,
-    ) != undefined,
+    (category) =>
+        posts.find(
+            (post) => post.data.hidden != true && post.data.category == category.id,
+        ) != undefined,
 );
 
 const topics = Object.keys(getTopics(posts));
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <main class="flex flex-col items-stretch justify-start">
-    <GrillContainer parentClassOverride="relative h-fit">
-      <h2
-        class="px-2 uppercase bg-gray-800 text-white
+    <main class="flex flex-col items-stretch justify-start">
+        <GrillContainer parentClassOverride="relative h-fit">
+            <h2
+                    class="px-2 uppercase bg-gray-800 text-white
     dark:bg-white dark:text-gray-800"
-      >
-        Categories
-      </h2>
-      <div class="flex flex-wrap gap-4 w-full">
-        {
-          categories.map((category) => (
-            <a
-              href={`/category/${category.id}`}
-              class={`transition-all hover:scale-[1.01] focus:scale-[1.01] border-2 p-4 border-slate-700 dark:border-white bg-category-${category.id}-bg text-category-${category.id}-text dark:bg-category-${category.id}-bg-dark dark:text-category-${category.id}-text-dark basis-full lg:basis-[calc(50%-0.5rem)]`}
             >
-              <h2 class="uppercase">{category.name}</h2>
-              <p>{category.description}</p>
-            </a>
-          ))
-        }
-      </div>
-    </GrillContainer>
-    <Container varient="wide">
-      <h2 class="uppercase">Topics</h2>
-      <div><Topics topics={topics} /></div>
-    </Container>
-  </main>
+                Categories
+            </h2>
+            <div class="flex flex-wrap gap-4 w-full">
+                {
+                    categories.map((category) => (
+                            <a
+                                    href={`/category/${category.id}`}
+                                    class={`transition-all hover:scale-[1.01] focus:scale-[1.01] border-2 p-4 border-slate-700 dark:border-white bg-category-${category.id}-bg text-category-${category.id}-text dark:bg-category-${category.id}-bg-dark dark:text-category-${category.id}-text-dark basis-full lg:basis-[calc(50%-0.5rem)]`}
+                            >
+                                <h2 class="uppercase">{category.name}</h2>
+                                <p>{category.description}</p>
+                            </a>
+                    ))
+                }
+            </div>
+        </GrillContainer>
+        <Container varient="wide">
+            <h2 class="uppercase">Topics</h2>
+            <div>
+                <Topics topics={topics}/>
+            </div>
+        </Container>
+    </main>
 </Layout>

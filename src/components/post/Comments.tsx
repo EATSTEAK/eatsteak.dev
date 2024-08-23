@@ -1,5 +1,5 @@
 import { type Component, createEffect } from "solid-js";
-import theme from "../utils/theme.ts";
+import theme from "../../signals/theme.ts";
 
 export const Comments: Component<{}> = () => {
   const [isDarkTheme, _] = theme;
@@ -24,5 +24,6 @@ export const Comments: Component<{}> = () => {
       sectionRef.appendChild(utterances());
     }
   }, [isDarkTheme]);
+  // @ts-ignore
   return <section class="comments" ref={sectionRef}></section>;
 };
