@@ -107,6 +107,7 @@
         all: unset;
         display: flex;
         flex-direction: column;
+        min-width: 100%;
         width: fit-content;
     }
 
@@ -114,6 +115,7 @@
         all: unset;
         display: flex;
         flex-direction: column;
+        min-width: 100%;
         width: fit-content;
     }
 
@@ -134,7 +136,7 @@
         }
 
         &.diff.add {
-            @apply w-full bg-green-800 bg-opacity-50;
+            @apply bg-green-800 bg-opacity-50;
 
             &::before {
                 content: "+ " counter(step);
@@ -145,7 +147,7 @@
         }
 
         &.diff.remove {
-            @apply w-full bg-red-800 bg-opacity-50;
+            @apply bg-red-800 bg-opacity-50;
 
             &::before {
                 content: "- " counter(step);
@@ -154,7 +156,7 @@
         }
 
         &.highlighted {
-            @apply w-full bg-gray-600 bg-opacity-50;
+            @apply bg-gray-600 bg-opacity-50;
         }
     }
 }
