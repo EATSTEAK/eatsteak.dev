@@ -1,5 +1,10 @@
-import type { Component, JSX } from "solid-js";
-import { createSignal, splitProps } from "solid-js";
+import {
+  type Component,
+  createEffect,
+  createSignal,
+  type JSX,
+  splitProps,
+} from "solid-js";
 import "./switch.css";
 
 interface SwitchProps {
@@ -13,6 +18,10 @@ export const Switch: Component<
   SwitchProps & JSX.InputHTMLAttributes<HTMLInputElement>
 > = (props) => {
   const [isEnabled, setIsEnabled] = createSignal(props.enabled);
+
+  createEffect(() => {
+    setIsEnabled(props.enabled);
+  }, [props.enabled]);
 
   const [self, inputAttributes] = splitProps(props, [
     "enabled",
