@@ -1,9 +1,9 @@
 import { type Component, Show } from "solid-js";
 
 export const SubExperienceCard: Component<{
-  children: any;
+  children?: any;
   title: string;
-  hasBorder: boolean;
+  hasBorder?: boolean;
   subtitle?: string;
   from?: string;
   to?: string;
