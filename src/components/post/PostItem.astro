@@ -14,9 +14,9 @@ const {post, minutesRead} = Astro.props;
 ---
 
 <section>
-    <a href={`/post/${post.slug}`}>
-        {
-            post.data.heroImage && (
+    {
+        post.data.heroImage && (
+                    <a href={`/post/${post.slug}`}>
                         <div
                                 class="mb-2"
                                 style={{
@@ -27,9 +27,9 @@ const {post, minutesRead} = Astro.props;
                                     height: "16rem",
                                 }}
                         />
-            )
-        }
-    </a>
+                    </a>
+        )
+    }
     <CategoryLabel category={post.data.category ?? "uncategorized"}/>
     <a href={`/post/${post.slug}`}>
         <h4 class="mt-2">
