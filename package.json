@@ -23,6 +23,7 @@
     "astro-compress": "^2.3.3",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
+    "mdast-util-from-markdown": "^2.0.1",
     "satori": "^0.11.2",
     "sharp": "^0.33.5",
     "solid-js": "^1.9.2",
