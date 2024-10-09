@@ -7,7 +7,7 @@ name: Deploy Astro site to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -43,6 +43,13 @@ jobs:
             echo "command=install --check-cache" >> $GITHUB_OUTPUT
             echo "runner=yarn" >> $GITHUB_OUTPUT
             echo "lockfile=yarn.lock" >> $GITHUB_OUTPUT
+            corepack enable
+            exit 0
+          elif [ -f "${{ github.workspace }}/pnpm-lock.yaml" ]; then
+            echo "manager=pnpm" >> $GITHUB_OUTPUT
+            echo "command=install --frozen-lockfile" >> $GITHUB_OUTPUT
+            echo "runner=pnpx --no-install" >> $GITHUB_OUTPUT
+            echo "lockfile=pnpm-lock.yaml" >> $GITHUB_OUTPUT
             corepack enable
             exit 0
           elif [ -f "${{ github.workspace }}/package.json" ]; then
