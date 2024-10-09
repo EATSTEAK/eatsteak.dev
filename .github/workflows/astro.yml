@@ -48,7 +48,7 @@ jobs:
           elif [ -f "${{ github.workspace }}/pnpm-lock.yaml" ]; then
             echo "manager=pnpm" >> $GITHUB_OUTPUT
             echo "command=install --frozen-lockfile" >> $GITHUB_OUTPUT
-            echo "runner=pnpx --no-install" >> $GITHUB_OUTPUT
+            echo "runner=pnpm" >> $GITHUB_OUTPUT
             echo "lockfile=pnpm-lock.yaml" >> $GITHUB_OUTPUT
             corepack enable
             exit 0
