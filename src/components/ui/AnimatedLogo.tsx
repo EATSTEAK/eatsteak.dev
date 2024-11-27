@@ -1,7 +1,11 @@
 import type { JSX, Component } from "solid-js";
-import "./animated_logo.css";
+import { Profile } from "@icons/Profile";
 export const AnimatedLogo: Component<JSX.HTMLAttributes<HTMLDivElement>> = (
   props
 ) => {
-  return <div {...props} class={`animated-logo ${props.class ?? ''}`}></div>;
+  return (
+    <div {...props} class={`${props.class ?? ""}`} role="presentation">
+      <Profile />
+    </div>
+  );
 };
