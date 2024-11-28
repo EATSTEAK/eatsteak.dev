@@ -1,0 +1,30 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Marpit } from "@marp-team/marpit";
+import Layout from "@layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const slides = await getCollection("slide");
+  return slides.map((slide) => ({
+    params: { slug: slide.slug },
+    props: slide,
+  }));
+}
+
+const slide = Astro.props;
+type Props = CollectionEntry<"slide">;
+
+const marpit = new Marpit({
+  markdown: {
+    html: true,
+  }
+});
+
+const { html, css } = marpit.render(slide.body);
+console.log(html);
+---
+<Layout title={slide.data.title} description={slide.data.description}>
+    <style is:inline set:html={css}></style>
+<Fragment set:html={html} />
+</Layout>
+
