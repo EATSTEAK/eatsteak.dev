@@ -158,6 +158,10 @@
         &.highlighted {
             @apply bg-gray-600 bg-opacity-50;
         }
+
+        & .highlighted-word {
+            @apply bg-gray-600 bg-opacity-50 border-white border border-opacity-20 rounded-sm font-bold;
+        }
     }
 }
 
