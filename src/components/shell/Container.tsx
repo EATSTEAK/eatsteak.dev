@@ -1,20 +1,12 @@
 import type { Component } from "solid-js";
 import "./container.css";
+import { cn } from "@utils/cn.ts";
 
-type ContainerVarient = "normal" | "wide";
-
-export const Container: Component<{ children: any, varient?: ContainerVarient }> = (props) => {
-
-  const getVarientClass = (varient: ContainerVarient) => {
-    switch(varient) {
-      case "normal":
-        return "max-w-5xl"
-      default:
-        return "max-w-screen-xl"
-    }
-  }
+export const Container: Component<{
+  children: any;
+}> = (props) => {
   return (
-    <section class={`container ${getVarientClass(props.varient ?? "normal")}`}>
+    <section class={cn("w-full max-w-screen-xl mx-auto px-6 my-8")}>
       {props.children}
     </section>
   );

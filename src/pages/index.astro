@@ -16,7 +16,7 @@ const posts = (await getCollection("blog"))
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
     <main class="w-full flex flex-col items-stretch justify-start">
         <Intro/>
-        <Container varient="wide">
+        <Container>
             <div class="mb-4 flex items-center justify-between">
                 <h3 class="uppercase">Recent posts</h3>
                 <Button href="/posts"><span class="break-keep">더보기</span></Button>
