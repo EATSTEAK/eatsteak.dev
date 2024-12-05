@@ -228,7 +228,7 @@
 
 .content [data-callout] {
     border-left: 4px solid;
-    padding: 1rem 0.5rem 0.5rem 1.5rem;
+    padding: 1rem 1rem 0.5rem 1.5rem;
     margin: .5em 0;
 
     & [data-callout-title]::before {
