@@ -185,10 +185,12 @@
 
 .content ol {
     list-style: decimal inside;
+    margin-bottom: 1.5rem;
 }
 
 .content ul {
     list-style: "- " inside;
+    margin-bottom: 1.5rem;
 }
 
 .content li > ol {
