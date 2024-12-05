@@ -2,6 +2,7 @@
 title: 숭실대학교 u-saint 스크래핑하기 - 동적 ID
 description: u-saint 스크래핑의 문제를 하나씩 해결해 봅시다. ID가 바뀌는 u-saint에서 일관적인 DOM 파싱을 달성하려면 어떻게 해야 할까요? 도메인적 접근 방법으로 해결해 봅시다.
 category: web
+thumbnail: ../../assets/u-saint-dyn-ids/ddalkak.webp
 pubDate: 2024-12-06T00:10+09:00
 hidden: false
 topics:

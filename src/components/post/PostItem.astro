@@ -12,18 +12,18 @@ interface Props {
 
 const {post, minutesRead} = Astro.props;
 
-const thumbnail = post.data.thumbnail ?? `/card/og/${post.slug}.png`;
+const thumbnail = post.data.thumbnail ?? { src: `/card/og/${post.slug}.png` };
 ---
 
-<section class="flex flex-col md:flex-row gap-4 border-b">
+<section class="flex flex-col md:flex-row gap-4 border-b py-4">
     <aside>
         <a href={`/post/${post.slug}`} class="block bg-cover bg-center bg-no-repeat w-full md:w-64 h-64 md:h-full"
            style={{
-             "background-image": `url('${thumbnail}')`,
+             "background-image": `url('${thumbnail.src}')`,
            }}>
         </a>
     </aside>
-    <article class="my-4">
+    <article>
         <CategoryLabel category={post.data.category ?? "uncategorized"}/>
         <a href={`/post/${post.slug}`}>
             <h4 class="mt-2">
