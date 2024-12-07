@@ -82,6 +82,7 @@
 /* Code block */
 
 .content pre {
+    font-size: 0.875em;
     padding: 2em 0 1.5em;
     border-radius: 8px;
     margin-bottom: 2em;
@@ -217,11 +218,6 @@
 
 .content td {
     border-bottom: 0.0625rem solid;
-}
-
-
-.content p > img {
-    margin-bottom: -.5em;
 }
 
 /* Callouts */
