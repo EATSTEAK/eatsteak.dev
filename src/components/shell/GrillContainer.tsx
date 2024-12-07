@@ -13,7 +13,7 @@ export const GrillContainer: Component<{
     <section class={cn("relative overflow-hidden min-h-72", props.parentClass)}>
       <div
         class={cn(
-          "grill-background bg-slate-700 dark:bg-slate-400 bg-opacity-30 rotate-3",
+          "grill-background bg-gradient-to-b from-slate-700 dark:from-slate-400 to-transparent bg-opacity-50 -rotate-3",
           props.grillClass,
         )}
       ></div>

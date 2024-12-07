@@ -18,51 +18,51 @@ import {TableOfContents} from "@components/post/TableOfContents";
 import Series from "@components/post/Series.astro";
 
 type Props = CollectionEntry<"blog">["data"] & {
-    slug: string;
-    minutesRead: number | undefined;
-    headings: MarkdownHeading[];
+  slug: string;
+  minutesRead: number | undefined;
+  headings: MarkdownHeading[];
 };
 
 const {
-    slug,
-    title,
-    description,
-    pubDate,
-    updatedDate,
-    thumbnail,
-    category,
-    topics,
-    minutesRead,
-    headings,
-    series,
+  slug,
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  thumbnail,
+  category,
+  topics,
+  minutesRead,
+  headings,
+  series,
 } = Astro.props;
 
 const allPosts = (await getCollection("blog")).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
 const recentPostsInCategory = allPosts
-    .filter((post) => post.data.hidden !== true && post.slug !== slug)
-    .filter(
-        (post) =>
-            (CATEGORIES[post.data.category ?? "uncategorized"]?.id ??
-                "uncategorized") === (category ?? "uncategorized"),
-    )
-    .slice(0, 3);
+  .filter((post) => post.data.hidden !== true && post.slug !== slug)
+  .filter(
+    (post) =>
+      (CATEGORIES[post.data.category ?? "uncategorized"]?.id ??
+        "uncategorized") === (category ?? "uncategorized"),
+  )
+  .slice(0, 3);
 
 function buildToc(headings: MarkdownHeading[]): TocHeading[] {
-    const toc: TocHeading[] = [];
-    const parentHeadings = new Map();
-    headings.forEach((h) => {
-        const heading = {...h, subheadings: []};
-        parentHeadings.set(heading.depth, heading);
-        if (heading.depth === 2) {
-            toc.push(heading);
-        } else {
-            parentHeadings.get(heading.depth - 1).subheadings.push(heading);
-        }
-    });
-    return toc;
+  const toc: TocHeading[] = [];
+  const parentHeadings = new Map();
+  headings.forEach((h) => {
+    const heading = {...h, subheadings: []};
+    parentHeadings.set(heading.depth, heading);
+    if (heading.depth === 2) {
+      toc.push(heading);
+    } else {
+      parentHeadings.get(heading.depth - 1).subheadings.push(heading);
+    }
+  });
+  return toc;
 }
 const toc = buildToc(headings);
 ---
@@ -74,14 +74,16 @@ const toc = buildToc(headings);
 >
     <div class="top-0 left-0 absolute w-full h-80 -z-10"
     >
-        <div class="w-full h-full grill-background before:bg-gradient-to-b before:from before:opacity-30 before:rotate-3"></div>
+        <div class="grill-background opacity-50 -rotate-3"
+             style={{'background': `linear-gradient(var(--category-${category}-bg), rgba(255, 255, 255, 0))`}}></div>
     </div>
     <main class="flex flex-col w-full">
         <section
                 class="self-center flex justify-center items-stretch w-full p-8 xl:p-0"
         >
             <article class="self-center w-full lg:max-xl:max-w-screen-sm max-w-screen-md pb-16">
-                <section class="mb-4 image min-h-[20rem] w-full bg-cover bg-no-repeat bg-center" style={{ ...(thumbnail && { backgroundImage: `url("${thumbnail.src}")` }) }}>
+                <section class="mb-4 image min-h-[20rem] w-full bg-cover bg-no-repeat bg-center"
+                         style={{...(thumbnail && {backgroundImage: `url("${thumbnail.src}")`})}}>
 
                 </section>
                 <section class="prose">
@@ -91,9 +93,9 @@ const toc = buildToc(headings);
                         <div class="flex flex-wrap line-between-flex-items">
                             <div class="date text-gray-500">
                                 <FormattedDate dateTime={pubDate} client:only="solid-js"/>
-                                {
-                                    updatedDate && (
-                                                <span>
+                              {
+                                updatedDate && (
+                                              <span>
                       &nbsp;게시,
                                                     <FormattedDate
                                                             dateTime={updatedDate}
@@ -101,35 +103,35 @@ const toc = buildToc(headings);
                                                     />
                                                     &nbsp;수정
                     </span>
-                                    )
-                                }
+                                )
+                              }
                             </div>
-                            {minutesRead &&
-                                    <MinutesRead minutesRead={minutesRead}/>}
+                          {minutesRead &&
+                                  <MinutesRead minutesRead={minutesRead}/>}
                             <Counter path={Astro.url.pathname} client:only="solid-js"/>
                         </div>
-                        {
-                            topics && (
-                                        <div class="topics mt-2 mb-8">
-                                            <Topics topics={topics}/>
-                                        </div>
-                            )
-                        }
+                      {
+                        topics && (
+                                      <div class="topics mt-2 mb-8">
+                                          <Topics topics={topics}/>
+                                      </div>
+                        )
+                      }
                     </div>
                     <div class="content">
                         <slot/>
                     </div>
                 </section>
                 <hr class="my-8"/>
-                {series &&
-                        <Series posts={allPosts} series={series} selectedSlug={slug}/>}
+              {series &&
+                      <Series posts={allPosts} series={series} selectedSlug={slug}/>}
                 <Comments client:only="solid-js"/>
             </article>
-            <aside class="hidden self-stretch lg:block pt-[20rem] max-w-xs">
+            <aside class="hidden self-stretch lg:block pt-[20rem] max-w-xs w-80">
                 <div class="py-8 pl-4 sticky top-0">
                     <TableOfContents tocHeadings={toc} client:only="solid-js"/>
                 </div>
-            </section>
+            </aside>
         </section>
         <section
                 class="py-16 flex flex-col items-center bg-slate-50 dark:bg-slate-900 transition-colors"
@@ -141,19 +143,19 @@ const toc = buildToc(headings);
                 <div class="w-full">
                     <h3>같은 분류의 최신 글</h3>
                     <div class="mt-4 flex flex-col gap-2">
-                        {
-                            recentPostsInCategory.map((post) => (
-                                    <PostItem
-                                            post={post}
-                                            minutesRead={getReadingTime(post.body)}
-                                    />
-                            ))
-                        }
-                        {
-                            recentPostsInCategory.length === 0 && (
-                                        <p class="mx-auto my-8">읽을 수 있는 글이 없습니다.</p>
-                            )
-                        }
+                      {
+                        recentPostsInCategory.map((post) => (
+                                <PostItem
+                                        post={post}
+                                        minutesRead={getReadingTime(post.body)}
+                                />
+                        ))
+                      }
+                      {
+                        recentPostsInCategory.length === 0 && (
+                                      <p class="mx-auto my-8">읽을 수 있는 글이 없습니다.</p>
+                        )
+                      }
                     </div>
                 </div>
             </div>
