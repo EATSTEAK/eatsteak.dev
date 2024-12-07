@@ -72,7 +72,7 @@ const toc = buildToc(headings);
         description={description}
         image={`/card/og/${slug}.png`}
 >
-    <div class="top-0 left-0 absolute w-full h-80 -z-10"
+    <div class="top-0 left-0 absolute w-full h-80 -z-10 overflow-x-clip overflow-y-visible"
     >
         <div class="grill-background opacity-50 -rotate-3"
              style={{'background': `linear-gradient(var(--category-${category}-bg), rgba(255, 255, 255, 0))`}}></div>
