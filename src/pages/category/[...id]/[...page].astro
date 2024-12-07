@@ -43,12 +43,20 @@ const {page, category} = Astro.props as Props;
     <main class="flex flex-col items-stretch justify-start">
         <GrillContainer parentClassOverride="relative h-fit">
             <h2
-                    class={`px-2 uppercase bg-category-${category.id}-bg text-category-${category.id}-text dark:bg-category-${category.id}-bg-dark dark:text-category-${category.id}-text-dark`}
+                    class="px-2 uppercase"
+                    style={{
+                        "background-color": `var(--category-${category.id}-bg)`,
+                        color: `var(--category-${category.id}-text)`,
+                    }}
             >
                 {category.name}
             </h2>
             <p
-                    class={`px-2 bg-category-${category.id}-bg text-category-${category.id}-text dark:bg-category-${category.id}-bg-dark dark:text-category-${category.id}-text-dark`}
+                    class="px-2"
+                    style={{
+                        "background-color": `var(--category-${category.id}-bg)`,
+                        color: `var(--category-${category.id}-text)`,
+                    }}
             >
                 {category.description}
             </p>

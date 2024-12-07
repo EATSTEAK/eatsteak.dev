@@ -46,7 +46,11 @@ const topics = Object.keys(getTopics(posts));
                     categories.map((category) => (
                             <a
                                     href={`/category/${category.id}`}
-                                    class={`transition-all hover:scale-[1.01] focus:scale-[1.01] border-2 p-4 border-slate-700 dark:border-white bg-category-${category.id}-bg text-category-${category.id}-text dark:bg-category-${category.id}-bg-dark dark:text-category-${category.id}-text-dark basis-full lg:basis-[calc(50%-0.5rem)]`}
+                                    class={`transition-all hover:scale-[1.01] focus:scale-[1.01] border-2 p-4 border-slate-700 dark:border-white basis-full lg:basis-[calc(50%-0.5rem)]`}
+                                    style={{
+                                        "background-color": `var(--category-${category.id}-bg)`,
+                                        color: `var(--category-${category.id}-text)`,
+                                    }}
                             >
                                 <h2 class="uppercase">{category.name}</h2>
                                 <p>{category.description}</p>

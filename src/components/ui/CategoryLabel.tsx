@@ -12,7 +12,11 @@ export const CategoryLabel: Component<{ category: string }> = (props) => {
       fallback={<label class="category-label">Uncategorized</label>}
     >
       <a
-        class={`category-label bg-category-${category.id}-bg dark:bg-category-${category.id}-bg-dark text-category-${category.id}-text dark:text-category-${category.id}-text-dark`}
+        class={`category-label`}
+        style={{
+          "background-color": `var(--category-${category.id}-bg)`,
+          color: `var(--category-${category.id}-text)`,
+        }}
         href={`/category/${category.id}`}
         aria-label={category.name}
       >
