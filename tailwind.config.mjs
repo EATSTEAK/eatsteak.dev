@@ -15,10 +15,4 @@ export default {
     },
   },
   plugins: [],
-  safelist: [
-    {
-      pattern: /(bg|text)-category-.+/,
-      variants: ["dark"],
-    },
-  ],
 };
