@@ -27,9 +27,9 @@ const thumbnail = post.data.thumbnail ?? { src: `/card/og/${post.slug}.png` };
     <article>
         <CategoryLabel category={post.data.category ?? "uncategorized"}/>
         <a href={`/post/${post.slug}`}>
-            <h4 class="mt-2">
+            <h1 class="text-[1.563em] mt-2">
                 <span class="nav-link">{post.data.title}</span>
-            </h4>
+            </h1>
             <div class="text-xs mb-2 text-gray-500 flex line-between-flex-items">
                 <div class="date">
                     <FormattedDate
