@@ -11,9 +11,10 @@ topics:
   - parsing
   - scraping
   - rusaint
-updatedDate: 2024-08-20T15:44+09:00
+updatedDate: 2024-12-08T00:56:02+09:00
 series: u-saint 스크래핑
-internalUpdatedDate: 2024-08-23T02:14+09:00
+internalUpdatedDate: 2024-12-08T00:56:02+09:00
+thumbnail: ../../assets/examining-ssu-u-saint/real-u-saint.png
 ---
 
 **숭실대 u-saint 학사 시스템은 SAP에서 제작한 솔루션을 사용하고 있습니다. u-saint가 가진 불편함 때문에 많은 학생들이 이를 쉽게 열람하기 위해

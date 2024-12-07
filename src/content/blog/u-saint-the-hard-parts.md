@@ -12,8 +12,9 @@ topics:
   - scraping
   - rusaint
 series: u-saint 스크래핑
-updatedDate: 2024-08-23T01:48+09:00
-internalUpdatedDate: 2024-12-05T01:40+09:00
+updatedDate: 2024-12-08T00:54+09:00
+internalUpdatedDate: 2024-12-08T00:55+09:00
+thumbnail: ../../assets/u-saint-the-hard-parts/wd01df.png
 ---
 
 **[앞선 글](/post/examining-ssu-u-saint)에서 u-saint의 간략한 외부 구조와, SAP WebDynpro 프레임워크로 u-saint가 만들어졌다는 점을 알아봤습니다. 그렇다면 일반적인 웹
