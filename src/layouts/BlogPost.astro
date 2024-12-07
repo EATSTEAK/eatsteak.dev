@@ -127,7 +127,7 @@ const toc = buildToc(headings);
                       <Series posts={allPosts} series={series} selectedSlug={slug}/>}
                 <Comments client:only="solid-js"/>
             </article>
-            <aside class="hidden self-stretch lg:block pt-[20rem] max-w-xs w-80">
+            <aside class="hidden self-stretch lg:block pt-[20rem] max-w-xs lg:w-80">
                 <div class="py-8 pl-4 sticky top-0">
                     <TableOfContents tocHeadings={toc} client:only="solid-js"/>
                 </div>
