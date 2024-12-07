@@ -77,12 +77,6 @@
 
 @layer components {
     .grill-background {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .grill-background::before {
-        content: "";
         position: absolute;
         width: 200%;
         height: 200%;
