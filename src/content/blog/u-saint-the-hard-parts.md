@@ -1,6 +1,6 @@
 ---
-title: 숭실대학교 u-saint 스크래핑하기 - 어려운 점
-description: 왜 u-saint 스크래핑은 어려울까요? 스크래핑에 대해 간략히 알아보면서 어떤 점이 u-saint 스크래핑을 어렵게 하는지 알아보고, 초기 라이브러리인 pysaint의 접근법을 알아봅시다.
+title: 숭실대 u-saint 스크래핑 - 어려운 점
+description: 어떤 점이 u-saint 스크래핑을 어렵게 하는지 알아보고, 초기 라이브러리인 pysaint의 접근법을 알아봅니다.
 category: web
 pubDate: 2024-08-23T01:40+09:00
 hidden: false
@@ -13,7 +13,7 @@ topics:
   - rusaint
 series: u-saint 스크래핑
 updatedDate: 2024-12-08T00:54+09:00
-internalUpdatedDate: 2024-12-08T00:55+09:00
+internalUpdatedDate: 2024-12-08T01:12:47+09:00
 thumbnail: ../../assets/u-saint-the-hard-parts/wd01df.png
 ---
 

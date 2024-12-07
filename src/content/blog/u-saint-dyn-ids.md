@@ -1,6 +1,6 @@
 ---
-title: 숭실대학교 u-saint 스크래핑하기 - 동적 ID
-description: u-saint 스크래핑의 문제를 하나씩 해결해 봅시다. ID가 바뀌는 u-saint에서 일관적인 DOM 파싱을 달성하려면 어떻게 해야 할까요? 도메인적 접근 방법으로 해결해 봅시다.
+title: 숭실대 u-saint 스크래핑 - 동적 ID
+description: 매번 ID가 바뀌는 u-saint에서 도메인적 접근 방법으로 일관적인 DOM 파싱을 해 봅니다.
 category: web
 thumbnail: ../../assets/u-saint-dyn-ids/ddalkak.webp
 pubDate: 2024-12-06T00:10+09:00
@@ -14,7 +14,7 @@ topics:
   - rusaint
   - sap
 series: u-saint 스크래핑
-internalUpdatedDate: 2024-12-06T00:16+09:00
+internalUpdatedDate: 2024-12-08T01:12:35+09:00
 ---
 
 **[u-saint](https://saint.ssu.ac.kr)의 전체적인 구조를 살펴보았으니, 스크래핑을 방해하는 문제를 하나씩 살펴보고, 해결책을 알아보겠습니다. 스크래핑을 방해하는 첫 번째 요소는 바로 동적 ID입니다. 보통 일반적인 웹 사이트의 스크래핑을 할 때 고유하고 고정된 값으로 간주되는 id 어트리뷰트를 많이 이용합니다. 하지만 u-saint에서는 ID가 렌더링 시마다 변화하고, 그 외에는 특정 엘리먼트를 일관적으로 가져오기 어렵습니다. 이 글과 함께 문제를 해결해 봅시다!**

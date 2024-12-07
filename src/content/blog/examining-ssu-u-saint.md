@@ -1,5 +1,5 @@
 ---
-title: 숭실대학교 u-saint 스크래핑하기 - 기본 정보 파악하기
+title: 숭실대 u-saint 스크래핑 - 기본 정보 파악
 description: 숭실대학교 u-saint를 스크래핑하는 효율적인 방법은 무엇일까요? 직접 u-saint를 뜯으면서 알아봅시다.
 category: web
 pubDate: 2024-08-20T05:20:58+09:00
@@ -13,7 +13,7 @@ topics:
   - rusaint
 updatedDate: 2024-12-08T00:56:02+09:00
 series: u-saint 스크래핑
-internalUpdatedDate: 2024-12-08T00:56:02+09:00
+internalUpdatedDate: 2024-12-08T01:13:25+09:00
 thumbnail: ../../assets/examining-ssu-u-saint/real-u-saint.png
 ---
 
