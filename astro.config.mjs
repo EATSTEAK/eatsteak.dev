@@ -13,6 +13,7 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 import { remarkCallout } from "@r4ai/remark-callout";
+import pager from "rehype-pager";
 
 // https://astro.build/config
 export default defineConfig({
@@ -30,7 +31,7 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkCallout],
-    rehypePlugins: [sectionize],
+    rehypePlugins: [pager, sectionize],
     remarkRehype: {
       footnoteLabel: "각주",
       footnoteBackLabel: "원문 보기",

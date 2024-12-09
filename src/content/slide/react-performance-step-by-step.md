@@ -66,7 +66,7 @@ export const WowComponent = () => {
 ```
 
 ---
-**Answer. Extract
+**Answer. Extract**
 
 ```tsx
 const BoldDivComponent = () => (<div className="text-bold">

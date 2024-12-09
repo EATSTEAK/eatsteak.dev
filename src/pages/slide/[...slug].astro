@@ -10,21 +10,14 @@ export async function getStaticPaths() {
     props: slide,
   }));
 }
-
-const slide = Astro.props;
 type Props = CollectionEntry<"slide">;
 
-const marpit = new Marpit({
-  markdown: {
-    html: true,
-  }
-});
+const slide = Astro.props;
 
-const { html, css } = marpit.render(slide.body);
-console.log(html);
+const {Content, headings} = await slide.render();
+
 ---
 <Layout title={slide.data.title} description={slide.data.description}>
-    <style is:inline set:html={css}></style>
-<Fragment set:html={html} />
+    <Content />
 </Layout>
 
