@@ -5,6 +5,7 @@ import sharp from "sharp";
 import type { APIRoute } from "astro";
 import { CATEGORIES } from "@consts";
 import { getReadingTime } from "@utils/reading-time";
+import { hexToRgb } from "@utils/hex-to-rgb.ts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -70,19 +71,8 @@ export const GET: APIRoute = async function GET({ props }) {
     timeStyle: "short",
   });
 
-  const hexToRgb = (hex: string) => {
-    let hexsplit = hex
-      .replace(
-        /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
-        (_m, r, g, b) => "#" + r + r + g + g + b + b,
-      )
-      .substring(1)
-      .match(/.{2}/g);
-    if (hexsplit == null) return null;
-    return hexsplit.map((x) => parseInt(x, 16));
-  };
-
-  const bgRgb = hexToRgb(category.color.light.bg);
+  const bgRgba = (alpha: number) =>
+    `rgba(${hexToRgb(category.color.light.bg).join(", ")}, ${alpha})`;
   const minutesToRead = getReadingTime(props.body) ?? 0;
   const topics = (props.data.topics ?? []).map((topic: string) => ({
     type: "div",
@@ -113,7 +103,7 @@ export const GET: APIRoute = async function GET({ props }) {
                 left: "0",
                 width: "1500px",
                 height: "1500px",
-                background: `linear-gradient(4deg, rgba(${bgRgb?.[0] ?? 0},${bgRgb?.[1] ?? 0},${bgRgb?.[2] ?? 0},0) 35%, rgba(${bgRgb?.[0] ?? 0},${bgRgb?.[1] ?? 0},${bgRgb?.[2] ?? 0},0.1) 72%, rgba(${bgRgb?.[0] ?? 0},${bgRgb?.[1] ?? 0},${bgRgb?.[2] ?? 0},1) 80%)`,
+                background: `linear-gradient(4deg, ${bgRgba(0)} 35%, ${bgRgba(0.1)} 72%, ${bgRgba(1)} 80%)`,
                 clipPath: `path("${grillPath}")`,
                 transform: "translateY(-120px) rotate(-8deg)",
               },

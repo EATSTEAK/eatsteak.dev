@@ -5,6 +5,7 @@ import sharp from "sharp";
 import type { APIRoute } from "astro";
 import { CATEGORIES } from "@consts";
 import { getReadingTime } from "@utils/reading-time";
+import { hexToRgb } from "@utils/hex-to-rgb.ts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -62,135 +63,13 @@ export const GET: APIRoute = async function GET({ props }) {
     timeStyle: "short",
   });
 
-  const hexToRgb = (hex: string) => {
-    let hexsplit = hex
-      .replace(
-        /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
-        (_m, r, g, b) => "#" + r + r + g + g + b + b,
-      )
-      .substring(1)
-      .match(/.{2}/g);
-    if (hexsplit == null) return null;
-    return hexsplit.map((x) => parseInt(x, 16));
-  };
-
-  const bgRgb = hexToRgb(category.color.light.bg);
+  const bgRgba = (alpha: number) =>
+    `rgba(${hexToRgb(category.color.light.bg).join(", ")}, ${alpha})`;
   const minutesToRead = getReadingTime(props.body) ?? 0;
   const svg = await satori(
     {
       type: "div",
       props: {
-        children: [
-          // Background
-          {
-            type: "div",
-            props: {
-              style: {
-                position: "absolute",
-                top: "0",
-                left: "0",
-                width: "1500px",
-                height: "900px",
-                background: `linear-gradient(4deg, rgba(${bgRgb?.[0] ?? 0},${bgRgb?.[1] ?? 0},${bgRgb?.[2] ?? 0},0) 35%, rgba(${bgRgb?.[0] ?? 0},${bgRgb?.[1] ?? 0},${bgRgb?.[2] ?? 0},0.1) 72%, rgba(${bgRgb?.[0] ?? 0},${bgRgb?.[1] ?? 0},${bgRgb?.[2] ?? 0},1) 80%)`,
-                clipPath: `path("${grillPath}")`,
-                transform: "translateY(-120px) rotate(-8deg)",
-              },
-            },
-          },
-          {
-            type: "div",
-            props: {
-              children: [
-                {
-                  type: "div",
-                  props: {
-                    children: `${category.name}`,
-                    style: {
-                      color: `${category.color.light.text}`,
-                      backgroundColor: `${category.color.light.bg}`,
-                      padding: "0 4px",
-                      fontFamily: "Jost, 'Noto Sans KR'",
-                      fontSize: "32px",
-                      fontWeight: "500",
-                      textTransform: "uppercase",
-                    },
-                  },
-                },
-              ],
-              style: {
-                display: "flex",
-                alignItems: "flex-start",
-              },
-            },
-          },
-          {
-            type: "h1",
-            props: {
-              children: `${props.data.title}`,
-              style: {
-                fontFamily: "Jost, 'Noto Sans KR'",
-                fontSize: "56px",
-                fontWeight: "500",
-                textTransform: "uppercase",
-                lineHeight: "1",
-                margin: "0 0 8px 0",
-                wordBreak: "keep-all",
-              },
-            },
-          },
-          {
-            type: "p",
-            props: {
-              children: `${formatter.format(new Date(props.data.pubDate))} | ${
-                minutesToRead < 1
-                  ? "1분 미만 소요"
-                  : `약 ${Math.ceil(minutesToRead)}분 소요`
-              }`,
-              style: {
-                color: "rgb(100 116 139)",
-                fontFamily: "'Noto Sans KR'",
-                fontSize: "24px",
-                fontWeight: "500",
-                margin: "0 0",
-              },
-            },
-          },
-          {
-            type: "p",
-            props: {
-              children: `${props.data.description}`,
-              style: {
-                color: "rgb(51 65 85)",
-                fontFamily: "'Noto Sans KR'",
-                fontSize: "36px",
-                fontWeight: "500",
-                lineHeight: "1.4",
-                margin: "0 0",
-                wordBreak: "keep-all",
-              },
-            },
-          },
-          {
-            type: "div",
-            props: {
-              children: [
-                {
-                  type: "img",
-                  props: {
-                    src: `data:image/png;base64,${logoData.toString("base64")}`,
-                    width: "200px",
-                  },
-                },
-              ],
-              style: {
-                display: "flex",
-                flexGrow: "1",
-                alignItems: "flex-end",
-                justifyContent: "flex-end",
-              },
-            },
-          },
-        ],
         style: {
           position: "relative",
           display: "flex",
@@ -202,6 +81,117 @@ export const GET: APIRoute = async function GET({ props }) {
           alignItems: "stretch",
           backgroundColor: "#fff",
         },
+        children: [
+          // Background
+          {
+            type: "div",
+            props: {
+              style: {
+                position: "absolute",
+                top: "0",
+                left: "0",
+                width: "1500px",
+                height: "900px",
+                background: `linear-gradient(4deg, ${bgRgba(0)} 35%, ${bgRgba(0.1)} 72%, ${bgRgba(1)} 80%)`,
+                clipPath: `path("${grillPath}")`,
+                transform: "translateY(-120px) rotate(-8deg)",
+              },
+            },
+          },
+          {
+            type: "div",
+            props: {
+              style: {
+                display: "flex",
+                alignItems: "flex-start",
+              },
+              children: [
+                {
+                  type: "div",
+                  props: {
+                    style: {
+                      color: `${category.color.light.text}`,
+                      backgroundColor: `${category.color.light.bg}`,
+                      padding: "0 4px",
+                      fontFamily: "Jost, 'Noto Sans KR'",
+                      fontSize: "32px",
+                      fontWeight: "500",
+                      textTransform: "uppercase",
+                    },
+                    children: `${category.name}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            type: "h1",
+            props: {
+              style: {
+                fontFamily: "Jost, 'Noto Sans KR'",
+                fontSize: "56px",
+                fontWeight: "500",
+                textTransform: "uppercase",
+                lineHeight: "1",
+                margin: "0 0 8px 0",
+                wordBreak: "keep-all",
+              },
+              children: `${props.data.title}`,
+            },
+          },
+          {
+            type: "p",
+            props: {
+              style: {
+                color: "rgb(100 116 139)",
+                fontFamily: "'Noto Sans KR'",
+                fontSize: "24px",
+                fontWeight: "500",
+                margin: "0 0",
+              },
+              children: `${formatter.format(new Date(props.data.pubDate))} | ${
+                minutesToRead < 1
+                  ? "1분 미만 소요"
+                  : `약 ${Math.ceil(minutesToRead)}분 소요`
+              }`,
+            },
+          },
+          {
+            type: "p",
+            props: {
+              style: {
+                color: "rgb(51 65 85)",
+                fontFamily: "'Noto Sans KR'",
+                fontSize: "36px",
+                fontWeight: "500",
+                lineHeight: "1.4",
+                margin: "0 0",
+                wordBreak: "keep-all",
+              },
+              children: `${props.data.description}`,
+            },
+          },
+          {
+            type: "div",
+            props: {
+              style: {
+                display: "flex",
+                flexGrow: "1",
+                alignItems: "flex-end",
+                justifyContent: "flex-end",
+              },
+              children: [
+                {
+                  type: "img",
+                  props: {
+                    src: `data:image/png;base64,${logoData.toString("base64")}`,
+                    width: "200px",
+                  },
+                },
+              ],
+            },
+          },
+        ],
       },
     },
     {
