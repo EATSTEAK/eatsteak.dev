@@ -31,7 +31,7 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkCallout],
-    rehypePlugins: [pager, sectionize],
+    rehypePlugins: [sectionize],
     remarkRehype: {
       footnoteLabel: "각주",
       footnoteBackLabel: "원문 보기",
