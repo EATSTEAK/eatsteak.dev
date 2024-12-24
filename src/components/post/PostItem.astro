@@ -1,65 +1,64 @@
 ---
-import type {CollectionEntry} from "astro:content";
-import {CategoryLabel} from "../ui/CategoryLabel";
-import {FormattedDate} from "./FormattedDate";
-import {MinutesRead} from "./MinutesRead";
-import {Topics} from "../ui/Topics";
+import type { CollectionEntry } from "astro:content";
+import { CategoryLabel } from "../ui/CategoryLabel";
+import { FormattedDate } from "./FormattedDate";
+import { MinutesRead } from "./MinutesRead";
+import { Topics } from "../ui/Topics";
 
 interface Props {
   post: CollectionEntry<"blog">;
   minutesRead: number | undefined;
 }
 
-const {post, minutesRead} = Astro.props;
+const { post, minutesRead } = Astro.props;
 
 const thumbnail = post.data.thumbnail ?? { src: `/card/og/${post.slug}.png` };
 ---
 
 <section class="group/post flex flex-col md:flex-row gap-4 border-b py-4">
-    <aside class="overflow-clip">
-        <a href={`/post/${post.slug}`} class="block bg-cover bg-center bg-no-repeat w-full md:w-64 h-64 md:h-full group-hover/post:scale-110 transition-transform"
-           style={{
-             "background-image": `url('${thumbnail.src}')`,
-           }}
-        aria-label={post.data.title}>
-        </a>
-    </aside>
-    <article>
-        <CategoryLabel category={post.data.category ?? "uncategorized"}/>
-        <a href={`/post/${post.slug}`}>
-            <h1 class="text-[1.563em] mt-2">
-                <span class="nav-link">{post.data.title}</span>
-            </h1>
-            <div class="text-xs mb-2 text-gray-500 flex line-between-flex-items">
-                <div class="date">
-                    <FormattedDate
-                            dateTime={post.data.pubDate}
-                            client:only="solid-js"
-                    />
-                </div>
-              {
-                post.data.updatedDate && (
-                              <div class="updated-date">
-                                  <FormattedDate
-                                          dateTime={post.data.updatedDate as Date}
-                                          client:only="solid-js"
-                                  />
-                                  &nbsp;수정
-                              </div>
-                )
-              }
-              {
-                minutesRead != undefined && (
-                              <MinutesRead minutesRead={minutesRead as number}/>
-                )
-              }
+  <aside class="overflow-clip">
+    <a
+      href={`/post/${post.slug}`}
+      class="block bg-cover bg-center bg-no-repeat w-full md:w-64 h-64 md:h-full group-hover/post:scale-110 transition-transform"
+      style={{
+        "background-image": `url('${thumbnail.src}')`,
+      }}
+      aria-label={post.data.title}
+    >
+    </a>
+  </aside>
+  <article>
+    <CategoryLabel category={post.data.category ?? "uncategorized"} />
+    <a href={`/post/${post.slug}`}>
+      <h1 class="text-[1.563em] mt-2">
+        <span class="nav-link">{post.data.title}</span>
+      </h1>
+      <div class="text-xs mb-2 text-gray-500 flex line-between-flex-items">
+        <div class="date">
+          <FormattedDate dateTime={post.data.pubDate} client:only="solid-js" />
+        </div>
+        {
+          post.data.updatedDate && (
+            <div class="updated-date">
+              <FormattedDate
+                dateTime={post.data.updatedDate as Date}
+                client:only="solid-js"
+              />
+              &nbsp;수정
             </div>
+          )
+        }
+        {
+          minutesRead != undefined && (
+            <MinutesRead minutesRead={minutesRead as number} />
+          )
+        }
+      </div>
 
-            <div class="text-gray-700 dark:text-gray-300 mb-2">
-              {post.data.description}
-            </div>
-        </a>
-      {post.data.topics &&
-              <Topics topics={post.data.topics}/>}
-    </article>
+      <div class="text-gray-700 dark:text-gray-300 mb-2">
+        {post.data.description}
+      </div>
+    </a>
+    {post.data.topics && <Topics topics={post.data.topics} />}
+  </article>
 </section>

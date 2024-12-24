@@ -62,7 +62,7 @@ export const Switch: Component<
           checked={isEnabled()}
           onChange={(e) => self?.onChange?.(e)}
           {...inputAttributes}
-        ></input>
+        />
       </div>
     </>
   );

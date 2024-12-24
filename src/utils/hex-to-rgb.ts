@@ -1,5 +1,5 @@
 export const hexToRgb = (hex: string) => {
-  let hexsplit = hex
+  const hexsplit = hex
     .replace(
       /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
       (_m, r, g, b) => "#" + r + r + g + g + b + b,

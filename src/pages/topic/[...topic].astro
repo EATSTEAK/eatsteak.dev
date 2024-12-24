@@ -1,66 +1,63 @@
 ---
-import {SITE_TITLE, SITE_DESCRIPTION} from "../../consts";
-import {getCollection} from "astro:content";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import PostItem from "@components/post/PostItem.astro";
-import {GrillContainer} from "@components/shell/GrillContainer";
-import {Container} from "@components/shell/Container";
-import {getReadingTime} from "@utils/reading-time";
+import { GrillContainer } from "@components/shell/GrillContainer";
+import { Container } from "@components/shell/Container";
+import { getReadingTime } from "@utils/reading-time";
 export async function getStaticPaths() {
-    const posts = await getCollection("blog");
-    const initial: { [topic: string]: number } = {};
-    return Object.entries(
-        posts.reduce((object, post) => {
-            const topics = post.data.topics ?? [];
-            topics.forEach((topic) => {
-                object[topic] += 1;
-            });
-            return object;
-        }, initial),
-    ).map(([topic, count]) => ({
-        params: {topic},
-        props: {topic, count},
-    }));
+  const posts = await getCollection("blog");
+  const initial: { [topic: string]: number } = {};
+  return Object.entries(
+    posts.reduce((object, post) => {
+      const topics = post.data.topics ?? [];
+      topics.forEach((topic) => {
+        object[topic] += 1;
+      });
+      return object;
+    }, initial),
+  ).map(([topic, count]) => ({
+    params: { topic },
+    props: { topic, count },
+  }));
 }
 
-const {topic} = Astro.props;
+const { topic } = Astro.props;
 
 async function getPostsByTopic(topic: string) {
-    return (await getCollection("blog"))
-        .filter((post) => post.data.hidden !== true)
-        .filter((post) => (post.data.topics ?? []).includes(topic));
+  return (await getCollection("blog"))
+    .filter((post) => post.data.hidden !== true)
+    .filter((post) => (post.data.topics ?? []).includes(topic));
 }
 
 const posts = await getPostsByTopic(topic);
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-    <main class="flex flex-col items-stretch justify-start">
-        <GrillContainer parentClass="relative h-fit">
-            <h4
-                    class="px-2 uppercase bg-gray-800 text-white
+  <main class="flex flex-col items-stretch justify-start">
+    <GrillContainer parentClass="relative h-fit">
+      <h4
+        class="px-2 uppercase bg-gray-800 text-white
           dark:bg-white dark:text-gray-800"
-            >
-                Topic
-            </h4>
-            <h2
-                    class="px-2 bg-gray-800 text-white
+      >
+        Topic
+      </h4>
+      <h2
+        class="px-2 bg-gray-800 text-white
           dark:bg-white dark:text-gray-800"
-            >
-                {topic}
-            </h2>
-        </GrillContainer>
-        <Container>
-            {
-                posts.map((post) => (
-                        <>
-                            <PostItem
-                                    post={post}
-                                    minutesRead={getReadingTime(post.body)}
-                            />
-                        </>
-                ))
-            }
-        </Container>
-    </main>
+      >
+        {topic}
+      </h2>
+    </GrillContainer>
+    <Container>
+      {
+        posts.map((post) => (
+          <>
+            <PostItem post={post} minutesRead={getReadingTime(post.body)} />
+          </>
+        ))
+      }
+    </Container>
+  </main>
 </Layout>

@@ -32,14 +32,14 @@ export const LightSwitch: Component = () => {
           <Show
             when={isDarkTheme()}
             fallback={
-              <img alt="Light mode" src="/images/sun.svg" class="w-6 h-6"></img>
+              <img alt="Light mode" src="/images/sun.svg" class="w-6 h-6" />
             }
           >
             <img
               alt="Dark mode"
               src="/images/moon.svg"
               class="dark:invert transition-[filter] w-6 h-6"
-            ></img>
+            />
           </Show>
         </div>
       </Switch>

@@ -10,7 +10,7 @@ export const Profile = () => {
             alt="Profile image of EATSTEAK"
             src="/images/profile.png"
             class="w-16"
-          ></img>
+          />
         </div>
         <div class="grow">
           <h1 class="text-xl m-0">EATSTEAK</h1>

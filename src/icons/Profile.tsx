@@ -1,7 +1,7 @@
 import type { Component, JSX } from "solid-js";
 
 export const Profile: Component<JSX.SvgSVGAttributes<SVGSVGElement>> = (
-  props
+  props,
 ) => {
   return (
     <svg

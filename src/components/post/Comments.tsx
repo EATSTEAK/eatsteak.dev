@@ -1,9 +1,9 @@
-import { type Component, createEffect } from "solid-js";
+import { type Component, createEffect, createSignal } from "solid-js";
 import theme from "@signals/theme.ts";
 
 export const Comments: Component = () => {
-  const [isDarkTheme, _] = theme;
-  let sectionRef: HTMLDivElement;
+  const [isDarkTheme] = theme;
+  const [sectionRef, setSectionRef] = createSignal<HTMLDivElement | null>(null);
   const utterances = () => {
     const utterancesScript = document.createElement("script");
     utterancesScript.src = "https://utteranc.es/client.js";
@@ -19,11 +19,11 @@ export const Comments: Component = () => {
     return utterancesScript;
   };
   createEffect(() => {
-    if (sectionRef) {
-      sectionRef.innerHTML = "";
-      sectionRef.appendChild(utterances());
+    const ref = sectionRef();
+    if (ref) {
+      ref.innerHTML = "";
+      ref.appendChild(utterances());
     }
-  }, [isDarkTheme]);
-  // @ts-ignore
-  return <section class="comments" ref={sectionRef}></section>;
+  });
+  return <section class="comments" ref={setSectionRef} />;
 };

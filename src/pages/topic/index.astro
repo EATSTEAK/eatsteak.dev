@@ -1,34 +1,34 @@
 ---
-import {getCollection} from "astro:content";
-import {Topics} from "@components/ui/Topics";
-import {SITE_TITLE, SITE_DESCRIPTION} from "../../consts";
+import { getCollection } from "astro:content";
+import { Topics } from "@components/ui/Topics";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import Layout from "@layouts/Layout.astro";
-import {Container} from "@components/shell/Container";
+import { Container } from "@components/shell/Container";
 
 async function getTopics() {
-    const posts = await getCollection("blog");
-    const initial: { [topic: string]: number } = {};
-    return posts
-        .filter((post) => post.data.hidden !== true)
-        .reduce((object, post) => {
-            const topics = post.data.topics ?? [];
-            topics.forEach((topic) => {
-                object[topic] += 1;
-            });
-            return object;
-        }, initial);
+  const posts = await getCollection("blog");
+  const initial: { [topic: string]: number } = {};
+  return posts
+    .filter((post) => post.data.hidden !== true)
+    .reduce((object, post) => {
+      const topics = post.data.topics ?? [];
+      topics.forEach((topic) => {
+        object[topic] += 1;
+      });
+      return object;
+    }, initial);
 }
 
 const topics = Object.keys(await getTopics());
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-    <main class="flex flex-col items-stretch justify-start">
-        <Container>
-            <h2 class="uppercase">Topics</h2>
-            <div>
-                <Topics topics={topics}/>
-            </div>
-        </Container>
-    </main>
+  <main class="flex flex-col items-stretch justify-start">
+    <Container>
+      <h2 class="uppercase">Topics</h2>
+      <div>
+        <Topics {topics} />
+      </div>
+    </Container>
+  </main>
 </Layout>

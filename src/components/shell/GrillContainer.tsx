@@ -16,7 +16,7 @@ export const GrillContainer: Component<{
           "grill-background bg-gradient-to-b from-slate-700 dark:from-slate-400 to-transparent bg-opacity-50 -rotate-3",
           props.grillClass,
         )}
-      ></div>
+      />
       <div class={cn("slide-to-top grill-content", props.containerClass)}>
         {props.children}
       </div>

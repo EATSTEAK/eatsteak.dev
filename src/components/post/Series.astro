@@ -1,32 +1,30 @@
 ---
-import type {CollectionEntry} from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import CompactPostItem from "./CompactPostItem.astro";
 
 interface Props {
-    posts: CollectionEntry<"blog">[];
-    series: string;
-    selectedSlug: string;
+  posts: CollectionEntry<"blog">[];
+  series: string;
+  selectedSlug: string;
 }
 
-const {posts, series, selectedSlug} = Astro.props;
+const { posts, series, selectedSlug } = Astro.props;
 
-const filteredPosts = posts.filter((post) => post.data.series === series && post.data.hidden !== true)
-    .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+const filteredPosts = posts
+  .filter((post) => post.data.series === series && post.data.hidden !== true)
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 ---
-<section class="bg-gray-200 dark:bg-gray-800 p-4">
-    <h1 class="text-xl">시리즈: {series}</h1>
-    <hr/>
-    <ul class="px-2 overflow-y-auto max-h-32 flex flex-col gap-4">
-        {
-            filteredPosts.map((post) => (
-                    <>
-                        <CompactPostItem
-                                post={post}
-                                selected={selectedSlug === post.slug}
-                        />
-                    </>
-            ))
-        }
-    </ul>
-</section>
 
+<section class="bg-gray-200 dark:bg-gray-800 p-4">
+  <h1 class="text-xl">시리즈: {series}</h1>
+  <hr />
+  <ul class="px-2 overflow-y-auto max-h-32 flex flex-col gap-4">
+    {
+      filteredPosts.map((post) => (
+        <>
+          <CompactPostItem post={post} selected={selectedSlug === post.slug} />
+        </>
+      ))
+    }
+  </ul>
+</section>

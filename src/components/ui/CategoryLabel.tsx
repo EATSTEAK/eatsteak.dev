@@ -5,6 +5,7 @@ import "./category_label.css";
 
 export const CategoryLabel: Component<{ category: string }> = (props) => {
   const category =
+    // eslint-disable-next-line solid/reactivity
     CATEGORIES?.[props.category] ?? CATEGORIES?.["uncategorized"];
   return (
     <Show

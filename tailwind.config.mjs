@@ -1,5 +1,4 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
-const { CATEGORIES } = require("./src/consts");
+import defaultTheme from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 export default {

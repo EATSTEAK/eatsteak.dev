@@ -3,6 +3,7 @@ import "./container.css";
 import { cn } from "@utils/cn.ts";
 
 export const Container: Component<{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children: any;
 }> = (props) => {
   return (

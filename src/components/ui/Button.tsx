@@ -6,10 +6,7 @@ export const Button: Component<
   const [self, anchorAttributes] = splitProps(props, ["children"]);
 
   return (
-    <a
-      {...anchorAttributes}
-      class="button"
-    >
+    <a {...anchorAttributes} class="button">
       {self.children}
     </a>
   );

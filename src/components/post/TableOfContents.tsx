@@ -1,8 +1,9 @@
 import { ReactiveSet } from "@solid-primitives/set";
-import { TocHeading } from "./TocHeading.tsx";
 import { type Component, createSignal, Show } from "solid-js";
 import "./toc.css";
 import { Transition } from "solid-transition-group";
+import { TocHeadings } from "@components/post/TocHeadings.tsx";
+import type { TocHeading } from "../../types";
 
 export const TableOfContents: Component<{ tocHeadings: TocHeading[] }> = (
   props,
@@ -30,7 +31,7 @@ export const TableOfContents: Component<{ tocHeadings: TocHeading[] }> = (
     <nav class="w-80 max-h-screen">
       <button
         class="contents-btn hover-fill-to-right transition-colors"
-        onclick={() => setVisibility(!isVisible())}
+        onClick={() => setVisibility(!isVisible())}
       >
         <span>CONTENTS</span>
         <svg
@@ -47,7 +48,7 @@ export const TableOfContents: Component<{ tocHeadings: TocHeading[] }> = (
       <Transition name="slide-fade">
         <Show when={isVisible()}>
           <div class="overflow-y-auto max-h-[80vh]">
-            <TocHeading
+            <TocHeadings
               tocHeadings={props.tocHeadings}
               activeHeadings={[...activeSections]}
             />

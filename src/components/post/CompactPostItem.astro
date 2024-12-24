@@ -1,19 +1,21 @@
 ---
-import type {CollectionEntry} from "astro:content";
-import {CategoryLabel} from "../ui/CategoryLabel";
+import type { CollectionEntry } from "astro:content";
+import { CategoryLabel } from "../ui/CategoryLabel";
 import cc from "classcat";
 
 interface Props {
-    post: CollectionEntry<"blog">;
-    selected?: boolean;
+  post: CollectionEntry<"blog">;
+  selected?: boolean;
 }
 
-const {post, selected} = Astro.props;
+const { post, selected } = Astro.props;
 ---
 
 <li class="flex align-center gap-2 items-start">
-    <CategoryLabel category={post.data.category ?? "uncategorized"}/>
-    <a href={selected ? "#" : `/post/${post.slug}`}>
-        <span class={cc({"nav-link": true, "link-selected": selected})}>{post.data.title}</span>
-    </a>
+  <CategoryLabel category={post.data.category ?? "uncategorized"} />
+  <a href={selected ? "#" : `/post/${post.slug}`}>
+    <span class={cc({ "nav-link": true, "link-selected": selected })}
+      >{post.data.title}</span
+    >
+  </a>
 </li>

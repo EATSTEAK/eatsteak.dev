@@ -1,33 +1,33 @@
 ---
-import {SITE_TITLE, SITE_DESCRIPTION} from "../consts";
-import {Intro} from "@components/index/Intro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { Intro } from "@components/index/Intro";
 import Layout from "@layouts/Layout.astro";
-import {getCollection} from "astro:content";
+import { getCollection } from "astro:content";
 import PostItem from "@components/post/PostItem.astro";
-import {Button} from "@components/ui/Button";
-import {Container} from "@components/shell/Container";
-import {getReadingTime} from "@utils/reading-time";
+import { Button } from "@components/ui/Button";
+import { Container } from "@components/shell/Container";
+import { getReadingTime } from "@utils/reading-time";
 const posts = (await getCollection("blog"))
-    .filter((post) => post.data.hidden !== true)
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-    .slice(0, 3);
+  .filter((post) => post.data.hidden !== true)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-    <main class="w-full flex flex-col items-stretch justify-start">
-        <Intro/>
-        <Container>
-            <div class="mb-4 flex items-center justify-between">
-                <h3 class="uppercase">Recent posts</h3>
-                <Button href="/posts"><span class="break-keep">더보기</span></Button>
-            </div>
-            <div class="flex flex-col gap-4">
-                {
-                    posts.map((post) => (
-                            <PostItem post={post} minutesRead={getReadingTime(post.body)}/>
-                    ))
-                }
-            </div>
-        </Container>
-    </main>
+  <main class="w-full flex flex-col items-stretch justify-start">
+    <Intro />
+    <Container>
+      <div class="mb-4 flex items-center justify-between">
+        <h3 class="uppercase">Recent posts</h3>
+        <Button href="/posts"><span class="break-keep">더보기</span></Button>
+      </div>
+      <div class="flex flex-col gap-4">
+        {
+          posts.map((post) => (
+            <PostItem post={post} minutesRead={getReadingTime(post.body)} />
+          ))
+        }
+      </div>
+    </Container>
+  </main>
 </Layout>

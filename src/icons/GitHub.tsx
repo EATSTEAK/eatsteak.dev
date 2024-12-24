@@ -1,7 +1,7 @@
 import type { JSX, Component } from "solid-js";
 
 export const GitHub: Component<JSX.SvgSVGAttributes<SVGSVGElement>> = (
-  props
+  props,
 ) => {
   return (
     <svg
