@@ -26,4 +26,17 @@ export default tsEslint.config(
     ...solid,
   },
   prettierConfig,
+  {
+    // Define the configuration for `<script>` tag.
+    // Script in `<script>` is assigned a virtual file name with the `.js` extension.
+    files: [
+      "**/*.astro/*.js",
+      "*.astro/*.js",
+      "**/*.astro/*.ts",
+      "*.astro/*.ts",
+    ],
+    rules: {
+      "prettier/prettier": "off",
+    },
+  },
 );

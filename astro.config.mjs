@@ -13,7 +13,6 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 import { remarkCallout } from "@r4ai/remark-callout";
-import pager from "rehype-pager";
 
 // https://astro.build/config
 export default defineConfig({
