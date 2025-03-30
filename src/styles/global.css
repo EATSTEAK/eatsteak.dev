@@ -3,18 +3,23 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --primary-background-color: var(--color-neutral-200);
+  --primary-background-color: var(--color-neutral-300);
   --primary-color: var(--color-neutral-900);
+  --secondary-background-color: var(--color-neutral-200);
 }
 
 :root[class~="dark"] {
   --primary-background-color: var(--color-neutral-900);
   --primary-color: var(--color-neutral-100);
+  --secondary-background-color: var(--color-neutral-950);
+  --secondary-color: var(--color-neutral-100);
 }
 
 @theme inline {
   --color-primary-bg: var(--primary-background-color);
   --color-primary: var(--primary-color);
+  --color-secondary-bg: var(--secondary-background-color);
+  --color-secondary: var(--secondary-color);
 }
 
 @theme {
