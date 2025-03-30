@@ -1,7 +1,10 @@
 import { type Component, Show } from "solid-js";
 import { CATEGORIES } from "@/consts.ts";
+import { cn } from "@/utils/cn";
 
-export const CategoryLabel: Component<{ category: string }> = (props) => {
+export const CategoryLabel: Component<{ class?: string; category: string }> = (
+  props,
+) => {
   const category =
     // eslint-disable-next-line solid/reactivity
     CATEGORIES?.[props.category] ?? CATEGORIES?.["uncategorized"];
@@ -9,13 +12,21 @@ export const CategoryLabel: Component<{ category: string }> = (props) => {
     <Show
       when={category}
       fallback={
-        <label class="uppercase font-bold tracking-widest mb-2 transition-all hover:brightness-125 focus:brightness-125 px-1">
+        <label
+          class={cn(
+            "uppercase font-bold tracking-widest transition-all hover:brightness-125 focus:brightness-125 px-1",
+            props.class,
+          )}
+        >
           Uncategorized
         </label>
       }
     >
       <a
-        class="uppercase font-bold tracking-widest mb-2 transition-all hover:brightness-125 focus:brightness-125 px-1"
+        class={cn(
+          "uppercase font-bold tracking-widest transition-all hover:brightness-125 focus:brightness-125 px-1",
+          props.class,
+        )}
         style={{
           "background-color": `var(--category-${category.id}-bg)`,
           color: `var(--category-${category.id}-text)`,

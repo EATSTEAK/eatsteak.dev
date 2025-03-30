@@ -99,9 +99,11 @@ const toc = buildToc(headings);
         </section>
         <section class="prose">
           <div class="title mb-8">
-            <CategoryLabel category={category ?? "uncategorized"} />
             <h1>{title}</h1>
-            <div class="flex flex-wrap line-between-flex-items">
+            <div class="flex items-center flex-wrap line-between-flex-items">
+              <div class="after:text-gray-500">
+                <CategoryLabel category={category ?? "uncategorized"} />
+              </div>
               <div class="date text-gray-500">
                 <FormattedDate dateTime={pubDate} client:only="solid-js" />
                 {
@@ -122,7 +124,7 @@ const toc = buildToc(headings);
             </div>
             {
               topics && (
-                <div class="topics mt-2 mb-8">
+                <div class="topic mt-2 mb-8">
                   <Topics topics={topics} />
                 </div>
               )

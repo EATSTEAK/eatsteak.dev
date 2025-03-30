@@ -28,7 +28,6 @@ const thumbnail = post.data.thumbnail ?? { src: `/card/og/${post.slug}.png` };
     </a>
   </aside>
   <article>
-    <CategoryLabel category={post.data.category ?? "uncategorized"} />
     <a href={`/post/${post.slug}`}>
       <h1 class="text-[1.563em] mt-2">
         <span class="nav-link">{post.data.title}</span>
@@ -59,6 +58,10 @@ const thumbnail = post.data.thumbnail ?? { src: `/card/og/${post.slug}.png` };
         {post.data.description}
       </div>
     </a>
-    {post.data.topics && <Topics topics={post.data.topics} />}
+    <div class="flex flex-wrap gap-4 items-center">
+      <CategoryLabel category={post.data.category ?? "uncategorized"} />{
+        post.data.topics && <Topics topics={post.data.topics} />
+      }
+    </div>
   </article>
 </section>
