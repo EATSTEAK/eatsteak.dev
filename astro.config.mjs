@@ -21,7 +21,7 @@ export default defineConfig({
     sitemap(),
     solidJs(),
     compress({
-      CSS: true,
+      CSS: false,
     }),
   ],
   markdown: {
@@ -41,5 +41,11 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    css: {
+      transformer: "lightningcss",
+    },
+    build: {
+      cssMinify: "lightningcss",
+    },
   },
 });
