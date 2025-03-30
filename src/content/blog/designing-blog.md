@@ -40,14 +40,14 @@ thumbnail: ../../assets/designing-blog/space-odyssey.png
 
 ### 모던함을 더한 Jost
 
-`Jost` 서체는 1920년대 독일에서 만들어진 [Futura](https://en.wikipedia.org/wiki/Futura_(typeface))에 영감을 받아 만들어진 서체입니다. 영화감독 스탠리 큐브릭이
+`Jost` 서체는 1920년대 독일에서 만들어진 [Futura](<https://en.wikipedia.org/wiki/Futura_(typeface)>)에 영감을 받아 만들어진 서체입니다. 영화감독 스탠리 큐브릭이
 자주 사용했기로 유명하기도 하고, 모던함의 시초가 되는 Typeface인데, 앞서 말한 불판과 프로그래밍의 연결 고리가 약하단 점을 좀 더 모던한 이미지를 통해 보강하기 위해 선택했습니다. 제가 큐브릭 영화들을
 좋아하는 것도 조금은 있고요.
 
 ![2001: A Space Odyssey 포스터에서 사용된 Futura 서체](../../assets/designing-blog/space-odyssey.png)
 
 > 스탠리 큐브릭 감독의 1968년작 영화 _2001: A Space Odyssey_ 의 메인 포스터에 사용된 Futura
-> 서체. <sup>[출처](https://en.wikipedia.org/wiki/File:2001_A_Space_Odyssey_(1968).png)</sup>
+> 서체. <sup>[출처](<https://en.wikipedia.org/wiki/File:2001_A_Space_Odyssey_(1968).png>)</sup>
 
 다만 Jost 서체의 형태가 대문자 `J`가 소문자처럼 디센더로 디자인되어 있거나, 너무 높은 weight에 가면 `V`와 같은 예리한 각도의 글자체들이 너무 날카롭게 디자인되어 있다 보니 베이스라인이 정렬되어 있지
 않아 보이는 경우가 있습니다. 그래서 제목용 서체나 디자인적인 요소에만 주로 이 서체를 이용하고, 가독성이 요구되는(글 본문 혹은 글자가 주 정보 전달원인 UI 요소) 요소의 경우 다른 서체를 이용하고자 했습니다.
@@ -57,9 +57,11 @@ thumbnail: ../../assets/designing-blog/space-odyssey.png
 본문 서체로 선택한 `Noto Sans KR`은 굳이 채용한 이유를 묻지 않아도 알 것입니다. 다만 _왜 않 Pretendard임?_ 라고 묻는 사람이 있을 것 같아서, 이에 대한 부연을 조금 하고자 합니다.
 
 ![Noto Sans KR의 예시 문장](../../assets/designing-blog/notokr.png)
+
 > _16px 기준 `Noto Sans KR`로 본 예시 문장._
 
 ![Pretendard의 예시 문장](../../assets/designing-blog/pretendard.png)
+
 > _16px 기준 `Pretendard`로 본 예시 문장._ 어떤 폰트가 더 읽기 편해 보이는가요?
 
 조금 뒤에서도 설명하겠지만, 보통 웹페이지의 내용을 읽을 때 좋은 크기인 16px 기준으로 두 폰트의 예시 문장([Pretendard 소개 웹사이트](https://cactus.tistory.com/306)에서
@@ -69,6 +71,7 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 
 > 본고딕의 한글 크기가 대부분의 한글 글꼴들과 비슷하게 다국어 타이포그래피 환경에서는 조금 크게 자리잡아 라틴 글자와 섞어쓸 때 글자 비율을 어느정도 조정해서 쓰는 점이 제품을 만드는 데 어느정도 부채가 쌓이는
 > 상황이라 보았고, 이처럼 적합하지 않은 글꼴로부터 생기는 추가적인 소요를 줄이자는 데에서 이 프로젝트를 2020년 11월부터 천천히 다듬어왔다.
+>
 > - [Pretendard 소개](https://cactus.tistory.com/306)에서.
 
 그러다 보니 Pretendard는 UI 측면에서는 꽤나 훌륭한 글꼴이지만, 균일된 글리프 크기가 읽기 중심의 블로그에는 답답한 느낌이 계속 들었습니다.
@@ -100,21 +103,21 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 
 ```css
 * {
-    /* 글꼴 크기 및 줄 간격 설정 */
-    font-size: clamp(1rem, 0.768rem + 0.893vw, 1.125rem);
-    line-height: clamp(1.4, 0.75 + 2.5vw, 1.75);
-    /* 문장 길이를 위한 최대 길이 설정 */
-    max-width: 75ch;
+  /* 글꼴 크기 및 줄 간격 설정 */
+  font-size: clamp(1rem, 0.768rem + 0.893vw, 1.125rem);
+  line-height: clamp(1.4, 0.75 + 2.5vw, 1.75);
+  /* 문장 길이를 위한 최대 길이 설정 */
+  max-width: 75ch;
 
-    /* 합자 */
-    text-rendering: optimizeLegibility;
+  /* 합자 */
+  text-rendering: optimizeLegibility;
 
-    /* 폰트 안티엘리어싱 */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* 폰트 안티엘리어싱 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-    /* (한국어)단어 줄 넘김 방지 */
-    word-break: keep-all;
+  /* (한국어)단어 줄 넘김 방지 */
+  word-break: keep-all;
 }
 ```
 
@@ -122,14 +125,16 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 
 글꼴 크기는 가독성의 가장 중요한 요소 중 하나입니다. 브라우저의 기본 글꼴 크기는 `16px`인데요. 일반적으로 16px는 데스크톱 환경에서 읽기에 권장되는 글꼴 크기의 마지노선으로 여겨지고 있습니다.[^1]
 
-[^1]: [PimpMyType, What's the right font size in web design?, 21. Sep 2021](https://pimpmytype.com/font-size/) 등 다양한
-사이트, 논문에서 적어도 16px 이상을 데스크톱 웹 사이트의 폰트 크기로 하기를 권장합니다.
+[^1]:
+    [PimpMyType, What's the right font size in web design?, 21. Sep 2021](https://pimpmytype.com/font-size/) 등 다양한
+    사이트, 논문에서 적어도 16px 이상을 데스크톱 웹 사이트의 폰트 크기로 하기를 권장합니다.
 
 대부분의 읽기 중심 사이트에서는 16-20px 범위 내에서 글꼴 크기를 크게 설정하는 것을 권장하고 있고,[^2] 뿐만 아니라 글꼴의 종류, 기기에 따라 적절히 읽기 편한 크기를 설정하는 것이 좋습니다.
 
-[^2]: 각주 [^1]의 웹사이트는
-물론이고, [Luz Rello, Martin Pielot and Mari-Carmen Marcos, Make It Big! The Effect of Font Size and Line Spacing on Online Readability, 2016](https://pielot.org/pubs/Rello2016-Fontsize.pdf)
-와 같은 논문에서도 18px를 가장 적절한 폰트 크기로 권장하고 있고, 20px 이상에서는 큰 효과가 없었다고 서술하고 있습니다.
+[^2]:
+    각주 [^1]의 웹사이트는
+    물론이고, [Luz Rello, Martin Pielot and Mari-Carmen Marcos, Make It Big! The Effect of Font Size and Line Spacing on Online Readability, 2016](https://pielot.org/pubs/Rello2016-Fontsize.pdf)
+    와 같은 논문에서도 18px를 가장 적절한 폰트 크기로 권장하고 있고, 20px 이상에서는 큰 효과가 없었다고 서술하고 있습니다.
 
 또한 줄 간격(`line-height`)는 데스크톱 기준 `1.5`에서 `2`사이의 간격을 설정하여(모바일에서는 `1.3`에서 `1.5` 정도가 적당합니다) 너무 간격이 넓어 글이 눈에 잘 들어오지 않도록 하거나,
 너무 좁아 답답해 보이지 않도록 하는 것이 좋습니다.
@@ -146,9 +151,9 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 ```css
 /* 미디어 쿼리를 활용하여 폰트 크기 조정하기 */
 @media screen and (min-width: 768px) {
-    :root {
-        font-size: 1.125rem;
-    }
+  :root {
+    font-size: 1.125rem;
+  }
 }
 ```
 
@@ -157,8 +162,8 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 ```css
 /* clamp()를 활용하여 동적으로 글자 크기 조정하기 */
 .content {
-    font-size: clamp(1rem, 0.768rem + 0.893vw, 1.125rem);
-    line-height: clamp(1.4, 0.75 + 2.5vw, 1.75);
+  font-size: clamp(1rem, 0.768rem + 0.893vw, 1.125rem);
+  line-height: clamp(1.4, 0.75 + 2.5vw, 1.75);
 }
 ```
 
@@ -179,8 +184,8 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 
 ```css
 :root {
-    font-size: 18px; /* [!code --] */
-    font-size: 1.125rem; /* [!code ++] */
+  font-size: 18px; /* [!code --] */
+  font-size: 1.125rem; /* [!code ++] */
 }
 ```
 
@@ -206,7 +211,7 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 
 ```css
 .w-80 {
-    width: 20rem; /* 320px */
+  width: 20rem; /* 320px */
 }
 ```
 
@@ -221,16 +226,19 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 있는지 살펴보겠습니다.
 
 ![optimizeLegibility 활성화 여부에 따른 차이(위: 비활성화, 아래: 활성화)](../../assets/designing-blog/optimizelegibility.png)
+
 > _optimizeLegibility 활성화 여부에 따른 차이(위: 비활성화, 아래: 활성화)_
 
 위 예시에서 LYoWAT 부분이 텍스트 커닝을 확인할 수 있는 부분이고, 오른쪽의 ff fi fl ffl 부분이 합자를 확인할 수 있는 부분입니다.
 
 > 커닝(kerning)은 글자의 모양 때문에 활자가 고르게 배열되지 않은 것처럼 보이는 것을 글자 모양에 따라 적당한 간격을 두게 조정하여 시각적으로 매끄럽게 보이게 하는 것을 말한다.
+>
 > - 한국어 위키백과, [커닝](https://ko.wikipedia.org/wiki/커닝) 문서에서.
 
 잘 확인해 보면 LY나 WAT 사이의 간격이 조절되어 텍스트 자간이 일정해 보이는 효과가 있습니다.
 
 > 합자(合字, ligature)는 인쇄하는 타이포그래피와 손으로 쓰는 필기에서 두 개 이상의 문자가 합쳐져서 하나의 글자 모양(글리프의 형태)으로 형성하는 것을 말한다.
+>
 > - 한국어 위키백과, [합자](https://ko.wikipedia.org/wiki/합자) 문서에서.
 
 문자가 합자되어 ff의 가로 선 사이의 빈 공간이 없는 것을 확인할 수 있습니다.
@@ -247,6 +255,7 @@ Pretendard의 경우 전체적인 글리프의 균일성을 중시한다고 생�
 
 CJK 문장에서는 브라우저가 기본적으로 한 글자 단위로 줄넘김을 수행합니다. 왜인지는 생각해 보면 간단한데, 바로 동아시아 문화권에서는 한국을 제외하면 띄어쓰기를 거의 사용하지 않기 때문입니다. 따라서 기본 옵션을
 두고 글을 쓰게 되면 줄넘김이 깔끔하지 않습니다.
+
 <blockquote>
   <p style="word-break: normal;">
   word-break: normal; 인 문장입니다.
@@ -266,4 +275,3 @@ CJK 문장에서는 브라우저가 기본적으로 한 글자 단위로 줄넘�
 ## 다음 글: 블로그 썸네일 자동 생성하기
 
 우리가 링크를 다른 곳에 공유할 때, 해당 웹사이트에서 제공하는 썸네일이 표시되는 경우가 있습니다(GitHub가 대표적이죠). 이런 카드를 표시한 방법을 알아보겠습니다(작성 중입니다).
-

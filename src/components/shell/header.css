@@ -1,28 +1,27 @@
 @tailwind components;
 
 @layer components {
-    header {
-        @apply flex justify-center content-center px-6 py-6;
-    }
+  header {
+    @apply flex justify-center content-center px-6 py-6;
+  }
 
-    .navbar-container {
-        @apply grow max-w-screen-xl flex flex-wrap gap-4 lg:gap-16 justify-between lg:justify-start content-center;
-    }
+  .navbar-container {
+    @apply grow max-w-screen-xl flex flex-wrap gap-4 lg:gap-16 justify-between lg:justify-start content-center;
+  }
 
-    .logo-container {
-        @apply shrink-0 min-w-fit order-1;
-    }
+  .logo-container {
+    @apply shrink-0 min-w-fit order-1;
+  }
 
-    .logo-image {
-        @apply w-[120px] h-[45px] md:w-[160px] md:h-[60px] dark:invert transition-[filter];
-    }
+  .logo-image {
+    @apply w-[120px] h-[45px] md:w-[160px] md:h-[60px] dark:invert transition-[filter];
+  }
 
-    .navbar {
-        @apply grow flex justify-center lg:justify-start items-center gap-8 order-3 lg:order-2 basis-full lg:basis-1;
-    }
+  .navbar {
+    @apply grow flex justify-center lg:justify-start items-center gap-8 order-3 lg:order-2 basis-full lg:basis-1;
+  }
 
-    .switch-container {
-        @apply shrink-0 flex justify-end items-center gap-2 order-2 lg:order-3;
-    }
-
+  .switch-container {
+    @apply shrink-0 flex justify-end items-center gap-2 order-2 lg:order-3;
+  }
 }

@@ -1,7 +1,7 @@
 @tailwind components;
 
 @layer components {
-    footer {
-        @apply w-full flex justify-center py-12;
-    }
+  footer {
+    @apply w-full flex justify-center py-12;
+  }
 }

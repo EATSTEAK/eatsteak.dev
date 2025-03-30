@@ -1,32 +1,32 @@
 @tailwind components;
 
 @layer components {
-    .switch-background {
-        margin: 0 1.5rem;
-        width: 2.5rem;
-        height: 1rem;
-        border-style: solid;
-        border-width: 2px;
-        cursor: pointer;
-    }
+  .switch-background {
+    margin: 0 1.5rem;
+    width: 2.5rem;
+    height: 1rem;
+    border-style: solid;
+    border-width: 2px;
+    cursor: pointer;
+  }
 
-    .switch-display {
-        font-size: 1.25rem;
-        text-align: center;
-        line-height: 2rem;
-        display: block;
-        width: 2rem;
-        height: 2rem;
-        border-style: solid;
-        border-width: 2px;
-        transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
+  .switch-display {
+    font-size: 1.25rem;
+    text-align: center;
+    line-height: 2rem;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border-style: solid;
+    border-width: 2px;
+    transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
 
-    .switch-display:not(.enabled) {
-        transform: translate(-1rem, -0.65rem) rotate(-135deg);
-    }
+  .switch-display:not(.enabled) {
+    transform: translate(-1rem, -0.65rem) rotate(-135deg);
+  }
 
-    .switch-display.enabled {
-        transform: translate(1.25rem, -0.65rem) rotate(0deg);
-    }
+  .switch-display.enabled {
+    transform: translate(1.25rem, -0.65rem) rotate(0deg);
+  }
 }

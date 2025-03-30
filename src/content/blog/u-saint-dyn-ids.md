@@ -32,32 +32,80 @@ u-saint가 사용하는 SAP WebDynpro는 SAP ABAP를 활용해 웹 페이지를 
 그렇다면 우리가 관심 있는 정보를 파싱하기 위한 고유값은 어떻게 찾아낼까요? 찾기 위해서 정보가 있는 HTML 요소를 살펴봅시다.
 
 ![엘리먼트의 위치](../../assets/u-saint-dyn-ids/what-is-unique.png)
+
 > 여기의 "학적부신청학점:" `label`과 선택되어있는 `input`을 들여다 봅시다.
 
 ```html
-// [!code word:lsdata=]
-// [!code word:id=]
-// [!code word:for=]
-<td ct="GLC" lsdata="{1:'STANDARD'}" id="WD0143" class="lsContainerCell lsGLCTopVAlign lsContainerCellVAlign--top sapLSGLTop urCellBgFill1 urLayoutDefault--grid lsContainerCell--wrap" valign="TOP" align="left">
+// [!code word:lsdata=] // [!code word:id=] // [!code word:for=]
+<td
+  ct="GLC"
+  lsdata="{1:'STANDARD'}"
+  id="WD0143"
+  class="lsContainerCell lsGLCTopVAlign lsContainerCellVAlign--top sapLSGLTop urCellBgFill1 urLayoutDefault--grid lsContainerCell--wrap"
+  valign="TOP"
+  align="left"
+>
   <span id="WD0144-r" class="lsLabel--root">
-  <label ct="L" lsdata="{1:'WD0146',3:'학적부신청학점',7:'100\x25',13:'ENDOFLINE',15:true}" id="WD0144" bhastabstop="false" for="WD0146" class="lsLabel lsLabel--valign lsControl--endaligned  lsLabel--standalone lsControl--fullwidth lsLabel--wrapping lsLabel--designbar-colon" title="">
-  <span id="WD0144-text" class="lsLabel__text lsLabel__text--overflow" title="">학적부신청학점</span>
-  </label>
+    <label
+      ct="L"
+      lsdata="{1:'WD0146',3:'학적부신청학점',7:'100\x25',13:'ENDOFLINE',15:true}"
+      id="WD0144"
+      bhastabstop="false"
+      for="WD0146"
+      class="lsLabel lsLabel--valign lsControl--endaligned  lsLabel--standalone lsControl--fullwidth lsLabel--wrapping lsLabel--designbar-colon"
+      title=""
+    >
+      <span
+        id="WD0144-text"
+        class="lsLabel__text lsLabel__text--overflow"
+        title=""
+        >학적부신청학점</span
+      >
+    </label>
   </span>
 </td>
-<td ct="GLC" lsdata="{1:'STANDARD'}" id="WD0145" class="lsContainerCell lsGLCTopVAlign lsContainerCellVAlign--top urLayoutDefault--grid lsContainerCell--wrap" valign="TOP" align="left">
-  <span id="WD0146-r" class="lsField lsField--standalone lsField--hasellipsis lsField--readonly lsField--list lsField--interactiontarget lsField--forcedleft">
-  <input id="WD0146" ct="I" lsdata="{0:'82.0',2:'BDC',31:'WD0144'}" type="text" size="11" maxlength="11" tabindex="0" ti="0" inputmode="decimal" class="lsField__input" readonly="" value="82.0" aria-labelledby="WD0144" autocomplete="off" autocorrect="off" name="WD0146" style="ime-mode:disabled;" title="">
+<td
+  ct="GLC"
+  lsdata="{1:'STANDARD'}"
+  id="WD0145"
+  class="lsContainerCell lsGLCTopVAlign lsContainerCellVAlign--top urLayoutDefault--grid lsContainerCell--wrap"
+  valign="TOP"
+  align="left"
+>
+  <span
+    id="WD0146-r"
+    class="lsField lsField--standalone lsField--hasellipsis lsField--readonly lsField--list lsField--interactiontarget lsField--forcedleft"
+  >
+    <input
+      id="WD0146"
+      ct="I"
+      lsdata="{0:'82.0',2:'BDC',31:'WD0144'}"
+      type="text"
+      size="11"
+      maxlength="11"
+      tabindex="0"
+      ti="0"
+      inputmode="decimal"
+      class="lsField__input"
+      readonly=""
+      value="82.0"
+      aria-labelledby="WD0144"
+      autocomplete="off"
+      autocorrect="off"
+      name="WD0146"
+      style="ime-mode:disabled;"
+      title=""
+    />
   </span>
 </td>
 ```
+
 복잡합니다. 그쵸? 그래도 잘 뜯어보면 고유값이 될 수 있을만한 후보는 몇 안되는 것을 알 수 있습니다. 강조된 `lsdata`, `id`와 `for` 속성이죠. `lsdata`는 확인해 보면 `WD0146`, `학적부신청학점` 등 요소의 메타데이터가 포함되어 있음을 추측해 볼 수 있겠고, `id`는 당연하지만 매 렌더에서는 고유하지만 영속적이진 않은 id, `for`는 `label`에서 `id`를 가르키는 속성이죠.
 
 우리가 관심있는 `학적부신청학점`의 값(`82.0`)을 가져오려면 두 가지 방법이 있습니다.
 
 - 원하는 값의 `input`을 가르키는 `label`을 문자열로 찾고(이 경우에는 `학적부신청학점`), `label`의 `for` 속성으로 `input`의 `id`를 구해 값을 가져온다.
 - 내부 요소의 구조로 요소를 찾아 값을 가져온다(이 경우에는 `table > tr > td:nth-child(2) > input` 같은 형태가 되겠죠).
-
 
 두 방법 다 약간의 변경만 있어도(`학적부신청학점`이 `학적부 신청학점`이 된다면? 혹은 테이블 내부 구조가 변경되어 정확하게 그 위치에 있지 않다면?) 데이터를 안정적으로 가져오기 힘듭니다. 그래서 `pysaint`에서는 이런 값들과 고유 속성들의 일부만 정규식으로 검사하는 방법으로 안정성을 높이려고 했습니다(그래도 현재는 잘 동작하지 않음). 정말 유지보수가 간편하고 안정적으로 데이터를 찾는 방법은 없을까요? 놀랍게도 아주 간단한 방법이 있습니다.
 
@@ -87,5 +135,7 @@ u-saint가 사용하는 SAP WebDynpro는 SAP ABAP를 활용해 웹 페이지를 
 
 > [!NOTE] TL;DR
 > 가끔은 코드를 들여다 보는 것 보다 하고자 하는 것의 정보를 찾는 것이 더 빠른 길일 때가 있습니다.
+
 ## 다음 주제: 이벤트
+
 이제 u-saint 파싱을 어렵게 하는 것 중 마지막 하나만 남았습니다. 도대체 사용자와의 인터렉션은 어떻게 처리하는 걸까요? HTTP 요청과 응답을 살펴보면서 확인해 봅시다.

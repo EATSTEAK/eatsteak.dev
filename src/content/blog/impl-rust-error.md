@@ -16,12 +16,13 @@ internalUpdatedDate: 2024-12-08T01:11:40+09:00
 **Rust 언어에서는 언어의 논리를 따라 다른 언어와 다른 방식의 오류 구현을 채택하고 있습니다. 이를 보완하기 위해 `thiserror`나 `anyhow`와 같은 오류 처리의 편리함을 더해주는 라이브러리들이 존재하는데요. 이런 라이브러리들은 쉽게 오류를 처리할 때 유용하지만, 외부에 배포하기 위한 API가 포함된 라이브러리의 경우엔 어떤 방식으로 오류를 구현하고, 처리해야 할까요? [rusaint](https://github.com/eatsteak/rusaint)를 개발하면서 얻은 시행착오와 함께, 러스트 오류 구현의 모범 답안은 무엇인지 함께 알아봅시다.**
 
 ## Rust의 오류 처리
+
 러스트의 오류 처리는 기존 언어들이 주로 채택하는 `try-catch-finally`문으로 대표되는 예외 처리를 통하지 않고, `panic!` 매크로와 `Result<T, E>`라는 열거형의 반환을 통해 이루어집니다. 이는 치명적인 오류가 아닌 함수의 오류 또한 반환 값의 타입으로 강제하여 함수의 반환 값 뿐만 아니라 오류까지 안전하게 처리할 수 있도록 해 줍니다.
 
 ```kotlin
 fun im_exceptional(): Int {
   // 오류가 발생하면 이 메소드 바깥에서 `try-catch`문으로 잡을 수 있습니다.
-  return "숫자".toInt() 
+  return "숫자".toInt()
 }
 
 fun main() {
@@ -58,7 +59,9 @@ fn main() {
   // thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }'
 }
 ```
+
 ### 하지만... 너무 복잡한걸요...
+
 이렇게 비교적 안전한 오류 처리는 함수가 반환하는 값 뿐만 아니라 오류 또한 명시적이라는 큰 장점이 있지만, 프로그램을 작성하는 프로그래머의 관점에서는 귀찮은 일일 수 있습니다. 아래의 예를 봅시다.
 
 ```rust
@@ -131,17 +134,21 @@ fn multiparse_string(): anyhow::Result<f32, MultiparseError> {
 기본적인 러스트 오류 처리는 프로그래머에게 불편하지만, 안전한 설계라는 이점이 있고, 그리고 이런 불편함을 여러 라이브러리들이 채워주어 `anyhow` 나 `thiserror`와 같은 크레이트는 오류 처리에 필수적인 라이브러리가 되었습니다.
 
 ## Rust 라이브러리에서의 오류 처리
+
 그렇다면, 여러분이 라이브러리의 개발자이고, API에서 반환하는 오류를 구성해야 한다고 생각해 봅시다. 우리는 어떤 오류를 어떻게 반환해야 할까요? 그냥 `anyhow`를 쓰면 안 될까요? `anyhow` 크레이트는 오류에 대한 자동 변환, 오류 트레이트 구현, 백트레이스 등 다양한 기능을 지원하지만, 최종 사용자가 개발자와 다른 라이브러리의 경우 정확한 오류 정보를 제공해야 하므로 `thiserror`를 통해 개발자가 직접 정의한 오류를 반환해 주는 것이 바람직합니다.
 
 > Use Anyhow if you don't care what error type your functions return, you just want it to be easy. This is common in application code. Use thiserror if you are a library that wants to design your own dedicated error type(s) so that on failures the caller gets exactly the information that you choose.
+>
 > - anyhow README, [Comparison to thiserror](https://github.com/dtolnay/anyhow?tab=readme-ov-file#comparison-to-thiserror)
 
 ## 나만의 오류 타입 만들기
+
 여러분의 라이브러리엔 어떤 오류가 발생하나요? 원본 오류를 전달한다면, 어떤 형태로 변형해서 전달해야 할까요? 어떤 정보를 포함해야 할까요? 이 점을 염두에 두고, 오류를 구현하면서 유의해야 할 점과 주요 오류 구현 패턴들을 확인해 봅시다.
 
 > 오류의 요구 사항들은 [API Guidelines](https://rust-lang.github.io/api-guidelines/interoperability.html#error-types-are-meaningful-and-well-behaved-c-good-err)의 `C-GOOD-ERR` 단락을 참고하고, 많은 라이브러리에서 채택하고 있는 예시를 결합하여 작성했습니다.
 
 ### 명확한 분류의 오류는 `Enum`으로
+
 Rust에서 대부분의 오류는 열거형을 통해 표현됩니다. 대부분 오류는 종류가 있고, 같은 오류의 범주 내이지만 종류에 따라 알리고자(표현하고자)하는 것이 크게 다르기 때문이죠. 위의 예시의 오류 구현을 살펴봅시다.
 
 ```rust
@@ -151,9 +158,11 @@ pub enum MultiparseError {
   Float(#[from] ParseFloatError)
 }
 ```
+
 이 오류의 경우는 int와 float에 대한 변환을 하나의 오류 타입으로 처리할 수 있도록 두 분류의 오류가 만들어져 있습니다. 이런 경우처럼 오류가 나는 특정 경우가 정해져 있고, 경우가 서로 겹치지 않는다면 열거형을 활용하여 오류를 표현하는 것이 좋습니다.
 
 ### 다양한 오류를 담아야 한다면?
+
 컴파일 타입에서 어떤 오류가 표현될지 알 수 없는 경우가 있습니다. 예를 들어 `Box<dyn Error + Send + Sync>`처럼 동적으로 오류가 담기는 컨테이너를 사용하거나 한다면 위처럼 열거형으로 오류를 표현하는 것이 적절하지 않을 수 있습니다.
 
 ```rust
@@ -166,4 +175,5 @@ pub struct DynamicError<E> where E: Into<Box<dyn Error + Send + Sync>> {
   error: E
 }
 ```
+
 > 모든 오류를 감싸는 wrapper를 만들고 싶을 때

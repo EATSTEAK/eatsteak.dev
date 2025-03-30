@@ -36,11 +36,13 @@ u-saint의 주소인 `saint.ssu.ac.kr`은 실제 u-saint 애플리케이션이 �
 애플리케이션의 뷰는 `ecc.ssu.ac.kr:8443` 주소 아래에서 서빙됩니다. 실제 `saint.ssu.ac.kr` 주소의 경우 네비게이션 바와 `<iframe>`만 제공하는 셈이죠.
 
 ![u-saint의 네비게이션 바 영역](../../assets/examining-ssu-u-saint/real-u-saint.png)
+
 > 여기까지가 `saint.ssu.ac.kr`의 영역입니다.
 
 따라서 각 페이지(강의시간표, 성적조회 등등...)은 바로 그 해당 앱만 표시되는 실제 주소가 있습니다.
 
 ![프레임을 새 탭에서 여는 법](../../assets/examining-ssu-u-saint/go-to-real-pages.png)
+
 > Firefox에서 페이지를 `Shift+우클릭` 후 `이 프레임` > `프레임을 새 탭에서 열기` 메뉴를 클릭하면 원본 페이지를 쉽게 볼 수 있습니다(Chromium 계열에서는 직접 개발자 도구를 열어서
 > 찾으세요!).
 
