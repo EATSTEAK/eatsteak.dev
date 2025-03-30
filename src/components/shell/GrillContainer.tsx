@@ -18,7 +18,7 @@ export const GrillContainer: Component<{
       />
       <div
         class={cn(
-          "slide-to-top py-8 px-6 lg:mx-auto h-full w-full max-w-(--breakpoint-xl) flex flex-col items-start justify-end gap-2",
+          "slide-to-top py-8 px-6 mx-auto h-full w-full max-w-(--breakpoint-xl) flex flex-col items-start justify-end gap-2",
           props.containerClass,
         )}
       >

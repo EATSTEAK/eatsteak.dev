@@ -1,3 +1,5 @@
+@reference './global.css';
+
 :not(.dark) {
   --category-rust-bg: #991b1b;
   --category-rust-text: #fff;

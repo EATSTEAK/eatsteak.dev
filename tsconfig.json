@@ -2,13 +2,15 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "strictNullChecks": true,
+    "verbatimModuleSyntax": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["src/*"]
     }
   },
+  "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["**/*.cjs", "**/*.js", "**/*.mjs"]
 }

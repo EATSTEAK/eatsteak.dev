@@ -7,9 +7,7 @@ export const Container: Component<{
 }> = (props) => {
   return (
     <section
-      class={cn(
-        "max-w-screen-xl px-6 my-8 flex flex-col gap-4 lg:mx-auto w-full",
-      )}
+      class={cn("max-w-screen-xl px-6 my-8 flex flex-col gap-4 mx-auto w-full")}
     >
       {props.children}
     </section>
