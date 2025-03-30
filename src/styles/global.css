@@ -1,6 +1,144 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-head:
+    "Jost", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    "Noto Sans KR", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    "MonoplexKR", ui-monospace, "SFMono-Regular", "Menlo", "Monaco", "Consolas",
+    "Liberation Mono", "Courier New", monospace;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility grill-background {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  z-index: -20;
+  mask-size: 2rem;
+  mask-image: url("/images/grill.png");
+  mask-repeat: repeat;
+}
+
+@utility nav-link {
+  @apply font-head;
+
+  box-sizing: border-box;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  padding-left: 0.1rem;
+  background-size: 0 2px;
+  background-repeat: no-repeat;
+  background-position-y: 100%;
+  transition: background-size 0.25s ease-out;
+
+  :not(.dark) & {
+    background-image: radial-gradient(black, black);
+  }
+
+  .dark & {
+    background-image: radial-gradient(white, white);
+  }
+
+  &:hover {
+    background-size: 100% 2px;
+  }
+}
+
+@utility dark {
+  & .nav-link {
+    background-image: radial-gradient(white, white);
+  }
+
+  & .link-selected {
+    color: var(--color-neutral-900);
+  }
+
+  & .link-selected:hover {
+    color: var(--color-neutral-50);
+  }
+}
+
+@utility link-selected {
+  font-weight: 500;
+  background-size: 100% 100%;
+
+  :not(.dark) & {
+    color: var(--color-neutral-50);
+  }
+
+  .dark & {
+    color: var(--color-neutral-900);
+  }
+
+  :not(.dark) &:hover {
+    color: var(--color-neutral-900);
+  }
+
+  .dark &:hover {
+    color: var(--color-neutral-50);
+  }
+}
+
+@utility line-between-flex-items {
+  & > *:not(:last-child)::after {
+    content: "|";
+    margin: 0 0.25rem;
+    line-height: 0;
+  }
+}
+
+@utility hover-fill-to-right {
+  & {
+    position: relative;
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+    background-position-y: 100%;
+    transition: background-size 0.25s ease-out;
+  }
+
+  &::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    z-index: -10;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    background-size: 100% 100%;
+  }
+}
+
+@utility slide-to-top {
+  animation: slide-to-top 300ms ease-out;
+}
 
 @layer base {
   @media screen and (prefers-reduced-motion: no-preference) {
@@ -40,23 +178,23 @@
   }
 
   h1 {
-    font-size: 3.052em;
-  }
-
-  h2 {
     font-size: 2.441em;
   }
 
-  h3 {
+  h2 {
     font-size: 1.953em;
   }
 
-  h4 {
+  h3 {
     font-size: 1.563em;
   }
 
-  h5 {
+  h4 {
     font-size: 1.25em;
+  }
+
+  h5 {
+    font-size: 1em;
   }
 
   strong,
@@ -75,108 +213,28 @@
   }
 }
 
-@layer components {
-  .grill-background {
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
-    z-index: -20;
-    mask-size: 2rem;
-    mask-image: url("/images/grill.png");
-    mask-repeat: repeat;
+@keyframes slide-to-top {
+  0% {
+    transform: translate(0, 10%);
+    opacity: 0;
   }
 
-  .nav-link {
-    @apply font-head;
-
-    box-sizing: border-box;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    padding-left: 0.1rem;
-    background-size: 0 2px;
-    background-repeat: no-repeat;
-    background-position-y: 100%;
-    transition: background-size 0.25s ease-out;
-  }
-
-  :not(.dark) .nav-link {
-    background-image: radial-gradient(black, black);
-  }
-
-  .dark .nav-link {
-    background-image: radial-gradient(white, white);
-  }
-
-  .nav-link:hover {
-    background-size: 100% 2px;
-  }
-
-  .link-selected {
-    font-weight: 500;
-    background-size: 100% 100%;
-  }
-
-  :not(.dark) .link-selected {
-    color: white;
-  }
-
-  .dark .link-selected {
-    color: black;
-  }
-
-  :not(.dark) .link-selected:hover {
-    color: black;
-  }
-
-  .dark .link-selected:hover {
-    color: white;
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
   }
 }
 
-@layer utilities {
-  .line-between-flex-items > *:not(:last-child)::after {
-    content: "|";
-    margin: 0 0.25rem;
-    line-height: 0;
-  }
+.slide-fade-enter-active {
+  transition: all -1.3s ease;
+}
 
-  .hover-fill-to-right::before {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    z-index: -10;
-    width: 100%;
-    height: 100%;
-  }
+.slide-fade-exit-active {
+  transition: all -1.3s ease;
+}
 
-  .hover-fill-to-right {
-    position: relative;
-    background-size: 0 100%;
-    background-repeat: no-repeat;
-    background-position-y: 100%;
-    transition: background-size 0.25s ease-out;
-  }
-
-  .hover-fill-to-right:hover {
-    background-size: 100% 100%;
-  }
-
-  .slide-to-top {
-    animation: slide-to-top 300ms ease-out;
-  }
-
-  @keyframes slide-to-top {
-    0% {
-      transform: translate(0, 10%);
-      opacity: 0;
-    }
-
-    100% {
-      transform: translate(0, 0);
-      opacity: 1;
-    }
-  }
+.slide-fade-enter,
+.slide-fade-exit-to {
+  transform: translateY(-11px);
+  opacity: -1;
 }

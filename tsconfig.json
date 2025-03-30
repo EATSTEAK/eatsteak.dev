@@ -7,14 +7,7 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@icons/*": ["src/icons/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@signals/*": ["src/signals/*"],
-      "@utils/*": ["src/utils/*"],
-      "@styles/*": ["src/styles/*"],
-      "@consts": ["src/consts.ts"]
+      "@/*": ["src/*"],
     }
   },
   "exclude": ["**/*.cjs", "**/*.js", "**/*.mjs"]

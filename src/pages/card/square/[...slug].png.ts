@@ -3,9 +3,9 @@ import { getCollection } from "astro:content";
 import satori from "satori";
 import sharp from "sharp";
 import type { APIRoute } from "astro";
-import { CATEGORIES } from "@consts";
-import { getReadingTime } from "@utils/reading-time";
-import { hexToRgb } from "@utils/hex-to-rgb.ts";
+import { CATEGORIES } from "@/consts.ts";
+import { getReadingTime } from "@/utils/reading-time";
+import { hexToRgb } from "@/utils/hex-to-rgb.ts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");

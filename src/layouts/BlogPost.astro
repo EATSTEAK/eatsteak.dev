@@ -1,20 +1,20 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
-import { Profile } from "@components/ui/Profile";
-import { FormattedDate } from "@components/post/FormattedDate";
-import { Topics } from "@components/ui/Topics";
-import { CategoryLabel } from "@components/ui/CategoryLabel";
-import "@styles/prose.css";
-import { Counter } from "@components/post/Counter";
-import { Comments } from "@components/post/Comments";
+import { Profile } from "@/components/ui/Profile";
+import { FormattedDate } from "@/components/post/FormattedDate";
+import { Topics } from "@/components/ui/Topics";
+import { CategoryLabel } from "@/components/ui/CategoryLabel";
+import "@/styles/prose.css";
+import { Counter } from "@/components/post/Counter";
+import { Comments } from "@/components/post/Comments";
 import { CATEGORIES } from "../consts";
-import PostItem from "@components/post/PostItem.astro";
-import { getReadingTime } from "@utils/reading-time";
-import { MinutesRead } from "@components/post/MinutesRead";
+import PostItem from "@/components/post/PostItem.astro";
+import { getReadingTime } from "@/utils/reading-time";
+import { MinutesRead } from "@/components/post/MinutesRead";
 import type { MarkdownHeading } from "astro";
-import { TableOfContents } from "@components/post/TableOfContents";
-import Series from "@components/post/Series.astro";
+import { TableOfContents } from "@/components/post/TableOfContents";
+import Series from "@/components/post/Series.astro";
 import type { TocHeading } from "../types";
 
 type Props = CollectionEntry<"blog">["data"] & {
@@ -88,7 +88,7 @@ const toc = buildToc(headings);
       class="self-center flex justify-center items-stretch w-full p-8 xl:p-0"
     >
       <article
-        class="self-center w-full lg:max-xl:max-w-screen-sm max-w-screen-md pb-16"
+        class="self-center w-full lg:max-xl:max-w-(--breakpoint-sm) max-w-(--breakpoint-md) pb-16"
       >
         <section
           class="mb-4 image min-h-[20rem] w-full bg-cover bg-no-repeat bg-center"
@@ -149,7 +149,9 @@ const toc = buildToc(headings);
     <section
       class="py-16 flex flex-col items-center bg-slate-50 dark:bg-slate-900 transition-colors"
     >
-      <div class="flex flex-col gap-8 w-full max-w-screen-lg p-8 xl:p-0">
+      <div
+        class="flex flex-col gap-8 w-full max-w-(--breakpoint-lg) p-8 xl:p-0"
+      >
         <div class="w-full">
           <Profile />
         </div>

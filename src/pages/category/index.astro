@@ -1,10 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import { Topics } from "@components/ui/Topics";
+import { Topics } from "@/components/ui/Topics";
 import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from "../../consts";
-import Layout from "@layouts/Layout.astro";
-import { GrillContainer } from "@components/shell/GrillContainer";
-import { Container } from "@components/shell/Container";
+import Layout from "@/layouts/Layout.astro";
+import { GrillContainer } from "@/components/shell/GrillContainer";
+import { Container } from "@/components/shell/Container";
 import type { CollectionEntry } from "astro:content";
 
 const posts = await getCollection("blog");

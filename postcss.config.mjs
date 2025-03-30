@@ -1,7 +1,7 @@
 import nesting from "postcss-nesting";
 import autoprefixer from "autoprefixer";
-import cssnano from "cssnano";
+import tailwindcss from "@tailwindcss/postcss";
 
 export default {
-  plugins: [nesting, autoprefixer, cssnano],
+  plugins: [nesting, autoprefixer, tailwindcss],
 };

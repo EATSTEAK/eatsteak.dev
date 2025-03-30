@@ -1,5 +1,5 @@
 import type { Component, JSX } from "solid-js";
-import { createSignal, splitProps } from "solid-js";
+import { createSignal } from "solid-js";
 import "./switch.css";
 
 interface SwitchProps {
@@ -7,19 +7,13 @@ interface SwitchProps {
   ref?: HTMLInputElement;
   onChange?: JSX.ChangeEventHandler<HTMLInputElement, Event>;
   children?: JSX.Element;
+  id?: string;
+  name?: string;
+  value?: string;
 }
 
-export const Switch: Component<
-  SwitchProps & JSX.InputHTMLAttributes<HTMLInputElement>
-> = (props) => {
+export const Switch: Component<SwitchProps> = (props) => {
   const [isEnabled, setIsEnabled] = createSignal(props.enabled);
-
-  const [self, inputAttributes] = splitProps(props, [
-    "enabled",
-    "ref",
-    "onChange",
-    "children",
-  ]);
 
   const toggle = () => {
     setIsEnabled((c) => !c);
@@ -44,24 +38,26 @@ export const Switch: Component<
     <>
       <div
         onClick={handleClick}
-        class="switch-background transition-colors bg-white border-black dark:bg-slate-700 dark:border-white"
+        class="mx-6 w-10 h-4 border-2 cursor-pointer transition-colors bg-white border-black dark:bg-slate-700 dark:border-white"
         tabindex="0"
         onKeyUp={handleKeyUp}
       >
         <div
-          class={`switch-display transition-colors bg-white border-black dark:bg-slate-700 dark:border-white${
+          class={`text-xl text-center leading-8 block w-8 h-8 border-2 switch-transform transition-colors bg-white border-black dark:bg-slate-700 dark:border-white${
             isEnabled() ? " enabled" : ""
           }`}
         >
-          {self.children}
+          {props.children}
         </div>
         <input
           ref={props.ref}
           type="checkbox"
           class="invisible"
           checked={isEnabled()}
-          onChange={(e) => self?.onChange?.(e)}
-          {...inputAttributes}
+          onChange={(e) => props.onChange?.(e)}
+          id={props.id}
+          name={props.name}
+          value={props.value}
         />
       </div>
     </>

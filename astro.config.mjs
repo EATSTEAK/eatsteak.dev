@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 
 import compress from "astro-compress";
 
@@ -21,9 +21,6 @@ export default defineConfig({
     mdx(),
     sitemap(),
     solidJs(),
-    tailwind({
-      applyBaseStyles: false,
-    }),
     compress({
       CSS: true,
     }),
@@ -42,5 +39,8 @@ export default defineConfig({
         transformerNotationWordHighlight(),
       ],
     },
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

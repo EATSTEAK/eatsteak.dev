@@ -1,7 +1,5 @@
 import { type Component, Show } from "solid-js";
-import { CATEGORIES } from "@consts";
-
-import "./category_label.css";
+import { CATEGORIES } from "@/consts.ts";
 
 export const CategoryLabel: Component<{ category: string }> = (props) => {
   const category =
@@ -10,10 +8,14 @@ export const CategoryLabel: Component<{ category: string }> = (props) => {
   return (
     <Show
       when={category}
-      fallback={<label class="category-label">Uncategorized</label>}
+      fallback={
+        <label class="uppercase font-bold tracking-widest mb-2 transition-all hover:brightness-125 focus:brightness-125 px-1">
+          Uncategorized
+        </label>
+      }
     >
       <a
-        class={`category-label`}
+        class="uppercase font-bold tracking-widest mb-2 transition-all hover:brightness-125 focus:brightness-125 px-1"
         style={{
           "background-color": `var(--category-${category.id}-bg)`,
           color: `var(--category-${category.id}-text)`,

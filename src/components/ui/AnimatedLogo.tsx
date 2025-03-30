@@ -1,6 +1,6 @@
 import type { JSX, Component } from "solid-js";
-import { Profile } from "@icons/Profile";
-import { cn } from "@utils/cn";
+import { Profile } from "@/icons/Profile";
+import { cn } from "@/utils/cn";
 export const AnimatedLogo: Component<JSX.HTMLAttributes<HTMLDivElement>> = (
   props,
 ) => {

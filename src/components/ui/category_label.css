@@ -1,7 +1,0 @@
-@tailwind components;
-
-@layer components {
-  .category-label {
-    @apply uppercase font-bold tracking-widest mb-2 transition-all hover:brightness-125 focus:brightness-125 px-1;
-  }
-}

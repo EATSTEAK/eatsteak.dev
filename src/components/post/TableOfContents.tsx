@@ -1,8 +1,7 @@
 import { ReactiveSet } from "@solid-primitives/set";
 import { type Component, createSignal, Show } from "solid-js";
-import "./toc.css";
 import { Transition } from "solid-transition-group";
-import { TocHeadings } from "@components/post/TocHeadings.tsx";
+import { TocHeadings } from "@/components/post/TocHeadings.tsx";
 import type { TocHeading } from "../../types";
 
 export const TableOfContents: Component<{ tocHeadings: TocHeading[] }> = (
@@ -30,12 +29,12 @@ export const TableOfContents: Component<{ tocHeadings: TocHeading[] }> = (
   return (
     <nav class="w-80 max-h-screen">
       <button
-        class="contents-btn hover-fill-to-right transition-colors"
+        class="cursor-pointer flex justify-between w-full font-semibold font-head py-1 px-2 uppercase border-2 text-gray-800 hover:text-white border-gray-800 dark:text-white dark:hover:text-gray-800 dark:border-white dark:before:bg-gray-800 dark:from-white dark:to-white before:bg-white bg-linear-to-r from-gray-800 to-gray-800 hover-fill-to-right transition-colors"
         onClick={() => setVisibility(!isVisible())}
       >
         <span>CONTENTS</span>
         <svg
-          class={`transition-transform mt-0.5 ${isVisible() ? "toc-active" : ""}`}
+          class={`transition-transform mt-0.5 ${isVisible() ? "rotate-180" : ""}`}
           width="24"
           height="24"
           fill="currentColor"

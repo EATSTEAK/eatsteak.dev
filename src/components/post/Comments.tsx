@@ -1,5 +1,5 @@
 import { type Component, createEffect, createSignal } from "solid-js";
-import theme from "@signals/theme.ts";
+import theme from "@/signals/theme.ts";
 
 export const Comments: Component = () => {
   const [isDarkTheme] = theme;

@@ -1,12 +1,12 @@
 ---
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import { Intro } from "@components/index/Intro";
-import Layout from "@layouts/Layout.astro";
+import { Intro } from "@/components/index/Intro";
+import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import PostItem from "@components/post/PostItem.astro";
-import { Button } from "@components/ui/Button";
-import { Container } from "@components/shell/Container";
-import { getReadingTime } from "@utils/reading-time";
+import PostItem from "@/components/post/PostItem.astro";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/shell/Container";
+import { getReadingTime } from "@/utils/reading-time";
 const posts = (await getCollection("blog"))
   .filter((post) => post.data.hidden !== true)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
