@@ -38,7 +38,7 @@ export const Switch: Component<SwitchProps> = (props) => {
     <>
       <div
         onClick={handleClick}
-        class="mx-6 w-10 h-4 border-2 cursor-pointer transition-colors bg-neutral-100al-50 border-black dark:bg-slate-700 dark:border-white"
+        class="mx-6 w-10 h-4 border-2 cursor-pointer transition-colors bg-neutral-100 border-black dark:bg-slate-700 dark:border-white"
         tabindex="0"
         onKeyUp={handleKeyUp}
       >

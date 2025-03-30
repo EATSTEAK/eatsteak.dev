@@ -2,6 +2,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  --primary-background-color: var(--color-neutral-200);
+  --primary-color: var(--color-neutral-900);
+}
+
+:root[class~="dark"] {
+  --primary-background-color: var(--color-neutral-900);
+  --primary-color: var(--color-neutral-100);
+}
+
+@theme inline {
+  --color-primary-bg: var(--primary-background-color);
+  --color-primary: var(--primary-color);
+}
+
 @theme {
   --font-head:
     "Jost", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif,
@@ -12,24 +27,6 @@
   --font-mono:
     "MonoplexKR", ui-monospace, "SFMono-Regular", "Menlo", "Monaco", "Consolas",
     "Liberation Mono", "Courier New", monospace;
-}
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
 }
 
 @utility grill-background {
