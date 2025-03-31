@@ -1,8 +1,12 @@
 @reference "./global.css";
 
 .content {
-  font-size: clamp(1rem, 0.768rem + 0.893vw, 1.125rem);
-  line-height: clamp(1.4, 0.75 + 2.5vw, 1.75);
+  font-size: clamp(
+    1rem,
+    0.7917rem + 0.5208vw,
+    1.125rem
+  ); /* min: 1rem, 40rem / max: 1.125rem, 64rem */
+
   font-weight: 400;
 }
 
