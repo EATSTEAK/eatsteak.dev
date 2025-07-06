@@ -31,3 +31,6 @@ pnpm-debug.log*
 
 # Obsidian
 .obsidian/
+
+# Frontmatter
+.frontmatter/

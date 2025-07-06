@@ -1,0 +1,82 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "default",
+      "pageBundle": false,
+      "previewPath": null,
+      "fields": [
+        {
+          "title": "title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "category",
+          "name": "category",
+          "type": "choice",
+          "choices": ["web", "rust"]
+        },
+        {
+          "title": "pubDate",
+          "name": "pubDate",
+          "type": "datetime"
+        },
+        {
+          "title": "updatedDate",
+          "name": "updatedDate",
+          "type": "datetime"
+        },
+        {
+          "title": "hidden",
+          "name": "hidden",
+          "type": "boolean"
+        },
+        {
+          "title": "topics",
+          "name": "topics",
+          "type": "tags"
+        },
+        {
+          "title": "series",
+          "name": "series",
+          "type": "string"
+        },
+        {
+          "title": "internalUpdatedDate",
+          "name": "internalUpdatedDate",
+          "type": "datetime"
+        },
+        {
+          "title": "thumbnail",
+          "name": "thumbnail",
+          "type": "image",
+          "isPreviewImage": true
+        }
+      ]
+    }
+  ],
+  "frontMatter.framework.id": "astro",
+  "frontMatter.preview.host": "http://localhost:4321/post",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "blog",
+      "path": "[[workspace]]/src/content/blog"
+    },
+    {
+      "title": "slide",
+      "path": "[[workspace]]/src/content/slide"
+    }
+  ],
+  "frontMatter.content.publicFolder": {
+    "path": "src/assets",
+    "relative": true
+  },
+  "frontMatter.git.enabled": true,
+  "frontMatter.framework.startCommand": "pnpm dev"
+}
