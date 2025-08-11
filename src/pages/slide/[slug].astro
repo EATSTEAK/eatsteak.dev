@@ -118,74 +118,72 @@ const toc = buildToc(headings);
   <style set:html={marpResult.css}></style>
 
   <!-- Enhanced Document View with Frontmatter and ToC -->
-  <div class="document-container">
-    <div class="document-controls">
-      <Button href={`/slide/${slide.slug}/show`} class="slideshow-btn">
-        🎞️ Slideshow
-      </Button>
-    </div>
-
-    <main class="flex flex-col w-full">
-      <section
-        class="self-center flex justify-center items-stretch w-full p-8 xl:p-0"
-      >
-        <article
-          class="self-center w-full lg:max-xl:max-w-(--breakpoint-sm) max-w-(--breakpoint-md) pb-16"
-        >
-          <!-- Frontmatter Section -->
-          <section class="prose mb-8">
-            <div class="title mb-8">
-              <h1>{slide.data.title}</h1>
-              <div class="flex items-center flex-wrap line-between-flex-items">
-                <div class="after:text-gray-500">
-                  <CategoryLabel
-                    category={slide.data.category ?? "uncategorized"}
-                  />
-                </div>
-                <div class="date text-gray-500">
-                  <FormattedDate
-                    dateTime={slide.data.pubDate}
-                    client:only="solid-js"
-                  />
-                  {
-                    slide.data.updatedDate && (
-                      <span>
-                        &nbsp;게시,
-                        <FormattedDate
-                          dateTime={slide.data.updatedDate}
-                          client:only="solid-js"
-                        />
-                        &nbsp;수정
-                      </span>
-                    )
-                  }
-                </div>
-              </div>
-              {
-                slide.data.topics && (
-                  <div class="topic mt-2 mb-8">
-                    <Topics topics={slide.data.topics} />
-                  </div>
-                )
-              }
-            </div>
-          </section>
-
-          <!-- Slide Content -->
-          <section class="slide-document prose" set:html={processedHtml} />
-        </article>
-
-        <!-- Table of Contents Sidebar -->
-        {
-          toc.length > 0 && (
-            <aside class="hidden self-stretch lg:block pt-[4rem] max-w-xs lg:w-80">
-              <div class="py-8 pl-4 sticky top-0">
-                <TableOfContents tocHeadings={toc} client:only="solid-js" />
-              </div>
-            </aside>
-          )
-        }
-      </section>
-    </main>
+  <div class="fixed top-5 right-5 z-10">
+    <Button href={`/slide/${slide.slug}/show`} class="slideshow-btn">
+      🎞️ Slideshow
+    </Button>
   </div>
+
+  <main class="flex flex-col w-full">
+    <section
+      class="self-center flex justify-center items-stretch w-full p-8 xl:p-0"
+    >
+      <article
+        class="self-center w-full lg:max-xl:max-w-(--breakpoint-sm) max-w-(--breakpoint-md) pb-16"
+      >
+        <!-- Frontmatter Section -->
+        <section class="prose mb-8">
+          <div class="title mb-8">
+            <h1>{slide.data.title}</h1>
+            <div class="flex items-center flex-wrap line-between-flex-items">
+              <div class="after:text-gray-500">
+                <CategoryLabel
+                  category={slide.data.category ?? "uncategorized"}
+                />
+              </div>
+              <div class="date text-gray-500">
+                <FormattedDate
+                  dateTime={slide.data.pubDate}
+                  client:only="solid-js"
+                />
+                {
+                  slide.data.updatedDate && (
+                    <span>
+                      &nbsp;게시,
+                      <FormattedDate
+                        dateTime={slide.data.updatedDate}
+                        client:only="solid-js"
+                      />
+                      &nbsp;수정
+                    </span>
+                  )
+                }
+              </div>
+            </div>
+            {
+              slide.data.topics && (
+                <div class="topic mt-2 mb-8">
+                  <Topics topics={slide.data.topics} />
+                </div>
+              )
+            }
+          </div>
+        </section>
+
+        <!-- Slide Content -->
+        <section class="slide-document prose" set:html={processedHtml} />
+      </article>
+
+      <!-- Table of Contents Sidebar -->
+      {
+        toc.length > 0 && (
+          <aside class="hidden self-stretch lg:block pt-[4rem] max-w-xs lg:w-80">
+            <div class="py-8 pl-4 sticky top-0">
+              <TableOfContents tocHeadings={toc} client:only="solid-js" />
+            </div>
+          </aside>
+        )
+      }
+    </section>
+  </main>
 </Layout>
