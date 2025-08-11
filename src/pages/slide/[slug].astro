@@ -12,6 +12,7 @@ import type { TocHeading } from "@/types";
 import type { ImageMetadata } from "astro";
 import "@/styles/prose.css";
 import "@/styles/slide.css";
+import { SlideMultiple } from "@/icons/SlideMultiple";
 
 // Import all images from src/assets using Vite's glob import
 const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -117,13 +118,6 @@ const toc = buildToc(headings);
 <Layout title={slide.data.title} description={slide.data.description}>
   <style set:html={marpResult.css}></style>
 
-  <!-- Enhanced Document View with Frontmatter and ToC -->
-  <div class="fixed top-5 right-5 z-10">
-    <Button href={`/slide/${slide.slug}/show`} class="slideshow-btn">
-      🎞️ Slideshow
-    </Button>
-  </div>
-
   <main class="flex flex-col w-full">
     <section
       class="self-center flex justify-center items-stretch w-full p-8 xl:p-0"
@@ -167,6 +161,12 @@ const toc = buildToc(headings);
                 </div>
               )
             }
+            <Button
+              href={`/slide/${slide.slug}/show`}
+              class="inline-flex gap-2 items-center"
+            >
+              <SlideMultiple class="size-4" /> 발표 모드로 보기
+            </Button>
           </div>
         </section>
 
@@ -175,15 +175,17 @@ const toc = buildToc(headings);
       </article>
 
       <!-- Table of Contents Sidebar -->
-      {
-        toc.length > 0 && (
-          <aside class="hidden self-stretch lg:block pt-[4rem] max-w-xs lg:w-80">
-            <div class="py-8 pl-4 sticky top-0">
+      <aside
+        class="hidden self-stretch lg:block pt-[4rem] max-w-xs lg:w-80 pl-4"
+      >
+        {
+          toc.length > 0 && (
+            <div class="py-8 sticky top-0">
               <TableOfContents tocHeadings={toc} client:only="solid-js" />
             </div>
-          </aside>
-        )
-      }
+          )
+        }
+      </aside>
     </section>
   </main>
 </Layout>
