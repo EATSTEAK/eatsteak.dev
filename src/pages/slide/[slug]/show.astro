@@ -1,0 +1,372 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { renderMarpSlides, extractSlideContent } from "@/utils/marp";
+import type { ImageMetadata } from "astro";
+
+// Import all images from src/assets using Vite's glob import
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/**/*.{jpeg,jpg,png,gif,webp}",
+  { eager: true },
+);
+
+export async function getStaticPaths() {
+  const slides = await getCollection("slide");
+  return slides.map((slide) => ({
+    params: { slug: slide.slug },
+    props: { slide },
+  }));
+}
+
+type Props = {
+  slide: CollectionEntry<"slide">;
+};
+
+const { slide } = Astro.props;
+
+// Get the raw markdown content
+const rawContent = slide.body;
+const slideContent = extractSlideContent(rawContent);
+
+// Create image path mapping for Vite assets
+const imageMapping: Record<string, string> = {};
+for (const [path, module] of Object.entries(images)) {
+  // Extract filename from the import path
+  const filename = path.split("/").pop();
+  if (filename) {
+    imageMapping[filename] = module.default.src;
+  }
+}
+
+const marpResult = renderMarpSlides(slideContent, imageMapping);
+---
+
+<Layout title={slide.data.title} description={slide.data.description}>
+  <style set:html={marpResult.css}></style>
+
+  <!-- Slideshow Presentation View -->
+  <div class="slideshow-container">
+    <div class="slideshow-controls">
+      <button id="prev-slide" class="slideshow-btn">←</button>
+      <span id="slide-counter">1 / {marpResult.slides.length}</span>
+      <button id="next-slide" class="slideshow-btn">→</button>
+      <a href={`/slide/${slide.slug}`} class="slideshow-btn">📄</a>
+    </div>
+
+    <div class="slide-viewport">
+      {
+        marpResult.slides.map((slideItem, index) => (
+          <div
+            class={`slide ${index === 0 ? "active" : ""}`}
+            data-slide-index={index}
+            set:html={slideItem.html}
+          />
+        ))
+      }
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".slide");
+    const totalSlides = slides.length;
+    const counter = document.getElementById("slide-counter");
+    const prevBtn = document.getElementById("prev-slide");
+    const nextBtn = document.getElementById("next-slide");
+    const controls = document.querySelector(
+      ".slideshow-controls",
+    ) as HTMLElement;
+
+    let controlsTimeout: number | null = null;
+
+    function showSlide(index: number) {
+      // Find currently active slide
+      const currentActiveSlide = document.querySelector(".slide.active");
+      const targetSlide = slides[index];
+
+      if (currentActiveSlide && currentActiveSlide !== targetSlide) {
+        // Start exit animation for current slide
+        currentActiveSlide.classList.add("slide-exiting");
+
+        // After exit animation completes, hide current and show new slide
+        setTimeout(() => {
+          currentActiveSlide.classList.remove("active", "slide-exiting");
+          targetSlide.classList.add("active", "slide-entering");
+
+          // Remove entering class after animation completes
+          setTimeout(() => {
+            targetSlide.classList.remove("slide-entering");
+          }, 300);
+        }, 150);
+      } else {
+        // First slide or same slide, show immediately
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === index);
+        });
+      }
+
+      if (counter) {
+        counter.textContent = `${index + 1} / ${totalSlides}`;
+      }
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+      resetControlsTimer();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(currentSlide);
+      resetControlsTimer();
+    }
+
+    // Auto-hide controls functionality
+    function showControls() {
+      if (controls) {
+        controls.style.opacity = "1";
+        controls.style.pointerEvents = "auto";
+      }
+    }
+
+    function hideControls() {
+      if (controls) {
+        controls.style.opacity = "0";
+        controls.style.pointerEvents = "none";
+      }
+    }
+
+    function resetControlsTimer() {
+      // Clear existing timeout
+      if (controlsTimeout) {
+        clearTimeout(controlsTimeout);
+      }
+
+      // Show controls
+      showControls();
+
+      // Set new timeout to hide controls after 3 seconds
+      controlsTimeout = window.setTimeout(() => {
+        hideControls();
+      }, 3000);
+    }
+
+    // Initialize controls and start timer
+    showControls();
+    resetControlsTimer();
+
+    // Event listeners for user interaction
+    document.addEventListener("mousemove", resetControlsTimer);
+    document.addEventListener("click", resetControlsTimer);
+    document.addEventListener("keydown", resetControlsTimer);
+
+    // Button event listeners
+    if (nextBtn) {
+      nextBtn.addEventListener("click", nextSlide);
+    }
+    if (prevBtn) {
+      prevBtn.addEventListener("click", prevSlide);
+    }
+
+    // Enhanced keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case "ArrowRight":
+        case "ArrowDown":
+        case " ":
+          e.preventDefault();
+          nextSlide();
+          break;
+        case "ArrowLeft":
+        case "ArrowUp":
+          e.preventDefault();
+          prevSlide();
+          break;
+        case "Home":
+          e.preventDefault();
+          currentSlide = 0;
+          showSlide(currentSlide);
+          resetControlsTimer();
+          break;
+        case "End":
+          e.preventDefault();
+          currentSlide = totalSlides - 1;
+          showSlide(currentSlide);
+          resetControlsTimer();
+          break;
+        case "Escape":
+          // Go back to document view
+          window.location.href = `/slide/${window.location.pathname.split("/")[2]}`;
+          break;
+      }
+    });
+  </script>
+
+  <style>
+    .slideshow-container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .slideshow-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: white;
+      backdrop-filter: blur(8px);
+      transition: opacity 0.4s ease;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Button styling inspired by UI Button component */
+    .slideshow-btn {
+      position: relative;
+      font-family: "JetBrains Mono", monospace;
+      padding: 8px 12px;
+      transition: all 0.25s ease-out;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.4)
+      );
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      backdrop-filter: blur(4px);
+      background-size: 0 100%;
+      background-repeat: no-repeat;
+      background-position-y: 100%;
+    }
+
+    .slideshow-btn::before {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+    }
+
+    .slideshow-btn:hover {
+      background-size: 100% 100%;
+      color: #000;
+      border-color: rgba(255, 255, 255, 0.8);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .slideshow-btn:hover::before {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .slideshow-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    #slide-counter {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.9rem;
+      padding: 0 8px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .slide-viewport {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding: 40px;
+      box-sizing: border-box;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      z-index: 2;
+    }
+
+    .slide.slide-entering {
+      opacity: 0;
+      transform: translateX(30px);
+      animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .slide.slide-exiting {
+      opacity: 1;
+      transform: translateX(0);
+      animation: slideOut 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      z-index: 1;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideOut {
+      from {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+    }
+
+    /* Ensure slide content is properly styled */
+    .slide section {
+      width: 100%;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  </style>
+</Layout>

@@ -1,0 +1,282 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { renderMarpSlides, extractSlideContent } from "@/utils/marp";
+import { Button } from "@/components/ui/Button";
+import { FormattedDate } from "@/components/post/FormattedDate";
+import { Topics } from "@/components/ui/Topics";
+import { CategoryLabel } from "@/components/ui/CategoryLabel";
+import { TableOfContents } from "@/components/post/TableOfContents";
+import type { MarkdownHeading } from "astro";
+import type { TocHeading } from "@/types";
+import type { ImageMetadata } from "astro";
+import "@/styles/prose.css";
+
+// Import all images from src/assets using Vite's glob import
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/**/*.{jpeg,jpg,png,gif,webp}",
+  { eager: true },
+);
+
+export async function getStaticPaths() {
+  const slides = await getCollection("slide");
+  return slides.map((slide) => ({
+    params: { slug: slide.slug },
+    props: { slide },
+  }));
+}
+
+type Props = {
+  slide: CollectionEntry<"slide">;
+};
+
+const { slide } = Astro.props;
+
+// Get the raw markdown content
+const rawContent = slide.body;
+const slideContent = extractSlideContent(rawContent);
+
+// Create image path mapping for Vite assets
+const imageMapping: Record<string, string> = {};
+for (const [path, module] of Object.entries(images)) {
+  // Extract filename from the import path
+  const filename = path.split("/").pop();
+  if (filename) {
+    imageMapping[filename] = module.default.src;
+  }
+}
+
+const marpResult = renderMarpSlides(slideContent, imageMapping);
+
+// Build ToC from slide headings
+function extractHeadingsFromSlides(slides: any[]): MarkdownHeading[] {
+  const headings: MarkdownHeading[] = [];
+  let globalIndex = 0;
+
+  slides.forEach((slideItem, slideIndex) => {
+    const htmlContent = slideItem.html;
+    const headingRegex = /<h([1-6])[^>]*>(.*?)<\/h[1-6]>/gi;
+    let match;
+
+    while ((match = headingRegex.exec(htmlContent)) !== null) {
+      const depth = parseInt(match[1]);
+      const text = match[2].replace(/<[^>]*>/g, "").trim();
+      if (text) {
+        headings.push({
+          depth,
+          slug: `slide-${slideIndex}-heading-${globalIndex}`,
+          text,
+        });
+        globalIndex++;
+      }
+    }
+  });
+
+  return headings;
+}
+
+function buildToc(headings: MarkdownHeading[]): TocHeading[] {
+  const toc: TocHeading[] = [];
+  const parentHeadings = new Map();
+
+  headings.forEach((h) => {
+    const heading = { ...h, subheadings: [] };
+    parentHeadings.set(heading.depth, heading);
+    if (heading.depth <= 2) {
+      toc.push(heading);
+    } else {
+      const parent = parentHeadings.get(heading.depth - 1);
+      if (parent) {
+        parent.subheadings.push(heading);
+      }
+    }
+  });
+
+  return toc;
+}
+
+const headings = extractHeadingsFromSlides(marpResult.slides);
+const toc = buildToc(headings);
+---
+
+<Layout title={slide.data.title} description={slide.data.description}>
+  <style set:html={marpResult.css}></style>
+
+  <!-- Enhanced Document View with Frontmatter and ToC -->
+  <div class="document-container">
+    <div class="document-controls">
+      <Button href={`/slide/${slide.slug}/show`} class="slideshow-btn">
+        🎞️ Slideshow
+      </Button>
+    </div>
+
+    <main class="flex flex-col w-full">
+      <section
+        class="self-center flex justify-center items-stretch w-full p-8 xl:p-0"
+      >
+        <article
+          class="self-center w-full lg:max-xl:max-w-(--breakpoint-sm) max-w-(--breakpoint-md) pb-16"
+        >
+          <!-- Frontmatter Section -->
+          <section class="prose mb-8">
+            <div class="title mb-8">
+              <h1>{slide.data.title}</h1>
+              <div class="flex items-center flex-wrap line-between-flex-items">
+                <div class="after:text-gray-500">
+                  <CategoryLabel
+                    category={slide.data.category ?? "uncategorized"}
+                  />
+                </div>
+                <div class="date text-gray-500">
+                  <FormattedDate
+                    dateTime={slide.data.pubDate}
+                    client:only="solid-js"
+                  />
+                  {
+                    slide.data.updatedDate && (
+                      <span>
+                        &nbsp;게시,
+                        <FormattedDate
+                          dateTime={slide.data.updatedDate}
+                          client:only="solid-js"
+                        />
+                        &nbsp;수정
+                      </span>
+                    )
+                  }
+                </div>
+              </div>
+              {
+                slide.data.topics && (
+                  <div class="topic mt-2 mb-8">
+                    <Topics topics={slide.data.topics} />
+                  </div>
+                )
+              }
+            </div>
+          </section>
+
+          <!-- Slide Content -->
+          <section class="slide-document prose" set:html={marpResult.html} />
+        </article>
+
+        <!-- Table of Contents Sidebar -->
+        {
+          toc.length > 0 && (
+            <aside class="hidden self-stretch lg:block pt-[4rem] max-w-xs lg:w-80">
+              <div class="py-8 pl-4 sticky top-0">
+                <TableOfContents tocHeadings={toc} client:only="solid-js" />
+              </div>
+            </aside>
+          )
+        }
+      </section>
+    </main>
+  </div>
+
+  <style>
+    .document-container {
+      min-height: 100vh;
+    }
+
+    .document-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .slideshow-btn {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .slideshow-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Dark mode responsive slide document styling */
+    .slide-document section {
+      margin-bottom: 3rem;
+      padding: 2.5rem;
+      border-bottom: 2px solid rgb(229 231 235);
+      page-break-inside: avoid;
+      background: rgb(255 255 255);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .slide-document section:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .slide-document section:last-child {
+      border-bottom: none;
+    }
+
+    /* Dark mode styles */
+    :global(.dark) .slide-document section {
+      background: rgb(31 41 55);
+      border-bottom-color: rgb(55 65 81);
+      color: rgb(243 244 246);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    :global(.dark) .slide-document section:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Override Marp's presentation styles for document view */
+    .slide-document section {
+      width: 100% !important;
+      height: auto !important;
+      display: block !important;
+    }
+
+    /* Fix image paths and responsiveness */
+    .slide-document img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .slide-document img:hover {
+      transform: scale(1.02);
+    }
+
+    :global(.dark) .slide-document img {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Enhanced typography for dark mode */
+    :global(.dark) .slide-document h1,
+    :global(.dark) .slide-document h2,
+    :global(.dark) .slide-document h3,
+    :global(.dark) .slide-document h4,
+    :global(.dark) .slide-document h5,
+    :global(.dark) .slide-document h6 {
+      color: rgb(243 244 246);
+    }
+
+    :global(.dark) .slide-document p,
+    :global(.dark) .slide-document li {
+      color: rgb(209 213 219);
+    }
+
+    /* Code blocks dark mode */
+    :global(.dark) .slide-document pre {
+      background: rgb(17 24 39) !important;
+      border: 1px solid rgb(55 65 81);
+    }
+
+    :global(.dark) .slide-document code:not(pre code) {
+      background: rgb(55 65 81);
+      color: rgb(229 231 235);
+    }
+  </style>
+</Layout>
