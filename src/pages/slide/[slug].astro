@@ -11,6 +11,7 @@ import type { MarkdownHeading } from "astro";
 import type { TocHeading } from "@/types";
 import type { ImageMetadata } from "astro";
 import "@/styles/prose.css";
+import "@/styles/slide.css";
 
 // Import all images from src/assets using Vite's glob import
 const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -48,26 +49,40 @@ for (const [path, module] of Object.entries(images)) {
 
 const marpResult = renderMarpSlides(slideContent, imageMapping);
 
-// Build ToC from slide headings
+// Add anchor IDs to slide sections for ToC navigation
+let processedHtml = marpResult.html;
+let slideIndex = 0;
+processedHtml = processedHtml.replace(
+  /<section([^>]*)>/g,
+  (match, attributes) => {
+    const slideId = `slide-${slideIndex}`;
+    slideIndex++;
+    return `<section id="${slideId}"${attributes}>`;
+  },
+);
+
+// Build ToC from slide headings with proper anchor links
 function extractHeadingsFromSlides(slides: any[]): MarkdownHeading[] {
   const headings: MarkdownHeading[] = [];
-  let globalIndex = 0;
 
   slides.forEach((slideItem, slideIndex) => {
     const htmlContent = slideItem.html;
     const headingRegex = /<h([1-6])[^>]*>(.*?)<\/h[1-6]>/gi;
     let match;
+    let hasHeading = false;
 
+    // Check if this slide has any headings
     while ((match = headingRegex.exec(htmlContent)) !== null) {
       const depth = parseInt(match[1]);
       const text = match[2].replace(/<[^>]*>/g, "").trim();
       if (text) {
         headings.push({
-          depth,
-          slug: `slide-${slideIndex}-heading-${globalIndex}`,
+          depth: Math.max(1, depth - 1), // Adjust depth for ToC hierarchy
+          slug: `slide-${slideIndex}`, // Link directly to slide
           text,
         });
-        globalIndex++;
+        hasHeading = true;
+        break; // Only use the first heading per slide for ToC
       }
     }
   });
@@ -157,7 +172,7 @@ const toc = buildToc(headings);
           </section>
 
           <!-- Slide Content -->
-          <section class="slide-document prose" set:html={marpResult.html} />
+          <section class="slide-document prose" set:html={processedHtml} />
         </article>
 
         <!-- Table of Contents Sidebar -->
@@ -173,110 +188,4 @@ const toc = buildToc(headings);
       </section>
     </main>
   </div>
-
-  <style>
-    .document-container {
-      min-height: 100vh;
-    }
-
-    .document-controls {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    .slideshow-btn {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      transition: all 0.3s ease;
-    }
-
-    .slideshow-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Dark mode responsive slide document styling */
-    .slide-document section {
-      margin-bottom: 3rem;
-      padding: 2.5rem;
-      border-bottom: 2px solid rgb(229 231 235);
-      page-break-inside: avoid;
-      background: rgb(255 255 255);
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
-    }
-
-    .slide-document section:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transform: translateY(-1px);
-    }
-
-    .slide-document section:last-child {
-      border-bottom: none;
-    }
-
-    /* Dark mode styles */
-    :global(.dark) .slide-document section {
-      background: rgb(31 41 55);
-      border-bottom-color: rgb(55 65 81);
-      color: rgb(243 244 246);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    :global(.dark) .slide-document section:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    }
-
-    /* Override Marp's presentation styles for document view */
-    .slide-document section {
-      width: 100% !important;
-      height: auto !important;
-      display: block !important;
-    }
-
-    /* Fix image paths and responsiveness */
-    .slide-document img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .slide-document img:hover {
-      transform: scale(1.02);
-    }
-
-    :global(.dark) .slide-document img {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Enhanced typography for dark mode */
-    :global(.dark) .slide-document h1,
-    :global(.dark) .slide-document h2,
-    :global(.dark) .slide-document h3,
-    :global(.dark) .slide-document h4,
-    :global(.dark) .slide-document h5,
-    :global(.dark) .slide-document h6 {
-      color: rgb(243 244 246);
-    }
-
-    :global(.dark) .slide-document p,
-    :global(.dark) .slide-document li {
-      color: rgb(209 213 219);
-    }
-
-    /* Code blocks dark mode */
-    :global(.dark) .slide-document pre {
-      background: rgb(17 24 39) !important;
-      border: 1px solid rgb(55 65 81);
-    }
-
-    :global(.dark) .slide-document code:not(pre code) {
-      background: rgb(55 65 81);
-      color: rgb(229 231 235);
-    }
-  </style>
 </Layout>

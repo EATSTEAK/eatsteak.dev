@@ -1,0 +1,162 @@
+.slideshow-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  overflow: hidden;
+}
+
+.slideshow-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: rgb(0 0 0 / 90%);
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: white;
+  backdrop-filter: blur(8px);
+  transition: opacity 0.4s ease;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Button styling inspired by UI Button component */
+.slideshow-btn {
+  position: relative;
+  font-family: MonoplexKR, monospace;
+  padding: 8px 12px;
+  transition: all 0.25s ease-out;
+  border: 2px solid rgb(255 255 255 / 30%);
+  background: linear-gradient(to right, rgb(0 0 0 / 40%), rgb(0 0 0 / 40%));
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  background-size: 0 100%;
+  background-repeat: no-repeat;
+  background-position-y: 100%;
+}
+
+.slideshow-btn::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: rgb(255 255 255 / 10%);
+  border-radius: 2px;
+}
+
+.slideshow-btn:hover {
+  background-size: 100% 100%;
+  color: #000;
+  border-color: rgb(255 255 255 / 80%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 30%);
+}
+
+.slideshow-btn:hover::before {
+  background: rgb(255 255 255 / 90%);
+}
+
+.slideshow-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+}
+
+#slide-counter {
+  font-family: MonoplexKR, monospace;
+  font-size: 0.9rem;
+  padding: 0 8px;
+  color: rgb(255 255 255 / 90%);
+}
+
+.slide-viewport {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.slide.slide-entering {
+  opacity: 0;
+  transform: translateX(30px);
+  animation: slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.slide.slide-exiting {
+  opacity: 1;
+  transform: translateX(0);
+  animation: slide-out 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 1;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
+
+/* Ensure slide content is properly styled */
+.slide section {
+  width: 100%;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
