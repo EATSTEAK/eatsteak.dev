@@ -17,7 +17,10 @@ export interface SlideDocument {
  * Process image paths in HTML to work with Vite's asset system
  * Converts relative paths like ../../assets/image.png to proper Vite asset URLs
  */
-function processImagePaths(html: string, imageMapping?: Record<string, string>): string {
+function processImagePaths(
+  html: string,
+  imageMapping?: Record<string, string>,
+): string {
   return html.replace(
     /<img([^>]+)src=["']([^"']+)["']([^>]*)>/g,
     (match, beforeSrc, src, afterSrc) => {
@@ -25,14 +28,14 @@ function processImagePaths(html: string, imageMapping?: Record<string, string>):
       if (src.includes("../assets/") || src.includes("assets/")) {
         // Extract the filename from the path
         const filename = src.split("/").pop();
-        
+
         // Use imageMapping to get the proper Vite asset URL
         if (filename && imageMapping && imageMapping[filename]) {
           const newSrc = imageMapping[filename];
           console.log(`[Marp] Mapping image: ${src} -> ${newSrc}`);
           return `<img${beforeSrc}src="${newSrc}"${afterSrc}>`;
         }
-        
+
         // Fallback: if no mapping found, try public assets path
         if (filename) {
           const newSrc = `/assets/${filename}`;
@@ -59,7 +62,10 @@ function processImagePaths(html: string, imageMapping?: Record<string, string>):
 /**
  * Parse and render markdown content using Marp
  */
-export function renderMarpSlides(markdown: string, imageMapping?: Record<string, string>): SlideDocument {
+export function renderMarpSlides(
+  markdown: string,
+  imageMapping?: Record<string, string>,
+): SlideDocument {
   const marp = new Marp({
     html: true,
     markdown: {

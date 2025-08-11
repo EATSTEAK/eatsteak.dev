@@ -4,6 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 import { renderMarpSlides, extractSlideContent } from "@/utils/marp";
 import type { ImageMetadata } from "astro";
 import "@/styles/show.css";
+import { Button } from "@/components/ui/Button";
 
 // Import all images from src/assets using Vite's glob import
 const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -47,11 +48,14 @@ const marpResult = renderMarpSlides(slideContent, imageMapping);
 
   <!-- Slideshow Presentation View -->
   <div class="slideshow-container">
-    <div class="slideshow-controls">
-      <button id="prev-slide" class="slideshow-btn">←</button>
+    <div
+      class="fixed top-5 right-5 z-30 flex gap-3 items-center backdrop-blur-sm transition-opacity pointer-events-auto"
+    >
+      <Button id="prev-slide" class="cursor-pointer">←</Button>
       <span id="slide-counter">1 / {marpResult.slides.length}</span>
-      <button id="next-slide" class="slideshow-btn">→</button>
-      <a href={`/slide/${slide.slug}`} class="slideshow-btn">📄</a>
+      <Button id="next-slide" class="cursor-pointer">→</Button>
+      <Button href={`/slide/${slide.slug}`}>📄</Button>
+      <Button id="fullscreen">F</Button>
     </div>
 
     <div class="slide-viewport">
@@ -156,6 +160,23 @@ const marpResult = renderMarpSlides(slideContent, imageMapping);
     // Initialize controls and start timer
     showControls();
     resetControlsTimer();
+
+    function fullscreenHandler() {
+      const slideshowContainer = document.querySelector(".slideshow-container");
+      console.log("Fullscreen change detected");
+      if (!slideshowContainer) return;
+
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        slideshowContainer.requestFullscreen();
+      }
+    }
+
+    const fullscreenBtn = document.getElementById("fullscreen");
+    if (fullscreenBtn) {
+      fullscreenBtn.addEventListener("click", fullscreenHandler);
+    }
 
     // Event listeners for user interaction
     document.addEventListener("mousemove", resetControlsTimer);

@@ -10,6 +10,7 @@ topics:
   - Anti-patterns
 updatedDate:
 internalUpdatedDate: 2024-11-27T19:25+09:00
+theme: uncover
 ---
 
 # React 앱 최적화
