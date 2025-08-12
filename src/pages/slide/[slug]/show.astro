@@ -53,7 +53,7 @@ const marpResult = renderMarpSlides(slideContent, imageMapping);
   <!-- Slideshow Presentation View -->
   <div class="slideshow-container">
     <div
-      class="slideshow-controls fixed top-5 right-5 z-30 flex gap-3 items-center backdrop-blur-sm transition-opacity pointer-events-auto p-3 rounded-md overflow-hidden bg-primary-bg/50"
+      class="slideshow-controls fixed bottom-5 right-5 z-30 flex gap-3 items-center backdrop-blur-sm transition-all pointer-events-auto p-3 rounded-md overflow-hidden bg-primary-bg/50"
     >
       <Button id="prev-slide" class="cursor-pointer"
         ><ArrowPrevious class="size-4" /></Button
@@ -130,18 +130,17 @@ const marpResult = renderMarpSlides(slideContent, imageMapping);
     function nextSlide() {
       currentSlide = (currentSlide + 1) % totalSlides;
       showSlide(currentSlide);
-      resetControlsTimer();
     }
 
     function prevSlide() {
       currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
       showSlide(currentSlide);
-      resetControlsTimer();
     }
 
     // Auto-hide controls functionality
     function showControls() {
       if (controls) {
+        controls.style.transform = "translateY(0)";
         controls.style.opacity = "1";
         controls.style.pointerEvents = "auto";
       }
@@ -149,6 +148,7 @@ const marpResult = renderMarpSlides(slideContent, imageMapping);
 
     function hideControls() {
       if (controls) {
+        controls.style.transform = "translateY(50%)";
         controls.style.opacity = "0";
         controls.style.pointerEvents = "none";
       }
@@ -192,7 +192,6 @@ const marpResult = renderMarpSlides(slideContent, imageMapping);
     // Event listeners for user interaction
     document.addEventListener("mousemove", resetControlsTimer);
     document.addEventListener("click", resetControlsTimer);
-    document.addEventListener("keydown", resetControlsTimer);
 
     // Button event listeners
     if (nextBtn) {
