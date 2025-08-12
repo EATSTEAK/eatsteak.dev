@@ -70,14 +70,18 @@ const marpResult = renderMarpSlides(slideContent, imageMapping);
       >
     </div>
 
-    <div class="slide-viewport">
+    <div class="slide-viewport marpit">
       {
         marpResult.slides.map((slideItem, index) => (
-          <div
+          <svg
             class={`slide ${index === 0 ? "active" : ""}`}
-            data-slide-index={index}
-            set:html={slideItem.html}
-          />
+            data-marpit-svg=""
+            viewBox="0 0 1280 720"
+          >
+            <foreignObject width="1280" height="720">
+              <section data-slide-index={index} set:html={slideItem.html} />
+            </foreignObject>
+          </svg>
         ))
       }
     </div>
