@@ -51,6 +51,21 @@ export const CATEGORIES: { [category: string]: Category } = {
       },
     },
   },
+  dev: {
+    id: "dev",
+    name: "Develop",
+    description: "전반적인 개발 이야기",
+    color: {
+      light: {
+        bg: "#1D4ED8",
+        text: "#ffffff",
+      },
+      dark: {
+        bg: "#1D4ED8",
+        text: "#ffffff",
+      },
+    },
+  },
   uncategorized: {
     id: "uncategorized",
     name: "Uncategorized",

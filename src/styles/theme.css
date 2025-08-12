@@ -1,6 +1,8 @@
 @reference './global.css';
 
 :not(.dark) {
+  --category-dev-bg: #1d4ed8;
+  --category-dev-text: #fff;
   --category-rust-bg: #991b1b;
   --category-rust-text: #fff;
   --category-web-bg: #0e7490;
@@ -10,6 +12,8 @@
 }
 
 .dark {
+  --category-dev-bg: #1d4ed8;
+  --category-dev-text: #fff;
   --category-rust-bg: #991b1b;
   --category-rust-text: #fff;
   --category-web-bg: #0e7490;
