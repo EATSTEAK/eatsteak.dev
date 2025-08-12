@@ -1,6 +1,6 @@
 ---
 title: React 성능 개선 Step-by-step
-description: React 앱의 성능을 개선하기 위한 노력을 공유합니다.
+description: "[Yourssu 웹 성능 향상 스터디] React 앱의 성능을 개선하기 위한 노력을 공유합니다."
 category: web
 pubDate: 2024-11-27T18:33+09:00
 hidden: true
