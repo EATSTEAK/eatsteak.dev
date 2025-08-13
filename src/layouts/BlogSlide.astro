@@ -1,0 +1,171 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "./Layout.astro";
+import { Profile } from "@/components/ui/Profile";
+import { FormattedDate } from "@/components/FormattedDate";
+import { Topics } from "@/components/ui/Topics";
+import { CategoryLabel } from "@/components/ui/CategoryLabel";
+import "@/styles/prose.css";
+import { Counter } from "@/components/Counter";
+import { Comments } from "@/components/Comments";
+import { CATEGORIES } from "../consts";
+import { getReadingTime } from "@/utils/reading-time";
+import { MinutesRead } from "@/components/MinutesRead";
+import type { MarkdownHeading } from "astro";
+import { TableOfContents } from "@/components/TableOfContents";
+import type { TocHeading } from "../types";
+import SlideItem from "@/components/slide/SlideItem.astro";
+
+type Props = CollectionEntry<"slide">["data"] & {
+  slug: string;
+  minutesRead: number | undefined;
+  headings: MarkdownHeading[];
+};
+
+const {
+  slug,
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  category,
+  topics,
+  minutesRead,
+  headings,
+  series,
+  ...leftoverProps
+} = Astro.props;
+
+const allPosts = (await getCollection("slide")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const recentPostsInCategory = allPosts
+  .filter((post) => post.data.hidden !== true && post.slug !== slug)
+  .filter(
+    (post) =>
+      (CATEGORIES[post.data.category ?? "uncategorized"]?.id ??
+        "uncategorized") === (category ?? "uncategorized"),
+  )
+  .slice(0, 3);
+
+function buildToc(headings: MarkdownHeading[]): TocHeading[] {
+  const toc: TocHeading[] = [];
+  const parentHeadings = new Map();
+  headings.forEach((h) => {
+    const heading = { ...h, subheadings: [] };
+    parentHeadings.set(heading.depth, heading);
+    if (heading.depth === 2) {
+      toc.push(heading);
+    } else {
+      if (!parentHeadings.has(heading.depth - 1)) {
+        parentHeadings.set(heading.depth - 1, { subheadings: [] });
+      }
+      parentHeadings.get(heading.depth - 1).subheadings.push(heading);
+    }
+  });
+  return toc;
+}
+const toc = buildToc(headings);
+---
+
+<Layout
+  title={`${title} - EATSTEAK.DEV`}
+  {description}
+  image={`/card/slide/og/${slug}.png`}
+>
+  <div
+    class="top-0 left-0 absolute w-full h-80 -z-10 overflow-x-clip overflow-y-visible"
+  >
+    <div
+      class="grill-background opacity-50 -rotate-3"
+      style={{
+        background: `linear-gradient(var(--category-${category}-bg), rgba(255, 255, 255, 0))`,
+      }}
+    >
+    </div>
+  </div>
+  <main class="flex flex-col w-full">
+    <section
+      class="self-center flex justify-center items-stretch w-full p-8 xl:p-0"
+    >
+      <article
+        class="self-center w-full lg:max-xl:max-w-(--breakpoint-sm) max-w-(--breakpoint-md) pb-16"
+      >
+        <section class="prose">
+          <div class="title mb-8">
+            <h1>{title}</h1>
+            <div class="flex items-center flex-wrap line-between-flex-items">
+              <div class="after:text-gray-500">
+                <CategoryLabel category={category ?? "uncategorized"} />
+              </div>
+              <div class="date text-gray-500">
+                <FormattedDate dateTime={pubDate} client:only="solid-js" />
+                {
+                  updatedDate && (
+                    <span>
+                      &nbsp;게시,
+                      <FormattedDate
+                        dateTime={updatedDate}
+                        client:only="solid-js"
+                      />
+                      &nbsp;수정
+                    </span>
+                  )
+                }
+              </div>
+              {minutesRead && <MinutesRead minutesRead={minutesRead} />}
+              <Counter path={Astro.url.pathname} client:only="solid-js" />
+            </div>
+            {
+              topics && (
+                <div class="topic mt-2 mb-8">
+                  <Topics topics={topics} />
+                </div>
+              )
+            }
+          </div>
+          <div class="content">
+            <slot />
+          </div>
+        </section>
+        <hr class="my-8" />
+        <Comments client:only="solid-js" />
+      </article>
+      <aside class="hidden self-stretch lg:block pt-[20rem] max-w-xs lg:w-80">
+        <div class="py-8 pl-4 sticky top-0">
+          <TableOfContents tocHeadings={toc} client:only="solid-js" />
+        </div>
+      </aside>
+    </section>
+    <section
+      class="py-16 flex flex-col items-center bg-primary-bg transition-colors"
+    >
+      <div
+        class="flex flex-col gap-8 w-full max-w-(--breakpoint-lg) p-8 xl:p-0"
+      >
+        <div class="w-full">
+          <Profile />
+        </div>
+        <div class="w-full">
+          <h3>같은 분류의 최신 글</h3>
+          <div class="mt-4 flex flex-col gap-2">
+            {
+              recentPostsInCategory.map((post) => (
+                <SlideItem
+                  post={post}
+                  minutesRead={getReadingTime(post.body)}
+                />
+              ))
+            }
+            {
+              recentPostsInCategory.length === 0 && (
+                <p class="mx-auto my-8">읽을 수 있는 글이 없습니다.</p>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

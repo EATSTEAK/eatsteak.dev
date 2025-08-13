@@ -7,6 +7,7 @@ import PostItem from "@/components/post/PostItem.astro";
 import { Container } from "@/components/shell/Container";
 import { Pagination } from "@/components/ui/Pagination";
 import { getReadingTime } from "@/utils/reading-time";
+import SlideItem from "@/components/slide/SlideItem.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = (await getCollection("slide"))
@@ -27,7 +28,7 @@ const { page } = Astro.props as Props;
         {
           page.data.map((post) => (
             <>
-              <PostItem baseUrl="/slides" post={post} minutesRead={getReadingTime(post.body)} />
+              <SlideItem post={post} minutesRead={getReadingTime(post.body)} />
             </>
           ))
         }
