@@ -110,7 +110,7 @@ _주의: 출처 없는 독자연구입니다._
 
 ---
 
-## Everchanging reality
+## Ever-changing reality
 
 > 변화하는 세상 속에서 살아남기
 
@@ -196,7 +196,7 @@ _주의: 출처 없는 독자연구입니다._
 
 ---
 
-## Expotentially faster
+## Exponentially faster
 
 > 덧셈보다는 곱셈으로
 
