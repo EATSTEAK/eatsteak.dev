@@ -9,8 +9,11 @@ topics:
   - philosophy
   - mastery
 internalUpdatedDate: 2024-11-27T19:25+09:00
-theme: uncover
 ---
+
+<!--
+theme: default
+-->
 
 ## 좋은 개발자란 무엇인가?
 

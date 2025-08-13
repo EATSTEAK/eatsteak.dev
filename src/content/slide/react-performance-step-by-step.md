@@ -9,8 +9,10 @@ topics:
   - Performance
   - Anti-patterns
 internalUpdatedDate: 2024-11-27T19:25+09:00
-theme: uncover
 ---
+<!--
+theme: default
+-->
 
 ## React 앱 최적화
 
