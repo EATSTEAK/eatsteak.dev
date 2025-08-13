@@ -8,7 +8,6 @@ topics:
   - development
   - philosophy
   - mastery
-updatedDate: null
 internalUpdatedDate: 2024-11-27T19:25+09:00
 theme: uncover
 ---
