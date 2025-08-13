@@ -1,7 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import { renderMarpSlides, extractSlideContent } from "@/utils/marp";
+import { renderMarpSlides } from "@/utils/marp";
 import type { ImageMetadata } from "astro";
 import "@/styles/show.css";
 import { Button } from "@/components/ui/Button";
@@ -30,10 +30,6 @@ type Props = {
 
 const { slide } = Astro.props;
 
-// Get the raw markdown content
-const rawContent = slide.body;
-const slideContent = extractSlideContent(rawContent);
-
 // Create image path mapping for Vite assets
 const imageMapping: Record<string, string> = {};
 for (const [path, module] of Object.entries(images)) {
@@ -44,7 +40,7 @@ for (const [path, module] of Object.entries(images)) {
   }
 }
 
-const marpResult = renderMarpSlides(slideContent, imageMapping);
+const marpResult = renderMarpSlides(slide.body, imageMapping);
 ---
 
 <Layout title={slide.data.title} description={slide.data.description}>

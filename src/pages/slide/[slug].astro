@@ -1,6 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import { renderMarpSlides, extractSlideContent } from "@/utils/marp";
+import { renderMarpSlides } from "@/utils/marp";
 import type { MarkdownHeading } from "astro";
 import type { ImageMetadata } from "astro";
 import "@/styles/prose.css";
@@ -29,10 +29,6 @@ type Props = {
 
 const { slide } = Astro.props;
 
-// Get the raw markdown content
-const rawContent = slide.body;
-const slideContent = extractSlideContent(rawContent);
-
 // Create image path mapping for Vite assets
 const imageMapping: Record<string, string> = {};
 for (const [path, module] of Object.entries(images)) {
@@ -43,9 +39,9 @@ for (const [path, module] of Object.entries(images)) {
   }
 }
 
-const minutesRead = getReadingTime(slideContent);
+const minutesRead = getReadingTime(slide.body);
 
-const marpResult = renderMarpSlides(slideContent, imageMapping);
+const marpResult = renderMarpSlides(slide.body, imageMapping);
 
 // Add anchor IDs to slide sections for ToC navigation
 let processedHtml = marpResult.html;
@@ -73,14 +69,13 @@ function extractHeadingsFromSlides(slides: any[]): MarkdownHeading[] {
     if (headingElements.length > 0) {
       // Only use the first heading per slide for ToC
       const firstHeading = headingElements[0];
-      const depth = parseInt(firstHeading.tagName.charAt(1)); // Extract number from h1, h2, etc.
       const text = firstHeading.textContent?.trim() || "";
-      const id = firstHeading.id || `slide-${slideIndex}`; // Use heading id or fallback to slide index
+      const slug = `slide-${slideIndex}`; // Use heading id or fallback to slide index
 
       if (text) {
         headings.push({
-          depth, // Adjust depth for ToC hierarchy
-          slug: id, // Use the heading's id attribute
+          depth: 2, // Adjust depth for ToC hierarchy
+          slug, // Use the heading's id attribute
           text,
         });
       }

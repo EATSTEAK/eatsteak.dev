@@ -101,17 +101,3 @@ export function renderMarpSlides(
     css: result.css,
   };
 }
-
-/**
- * Extract slide content from markdown (removing frontmatter)
- */
-export function extractSlideContent(markdown: string): string {
-  // Remove frontmatter
-  if (markdown.trim().startsWith("---")) {
-    const frontmatterEnd = markdown.indexOf("---", 3);
-    if (frontmatterEnd !== -1) {
-      return markdown.substring(frontmatterEnd + 3).trim();
-    }
-  }
-  return markdown;
-}

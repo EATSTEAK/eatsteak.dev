@@ -4,16 +4,19 @@ import { Transition } from "solid-transition-group";
 import { TocHeadings } from "@/components/TocHeadings";
 import type { TocHeading } from "@/types";
 
-export const TableOfContents: Component<{ tocHeadings: TocHeading[] }> = (
-  props,
-) => {
+export const TableOfContents: Component<{
+  watchSection?: boolean;
+  tocHeadings: TocHeading[];
+}> = (props) => {
   const [isVisible, setVisibility] = createSignal(true);
   const activeSections = new ReactiveSet<string>([]);
   const observer = new IntersectionObserver((sections) =>
     sections.forEach((section) => {
       const heading = section.target.querySelector("h2, h3, h4, h5");
       if (!heading) return;
-      const id = heading.getAttribute("id");
+      const id = props.watchSection
+        ? section.target.getAttribute("id")
+        : heading.getAttribute("id");
       if (id == null) return;
       if (section.intersectionRatio > 0) {
         if (!activeSections.has(id)) activeSections.add(id);
