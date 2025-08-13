@@ -12,7 +12,7 @@ internalUpdatedDate: 2024-11-27T19:25+09:00
 theme: uncover
 ---
 
-# React 앱 최적화
+## React 앱 최적화
 
 - 어렵다. 왜?
 - 코드 작성 단계: 어떤 코드가 **리렌더링**을 발생시키는지 모름
@@ -32,7 +32,7 @@ useEffect(() => {
 
 ---
 
-# 1. React Anti-Patterns
+## 1. React Anti-Patterns
 
 ---
 
@@ -153,7 +153,7 @@ export const TimeList = ({ dates }: { dates: string[] }) => {
 
 ---
 
-# 2. 성능 분석하기
+## 2. 성능 분석하기
 
 ---
 
@@ -162,20 +162,20 @@ export const TimeList = ({ dates }: { dates: string[] }) => {
 
 ---
 
-## React Devtools
+### React Devtools
 
 React 앱을 분석하기 위한 개발자 도구
 
 ---
 
-## ![](../../assets/react-performance-step-by-step/devtools.png)
+![devtools](../../assets/react-performance-step-by-step/devtools.png)
 
 **Flame graph: 스택 추적**
 ![](../../assets/react-performance-step-by-step/profiler.png)
 
 ---
 
-## 브라우저 Performance 탭
+### 브라우저 Performance 탭
 
 ---
 
@@ -190,7 +190,7 @@ Firefox Profiler
 
 ---
 
-## react-scan: 리렌더링 감시
+### react-scan: 리렌더링 감시
 
 ```bash
 pnpx react-scan@latest https://soomsil.de
@@ -203,7 +203,7 @@ pnpx react-scan@latest https://soomsil.de
 
 ---
 
-## Million Lint: react-scan의 진화
+### Million Lint: react-scan의 진화
 
 ```bash
 pnpx million@latest
