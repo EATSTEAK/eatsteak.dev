@@ -1,8 +1,8 @@
 import { ReactiveSet } from "@solid-primitives/set";
 import { type Component, createSignal, Show } from "solid-js";
 import { Transition } from "solid-transition-group";
-import { TocHeadings } from "@/components/post/TocHeadings.tsx";
-import type { TocHeading } from "../../types";
+import { TocHeadings } from "@/components/TocHeadings";
+import type { TocHeading } from "@/types";
 
 export const TableOfContents: Component<{ tocHeadings: TocHeading[] }> = (
   props,

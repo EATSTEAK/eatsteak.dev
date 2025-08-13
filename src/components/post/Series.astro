@@ -1,6 +1,6 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import CompactPostItem from "./CompactPostItem.astro";
+import type { CollectionEntry, DataEntryMap } from "astro:content";
+import CompactPostItem from "@/components/post/CompactPostItem.astro";
 
 interface Props {
   posts: CollectionEntry<"blog">[];

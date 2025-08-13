@@ -6,21 +6,21 @@ import { MinutesRead } from "@/components/MinutesRead";
 import { Topics } from "@/components/ui/Topics";
 
 interface Props {
-  post: CollectionEntry<"blog">;
+  post: CollectionEntry<"slide">;
   minutesRead: number | undefined;
 }
 
 const { post, minutesRead } = Astro.props;
 
-const thumbnail = post.data.thumbnail ?? {
-  src: `/card/post/og/${post.slug}.png`,
+const thumbnail = {
+  src: `/card/slide/og/${post.slug}.png`,
 };
 ---
 
 <section class="group/post flex flex-col md:flex-row gap-4 border-b py-4">
   <aside class="overflow-clip">
     <a
-      href={`/post/${post.slug}`}
+      href={`/slide/${post.slug}`}
       class="block bg-cover bg-center bg-no-repeat w-full md:w-64 h-64 md:h-full group-hover/post:scale-110 transition-transform"
       style={{
         "background-image": `url('${thumbnail.src}')`,
@@ -30,7 +30,7 @@ const thumbnail = post.data.thumbnail ?? {
     </a>
   </aside>
   <article>
-    <a href={`/post/${post.slug}`}>
+    <a href={`/slide/${post.slug}`}>
       <h1 class="text-[1.563em] mt-2">
         <span class="nav-link">{post.data.title}</span>
       </h1>

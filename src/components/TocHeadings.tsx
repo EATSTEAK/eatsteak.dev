@@ -1,6 +1,6 @@
 import { Transition } from "solid-transition-group";
 import { type Component, For, Show } from "solid-js";
-import type { TocHeading } from "../../types";
+import type { TocHeading } from "@/types";
 
 export const TocHeadings: Component<{
   tocHeadings: TocHeading[];

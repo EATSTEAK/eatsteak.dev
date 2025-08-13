@@ -4,7 +4,7 @@ import { CategoryLabel } from "@/components/ui/CategoryLabel";
 import { cn } from "@/utils/cn";
 
 interface Props {
-  post: CollectionEntry<"blog">;
+  post: CollectionEntry<"slide">;
   selected?: boolean;
 }
 
@@ -13,7 +13,7 @@ const { post, selected } = Astro.props;
 
 <li class="flex align-center gap-2 items-start">
   <CategoryLabel category={post.data.category ?? "uncategorized"} />
-  <a href={selected ? "#" : `/post/${post.slug}`}>
+  <a href={selected ? "#" : `/slide/${post.slug}`}>
     <span class={cn({ "nav-link": true, "link-selected": selected })}>
       {post.data.title}
     </span>
