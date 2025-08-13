@@ -1,0 +1,42 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import PostItem from "@/components/post/PostItem.astro";
+import { Container } from "@/components/shell/Container";
+import { Pagination } from "@/components/ui/Pagination";
+import { getReadingTime } from "@/utils/reading-time";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection("slide"))
+    .filter((post) => post.data.hidden !== true)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  return paginate(posts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page } = Astro.props as Props;
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main class="flex justify-center">
+    <Container class="max-w-screen-lg">
+      <div class="flex flex-col gap-2">
+        {
+          page.data.map((post) => (
+            <>
+              <PostItem baseUrl="/slides" post={post} minutesRead={getReadingTime(post.body)} />
+            </>
+          ))
+        }
+      </div>
+      <Pagination
+        baseUrl="/slides"
+        lastPage={page.lastPage}
+        currentPage={page.currentPage}
+      />
+    </Container>
+  </main>
+</Layout>

@@ -6,11 +6,12 @@ import { MinutesRead } from "./MinutesRead";
 import { Topics } from "../ui/Topics";
 
 interface Props {
+  baseUrl?: string;
   post: CollectionEntry<"blog">;
   minutesRead: number | undefined;
 }
 
-const { post, minutesRead } = Astro.props;
+const { baseUrl, post, minutesRead } = Astro.props;
 
 const thumbnail = post.data.thumbnail ?? { src: `/card/og/${post.slug}.png` };
 ---
@@ -18,7 +19,7 @@ const thumbnail = post.data.thumbnail ?? { src: `/card/og/${post.slug}.png` };
 <section class="group/post flex flex-col md:flex-row gap-4 border-b py-4">
   <aside class="overflow-clip">
     <a
-      href={`/post/${post.slug}`}
+      href={`${baseUrl ?? "/posts"}/${post.slug}`}
       class="block bg-cover bg-center bg-no-repeat w-full md:w-64 h-64 md:h-full group-hover/post:scale-110 transition-transform"
       style={{
         "background-image": `url('${thumbnail.src}')`,
