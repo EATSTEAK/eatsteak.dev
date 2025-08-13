@@ -3,6 +3,8 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  color-scheme: light;
+
   --primary-background-color: var(--color-neutral-300);
   --primary-color: var(--color-neutral-900);
   --secondary-background-color: var(--color-neutral-200);
@@ -10,6 +12,8 @@
 }
 
 :root[class~="dark"] {
+  color-scheme: dark;
+
   --primary-background-color: var(--color-neutral-900);
   --primary-color: var(--color-neutral-200);
   --secondary-background-color: var(--color-neutral-950);
