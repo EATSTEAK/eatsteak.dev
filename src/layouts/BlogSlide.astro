@@ -16,6 +16,7 @@ import type { TocHeading } from "../types";
 import SlideItem from "@/components/slide/SlideItem.astro";
 import { Button } from "@/components/ui/Button";
 import { SlideMultiple } from "@/icons/SlideMultiple";
+import { cn } from "@/utils/cn";
 
 type Props = CollectionEntry<"slide">["data"] & {
   slug: string;
@@ -79,7 +80,10 @@ const toc = buildToc(headings);
     class="top-0 left-0 absolute w-full h-80 -z-10 overflow-x-clip overflow-y-visible"
   >
     <div
-      class="grill-background opacity-50 -rotate-3"
+      class={cn(
+        "grill-background opacity-50 -rotate-3",
+        "animate-in fade-in slide-in-from-top-15 delay-500 spring-bounce-40 spring-duration-1000 duration-1000 fill-mode-both",
+      )}
       style={{
         background: `linear-gradient(var(--category-${category}-bg), rgba(255, 255, 255, 0))`,
       }}

@@ -13,6 +13,7 @@ export const GrillContainer: Component<{
       <div
         class={cn(
           "grill-background bg-linear-to-b from-slate-700/50 dark:from-slate-400/50 to-transparent -rotate-3",
+          "animate-in fade-in-5 slide-in-from-top-15 delay-500 spring-bounce-40 spring-duration-1000 duration-1000 fill-mode-both",
           props.grillClass,
         )}
       />
