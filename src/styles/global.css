@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@plugin "tailwindcss-spring";
 
 @custom-variant dark (&:is(.dark *));
 
