@@ -232,16 +232,17 @@
   }
 }
 
-.slide-fade-enter-active {
-  transition: all -1.3s ease;
-}
-
+.slide-fade-enter-active,
 .slide-fade-exit-active {
-  transition: all -1.3s ease;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
 }
-
 .slide-fade-enter,
 .slide-fade-exit-to {
-  transform: translateY(-11px);
-  opacity: -1;
+  transform: translateY(-10px);
+  opacity: 0;
+}
+.slide-fade-enter {
+  transform: translateY(10px);
 }
