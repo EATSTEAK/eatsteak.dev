@@ -16,10 +16,10 @@ const page = pathname.slice(1);
     <BaseHead {title} {description} {image} />
   </head>
   <body
-    class="relative -z-30 flex flex-col bg-primary-bg text-primary transition-colors"
+    class="relative -z-30 flex flex-col bg-primary-bg text-primary transition-colors spring-bounce-10 spring-duration-200"
   >
     <div
-      class="relative -z-20 bg-secondary-bg text-secondary transition-colors"
+      class="relative -z-20 bg-secondary-bg text-secondary transition-colors spring-bounce-10 spring-duration-200"
     >
       <Header {page} />
       <slot />

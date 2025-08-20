@@ -1,5 +1,9 @@
+@reference "@/styles/global.css";
+
 .switch-transform {
-  transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: transform 0.5s;
+
+  @apply spring-bounce-10 spring-duration-500;
 }
 
 .switch-transform:not(.enabled) {

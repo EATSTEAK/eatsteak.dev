@@ -24,13 +24,13 @@ export const Profile = () => {
             href="https://github.com/eatsteak"
             aria-label="@EATSTEAK at GitHub"
           >
-            <GitHub class="w-8 hover:text-gray-900 text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 transition-colors" />
+            <GitHub class="w-8 hover:text-gray-900 text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 transition-colors spring-bounce-10 spring-duration-200" />
           </a>
           <a
             href="https://threads.net/eatsteak.dev"
             aria-label="@eatsteak.dev at Threads"
           >
-            <Threads class="w-8 hover:text-gray-900 text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 transition-colors" />
+            <Threads class="w-8 hover:text-gray-900 text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 transition-colors spring-bounce-10 spring-duration-200" />
           </a>
         </div>
       </div>

@@ -38,12 +38,12 @@ export const Switch: Component<SwitchProps> = (props) => {
     <>
       <div
         onClick={handleClick}
-        class="mx-6 w-10 h-4 border-2 cursor-pointer transition-colors bg-neutral-100 border-black dark:bg-slate-700 dark:border-white"
+        class="mx-6 w-10 h-4 border-2 cursor-pointer transition-colors spring-bounce-10 spring-duration-200 bg-neutral-100 border-black dark:bg-slate-700 dark:border-white"
         tabindex="0"
         onKeyUp={handleKeyUp}
       >
         <div
-          class={`text-xl text-center leading-8 block w-8 h-8 border-2 switch-transform transition-colors bg-neutral-100 border-black dark:bg-slate-700 dark:border-white${
+          class={`text-xl text-center leading-8 block w-8 h-8 border-2 switch-transform transition-colors spring-bounce-10 spring-duration-200 bg-neutral-100 border-black dark:bg-slate-700 dark:border-white${
             isEnabled() ? " enabled" : ""
           }`}
         >

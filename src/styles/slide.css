@@ -1,3 +1,5 @@
+@reference "@/styles/global.css";
+
 .slide-document svg {
   margin: 0.5rem 0;
   counter-increment: slide-counter;
@@ -28,8 +30,10 @@
   box-shadow:
     0 4px 6px -1px rgb(var(--color-shadow) / 10%),
     0 2px 4px -1px rgb(var(--color-shadow) / 6%) !important;
-  transition: all 0.3s ease !important;
+  transition: all 0.3s !important;
   margin: 1rem 0 !important;
+
+  @apply spring-bounce-10 spring-duration-300;
 }
 
 .slide-document img:hover {

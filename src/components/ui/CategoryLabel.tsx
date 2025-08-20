@@ -14,7 +14,7 @@ export const CategoryLabel: Component<{ class?: string; category: string }> = (
       fallback={
         <label
           class={cn(
-            "uppercase font-bold tracking-widest transition-all hover:brightness-125 focus:brightness-125 px-1",
+            "uppercase font-bold tracking-widest transition-all hover:brightness-125 focus:brightness-125 px-1 spring-bounce-10 spring-duration-200",
             props.class,
           )}
         >
@@ -24,7 +24,7 @@ export const CategoryLabel: Component<{ class?: string; category: string }> = (
     >
       <a
         class={cn(
-          "uppercase font-bold tracking-widest transition-all hover:brightness-125 focus:brightness-125 px-1",
+          "uppercase font-bold tracking-widest transition-all hover:brightness-125 focus:brightness-125 px-1 spring-bounce-10 spring-duration-200",
           props.class,
         )}
         style={{

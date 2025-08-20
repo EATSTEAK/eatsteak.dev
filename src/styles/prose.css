@@ -26,12 +26,12 @@
 }
 
 .content a {
-  @apply text-blue-600 dark:text-blue-400 transition-colors;
+  @apply text-blue-600 dark:text-blue-400 transition-colors spring-bounce-10 spring-duration-300;
 
   background-size: 0 2px;
   background-repeat: no-repeat;
   background-position-y: 100%;
-  transition: background-size 0.25s ease-out;
+  transition: background-size 0.25s;
 
   :not(.dark) & {
     background-image: radial-gradient(black, black);
@@ -42,7 +42,7 @@
   }
 
   &:hover {
-    @apply text-blue-800 dark:text-blue-200 transition-colors;
+    @apply text-blue-800 dark:text-blue-200 transition-colors spring-bounce-10 spring-duration-300;
 
     background-size: 100% 2px;
   }
