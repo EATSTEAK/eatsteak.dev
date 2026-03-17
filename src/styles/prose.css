@@ -17,8 +17,32 @@
 .content h5,
 .content h6 {
   word-break: keep-all;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.25em;
   margin-top: 1.5em;
+}
+
+.content > :first-child {
+  margin-top: 0;
+}
+
+.content h1 {
+  font-size: 1.953em;
+}
+
+.content h2 {
+  font-size: 1.563em;
+}
+
+.content h3 {
+  font-size: 1.25em;
+}
+
+.content h4 {
+  font-size: 1em;
+}
+
+.content h5 {
+  font-size: 0.8em;
 }
 
 .content strong,
@@ -46,6 +70,19 @@
     @apply text-blue-800 dark:text-blue-200 transition-colors spring-bounce-10 spring-duration-300;
 
     background-size: 100% 2px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid;
+    outline-offset: 2px;
+
+    :not(.dark) & {
+      outline-color: theme(--color-blue-600);
+    }
+
+    .dark & {
+      outline-color: theme(--color-blue-400);
+    }
   }
 }
 
@@ -215,6 +252,7 @@
 
 .content th {
   border-bottom: 0.125rem solid;
+  padding: 0.5rem 0.75rem;
 
   :not(.dark) & {
     @apply border-gray-700;
@@ -227,6 +265,7 @@
 
 .content td {
   border-bottom: 0.0625rem solid;
+  padding: 0.5rem 0.75rem;
 }
 
 /* Callouts */
