@@ -54,7 +54,7 @@ const posts = await getPostsByTopic(topic);
       {
         posts.map((post) => (
           <>
-            <PostItem post={post} minutesRead={getReadingTime(post.body)} />
+            <PostItem post={post} minutesRead={getReadingTime(post.body!)} />
           </>
         ))
       }

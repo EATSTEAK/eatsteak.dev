@@ -43,7 +43,7 @@ const allPosts = (await getCollection("blog")).sort(
 );
 
 const recentPostsInCategory = allPosts
-  .filter((post) => post.data.hidden !== true && post.slug !== slug)
+  .filter((post) => post.data.hidden !== true && post.id !== slug)
   .filter(
     (post) =>
       (CATEGORIES[post.data.category ?? "uncategorized"]?.id ??
@@ -166,7 +166,7 @@ const toc = buildToc(headings);
           <div class="mt-4 flex flex-col gap-2">
             {
               recentPostsInCategory.map((post) => (
-                <PostItem post={post} minutesRead={getReadingTime(post.body)} />
+                <PostItem post={post} minutesRead={getReadingTime(post.body!)} />
               ))
             }
             {

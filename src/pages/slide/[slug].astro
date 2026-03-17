@@ -17,7 +17,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 export async function getStaticPaths() {
   const slides = await getCollection("slide");
   return slides.map((slide) => ({
-    params: { slug: slide.slug },
+    params: { slug: slide.id },
     props: { slide },
   }));
 }
@@ -38,9 +38,9 @@ for (const [path, module] of Object.entries(images)) {
   }
 }
 
-const minutesRead = getReadingTime(slide.body);
+const minutesRead = getReadingTime(slide.body!);
 
-const marpResult = renderMarpSlides(slide.body, imageMapping);
+const marpResult = renderMarpSlides(slide.body!, imageMapping);
 
 // Add anchor IDs to slide sections for ToC navigation
 let processedHtml = marpResult.html;
@@ -87,7 +87,7 @@ function extractHeadingsFromSlides(slides: any[]): MarkdownHeading[] {
 const headings = extractHeadingsFromSlides(marpResult.slides);
 ---
 
-<BlogSlide slug={slide.slug} {...slide.data} {minutesRead} {headings}>
+<BlogSlide slug={slide.id} {...slide.data} {minutesRead} {headings}>
   <style set:html={marpResult.css}></style>
   <section class="slide-document prose" set:html={processedHtml} />
 </BlogSlide>

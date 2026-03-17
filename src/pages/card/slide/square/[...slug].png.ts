@@ -10,7 +10,7 @@ import { hexToRgb } from "@/utils/hex-to-rgb.ts";
 export async function getStaticPaths() {
   const posts = await getCollection("slide");
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: post,
   }));
 }
@@ -73,7 +73,7 @@ export const GET: APIRoute = async function GET({ props }) {
 
   const bgRgba = (alpha: number) =>
     `rgba(${hexToRgb(category.color.light.bg).join(", ")}, ${alpha})`;
-  const minutesToRead = getReadingTime(props.body) ?? 0;
+  const minutesToRead = getReadingTime(props.body!) ?? 0;
   const topics = (props.data.topics ?? []).map((topic: string) => ({
     type: "div",
     props: {

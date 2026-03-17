@@ -13,7 +13,7 @@ export const GET: APIRoute = async function GET(context) {
       .filter((post) => post.data.hidden !== true)
       .map((post) => ({
         ...post.data,
-        link: `/post/${post.slug}/`,
+        link: `/post/${post.id}/`,
       })),
   });
 };

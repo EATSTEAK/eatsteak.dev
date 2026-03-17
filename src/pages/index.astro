@@ -24,7 +24,7 @@ const posts = (await getCollection("blog"))
       <div class="flex flex-col gap-4">
         {
           posts.map((post) => (
-            <PostItem post={post} minutesRead={getReadingTime(post.body)} />
+            <PostItem post={post} minutesRead={getReadingTime(post.body!)} />
           ))
         }
       </div>

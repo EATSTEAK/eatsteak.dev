@@ -43,7 +43,7 @@ const allPosts = (await getCollection("slide")).sort(
 );
 
 const recentPostsInCategory = allPosts
-  .filter((post) => post.data.hidden !== true && post.slug !== slug)
+  .filter((post) => post.data.hidden !== true && post.id !== slug)
   .filter(
     (post) =>
       (CATEGORIES[post.data.category ?? "uncategorized"]?.id ??
@@ -169,7 +169,7 @@ const toc = buildToc(headings);
               recentPostsInCategory.map((post) => (
                 <SlideItem
                   post={post}
-                  minutesRead={getReadingTime(post.body)}
+                  minutesRead={getReadingTime(post.body!)}
                 />
               ))
             }

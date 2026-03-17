@@ -13,14 +13,14 @@ interface Props {
 const { post, minutesRead } = Astro.props;
 
 const thumbnail = post.data.thumbnail ?? {
-  src: `/card/post/og/${post.slug}.png`,
+  src: `/card/post/og/${post.id}.png`,
 };
 ---
 
 <section class="group/post flex flex-col md:flex-row gap-4 border-b py-4">
   <aside class="overflow-clip">
     <a
-      href={`/post/${post.slug}`}
+      href={`/post/${post.id}`}
       class="block bg-cover bg-center bg-no-repeat w-full md:w-64 h-64 md:h-full group-hover/post:scale-110 transition-transform"
       style={{
         "background-image": `url('${thumbnail.src}')`,
@@ -30,7 +30,7 @@ const thumbnail = post.data.thumbnail ?? {
     </a>
   </aside>
   <article>
-    <a href={`/post/${post.slug}`}>
+    <a href={`/post/${post.id}`}>
       <h1 class="text-[1.563em] mt-2">
         <span class="nav-link">{post.data.title}</span>
       </h1>

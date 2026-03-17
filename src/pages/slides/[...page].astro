@@ -28,7 +28,7 @@ const { page } = Astro.props as Props;
         {
           page.data.map((post) => (
             <>
-              <SlideItem post={post} minutesRead={getReadingTime(post.body)} />
+              <SlideItem post={post} minutesRead={getReadingTime(post.body!)} />
             </>
           ))
         }

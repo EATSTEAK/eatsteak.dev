@@ -22,7 +22,7 @@ const filteredPosts = posts
     {
       filteredPosts.map((post) => (
         <>
-          <CompactPostItem post={post} selected={selectedSlug === post.slug} />
+          <CompactPostItem post={post} selected={selectedSlug === post.id} />
         </>
       ))
     }
