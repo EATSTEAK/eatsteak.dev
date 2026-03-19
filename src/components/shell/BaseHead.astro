@@ -96,12 +96,12 @@ const { title, description, image = "/images/logo.png" } = Astro.props;
   }
   window.localStorage.setItem("theme", theme);
 
-  document.addEventListener("astro:after-swap", () => {
+  document.addEventListener("astro:before-swap", (e) => {
     const theme = localStorage.getItem("theme");
     if (theme === "dark") {
-      document.documentElement.classList.add("dark");
+      e.newDocument.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove("dark");
+      e.newDocument.documentElement.classList.remove("dark");
     }
   });
 </script>
