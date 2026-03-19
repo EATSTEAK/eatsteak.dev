@@ -103,7 +103,7 @@ const toc = buildToc(headings);
         </section>
         <section class="prose">
           <div class="title mb-8">
-            <h1>{title}</h1>
+            <h1 transition:name={`post-title-${slug}`}>{title}</h1>
             <div class="flex items-center flex-wrap line-between-flex-items">
               <div class="after:text-gray-500">
                 <CategoryLabel category={category ?? "uncategorized"} />

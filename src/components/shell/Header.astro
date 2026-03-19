@@ -11,7 +11,7 @@ const selected = (value: string) =>
   page.startsWith(value) ? "nav-link link-selected" : "nav-link";
 ---
 
-<header class="flex justify-center content-center px-6 py-6">
+<header transition:persist class="flex justify-center content-center px-6 py-6">
   <div
     class="grow max-w-(--breakpoint-xl) flex flex-wrap gap-4 lg:gap-16 justify-between lg:justify-start content-center"
   >
