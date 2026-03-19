@@ -164,7 +164,7 @@
 }
 
 @utility slide-to-top {
-  animation: slide-to-top 300ms ease-out;
+  animation: slide-to-top 500ms var(--spring-easing);
 }
 
 @layer base {
