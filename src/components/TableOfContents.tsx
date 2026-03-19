@@ -1,5 +1,5 @@
 import { ReactiveSet } from "@solid-primitives/set";
-import { type Component, createSignal, Show } from "solid-js";
+import { type Component, createSignal, onCleanup, onMount, Show } from "solid-js";
 import { Transition } from "solid-transition-group";
 import { TocHeadings } from "@/components/TocHeadings";
 import type { TocHeading } from "@/types";
@@ -26,8 +26,14 @@ export const TableOfContents: Component<{
     }),
   );
 
-  document.querySelectorAll(".prose section").forEach((section) => {
-    observer.observe(section);
+  onMount(() => {
+    document.querySelectorAll(".prose section").forEach((section) => {
+      observer.observe(section);
+    });
+  });
+
+  onCleanup(() => {
+    observer.disconnect();
   });
   return (
     <nav class="w-80 max-h-screen">
