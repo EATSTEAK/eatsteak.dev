@@ -5,15 +5,15 @@ export const Pagination: Component<{
   lastPage: number;
   currentPage: number;
 }> = (props) => {
-  const currentPageStartingZero = props.currentPage - 1;
-  const previousPage = currentPageStartingZero - (currentPageStartingZero % 5);
-  const nextPage =
+  const currentPageStartingZero = () => props.currentPage - 1;
+  const previousPage = () => currentPageStartingZero() - (currentPageStartingZero() % 5);
+  const nextPage = () =>
     Math.min(
       props.lastPage,
-      currentPageStartingZero + (5 - (currentPageStartingZero % 5)),
+      currentPageStartingZero() + (5 - (currentPageStartingZero() % 5)),
     ) + 1;
-  const pages = [...Array(nextPage - previousPage - 1).keys()].map(
-    (v) => v + 1 + previousPage,
+  const pages = () => [...Array(nextPage() - previousPage() - 1).keys()].map(
+    (v) => v + 1 + previousPage(),
   );
   const selected = (page: number) =>
     props.currentPage == page ? "nav-link link-selected" : "nav-link";
@@ -21,19 +21,19 @@ export const Pagination: Component<{
     disabled ? "pointer-events-none cursor-default" : "";
   return (
     <div class="w-full flex gap-2 justify-center">
-      <Show when={previousPage > 0}>
+      <Show when={previousPage() > 0}>
         <a
           href={
-            previousPage == 1
+            previousPage() == 1
               ? `${props.baseUrl}`
-              : `${props.baseUrl}/${previousPage}`
+              : `${props.baseUrl}/${previousPage()}`
           }
           class="px-1 nav-link font-mono"
         >
           &lt;
         </a>
       </Show>
-      <For each={pages}>
+      <For each={pages()}>
         {(i) => (
           <a
             class={`px-1 font-mono ${selected(i)} ${disabled(i == props.currentPage)}`}
@@ -43,9 +43,9 @@ export const Pagination: Component<{
           </a>
         )}
       </For>
-      <Show when={nextPage <= props.lastPage}>
+      <Show when={nextPage() <= props.lastPage}>
         <a
-          href={`${props.baseUrl}/${nextPage}`}
+          href={`${props.baseUrl}/${nextPage()}`}
           class="px-1 nav-link font-mono"
         >
           &gt;

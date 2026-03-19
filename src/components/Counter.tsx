@@ -13,7 +13,7 @@ const fetchCount = async (path: string): Promise<number> => {
 };
 
 export const Counter: Component<{ path: string }> = (props) => {
-  const [count] = createResource(props.path, fetchCount);
+  const [count] = createResource(() => props.path, fetchCount);
   return (
     <span class="text-gray-500">
       {count() ?? 0}회 조회{" "}

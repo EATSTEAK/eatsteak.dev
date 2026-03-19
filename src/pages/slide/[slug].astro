@@ -52,7 +52,7 @@ processedHtml = processedHtml.replace(/<section([^>]*)>/g, (_, attributes) => {
 });
 
 // Build ToC from slide headings with proper anchor links
-function extractHeadingsFromSlides(slides: any[]): MarkdownHeading[] {
+function extractHeadingsFromSlides(slides: { html: string }[]): MarkdownHeading[] {
   const headings: MarkdownHeading[] = [];
 
   slides.forEach((slideItem, slideIndex) => {

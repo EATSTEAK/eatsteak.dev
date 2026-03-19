@@ -1,5 +1,5 @@
 import type { Component, JSX } from "solid-js";
-import { createSignal } from "solid-js";
+import { createSignal, untrack } from "solid-js";
 import "./switch.css";
 
 interface SwitchProps {
@@ -13,7 +13,7 @@ interface SwitchProps {
 }
 
 export const Switch: Component<SwitchProps> = (props) => {
-  const [isEnabled, setIsEnabled] = createSignal(props.enabled);
+  const [isEnabled, setIsEnabled] = createSignal(untrack(() => props.enabled));
 
   const toggle = () => {
     setIsEnabled((c) => !c);

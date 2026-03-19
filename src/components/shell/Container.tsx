@@ -1,10 +1,9 @@
-import type { Component } from "solid-js";
+import type { Component, JSX } from "solid-js";
 import { cn } from "@/utils/cn.ts";
 
 export const Container: Component<{
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   class?: string;
-  children: any;
+  children: JSX.Element;
 }> = (props) => {
   return (
     <section

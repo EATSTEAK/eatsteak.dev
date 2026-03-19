@@ -34,8 +34,6 @@ const {
   topics,
   minutesRead,
   headings,
-  series,
-  ...leftoverProps
 } = Astro.props;
 
 const allPosts = (await getCollection("slide")).sort(

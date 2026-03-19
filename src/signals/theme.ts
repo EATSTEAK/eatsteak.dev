@@ -10,4 +10,5 @@ const initializeTheme = () => {
   return theme;
 };
 
-export default createSignal(initializeTheme());
+const [isDark, setIsDark] = createSignal(initializeTheme());
+export default [isDark, setIsDark] as const;
