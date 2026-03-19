@@ -84,154 +84,145 @@ const marpResult = renderMarpSlides(slide.body!, imageMapping);
   </div>
 
   <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll(".slide");
-    const totalSlides = slides.length;
-    const counter = document.getElementById("slide-counter");
-    const prevBtn = document.getElementById("prev-slide");
-    const nextBtn = document.getElementById("next-slide");
-    const controls = document.querySelector(
-      ".slideshow-controls",
-    ) as HTMLElement;
+    document.addEventListener("astro:page-load", () => {
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      if (!slides.length) return;
+      const totalSlides = slides.length;
+      const counter = document.getElementById("slide-counter");
+      const prevBtn = document.getElementById("prev-slide");
+      const nextBtn = document.getElementById("next-slide");
+      const controls = document.querySelector(
+        ".slideshow-controls",
+      ) as HTMLElement;
 
-    let controlsTimeout: number | null = null;
+      let controlsTimeout: number | null = null;
 
-    function showSlide(index: number) {
-      // Find currently active slide
-      const currentActiveSlide = document.querySelector(".slide.active");
-      const targetSlide = slides[index];
+      function showSlide(index: number) {
+        const currentActiveSlide = document.querySelector(".slide.active");
+        const targetSlide = slides[index];
 
-      if (currentActiveSlide && currentActiveSlide !== targetSlide) {
-        // Start exit animation for current slide
-        currentActiveSlide.classList.add("slide-exiting");
+        if (currentActiveSlide && currentActiveSlide !== targetSlide) {
+          currentActiveSlide.classList.add("slide-exiting");
 
-        // After exit animation completes, hide current and show new slide
-        setTimeout(() => {
-          currentActiveSlide.classList.remove("active", "slide-exiting");
-          targetSlide.classList.add("active", "slide-entering");
-
-          // Remove entering class after animation completes
           setTimeout(() => {
-            targetSlide.classList.remove("slide-entering");
-          }, 300);
-        }, 150);
-      } else {
-        // First slide or same slide, show immediately
-        slides.forEach((slide, i) => {
-          slide.classList.toggle("active", i === index);
-        });
+            currentActiveSlide.classList.remove("active", "slide-exiting");
+            targetSlide.classList.add("active", "slide-entering");
+
+            setTimeout(() => {
+              targetSlide.classList.remove("slide-entering");
+            }, 300);
+          }, 150);
+        } else {
+          slides.forEach((slide, i) => {
+            slide.classList.toggle("active", i === index);
+          });
+        }
+
+        if (counter) {
+          counter.textContent = `${index + 1} / ${totalSlides}`;
+        }
       }
 
-      if (counter) {
-        counter.textContent = `${index + 1} / ${totalSlides}`;
-      }
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      showSlide(currentSlide);
-    }
-
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      showSlide(currentSlide);
-    }
-
-    // Auto-hide controls functionality
-    function showControls() {
-      if (controls) {
-        controls.style.transform = "translateY(0)";
-        controls.style.opacity = "1";
-        controls.style.pointerEvents = "auto";
-      }
-    }
-
-    function hideControls() {
-      if (controls) {
-        controls.style.transform = "translateY(50%)";
-        controls.style.opacity = "0";
-        controls.style.pointerEvents = "none";
-      }
-    }
-
-    function resetControlsTimer() {
-      // Clear existing timeout
-      if (controlsTimeout) {
-        clearTimeout(controlsTimeout);
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
       }
 
-      // Show controls
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(currentSlide);
+      }
+
+      function showControls() {
+        if (controls) {
+          controls.style.transform = "translateY(0)";
+          controls.style.opacity = "1";
+          controls.style.pointerEvents = "auto";
+        }
+      }
+
+      function hideControls() {
+        if (controls) {
+          controls.style.transform = "translateY(50%)";
+          controls.style.opacity = "0";
+          controls.style.pointerEvents = "none";
+        }
+      }
+
+      function resetControlsTimer() {
+        if (controlsTimeout) {
+          clearTimeout(controlsTimeout);
+        }
+
+        showControls();
+
+        controlsTimeout = window.setTimeout(() => {
+          hideControls();
+        }, 3000);
+      }
+
       showControls();
+      resetControlsTimer();
 
-      // Set new timeout to hide controls after 3 seconds
-      controlsTimeout = window.setTimeout(() => {
-        hideControls();
-      }, 3000);
-    }
+      function fullscreenHandler() {
+        const slideshowContainer = document.querySelector(
+          ".slideshow-container",
+        );
+        if (!slideshowContainer) return;
 
-    // Initialize controls and start timer
-    showControls();
-    resetControlsTimer();
-
-    function fullscreenHandler() {
-      const slideshowContainer = document.querySelector(".slideshow-container");
-      if (!slideshowContainer) return;
-
-      if (document.fullscreenElement) {
-        document.exitFullscreen();
-      } else {
-        slideshowContainer.requestFullscreen();
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          slideshowContainer.requestFullscreen();
+        }
       }
-    }
 
-    const fullscreenBtn = document.getElementById("fullscreen");
-    if (fullscreenBtn) {
-      fullscreenBtn.addEventListener("click", fullscreenHandler);
-    }
-
-    // Event listeners for user interaction
-    document.addEventListener("mousemove", resetControlsTimer);
-    document.addEventListener("click", resetControlsTimer);
-
-    // Button event listeners
-    if (nextBtn) {
-      nextBtn.addEventListener("click", nextSlide);
-    }
-    if (prevBtn) {
-      prevBtn.addEventListener("click", prevSlide);
-    }
-
-    // Enhanced keyboard navigation
-    document.addEventListener("keydown", (e) => {
-      switch (e.key) {
-        case "ArrowRight":
-        case "ArrowDown":
-        case " ":
-          e.preventDefault();
-          nextSlide();
-          break;
-        case "ArrowLeft":
-        case "ArrowUp":
-          e.preventDefault();
-          prevSlide();
-          break;
-        case "Home":
-          e.preventDefault();
-          currentSlide = 0;
-          showSlide(currentSlide);
-          resetControlsTimer();
-          break;
-        case "End":
-          e.preventDefault();
-          currentSlide = totalSlides - 1;
-          showSlide(currentSlide);
-          resetControlsTimer();
-          break;
-        case "Escape":
-          // Go back to document view
-          window.location.href = `/slide/${window.location.pathname.split("/")[2]}`;
-          break;
+      const fullscreenBtn = document.getElementById("fullscreen");
+      if (fullscreenBtn) {
+        fullscreenBtn.addEventListener("click", fullscreenHandler);
       }
+
+      document.addEventListener("mousemove", resetControlsTimer);
+      document.addEventListener("click", resetControlsTimer);
+
+      if (nextBtn) {
+        nextBtn.addEventListener("click", nextSlide);
+      }
+      if (prevBtn) {
+        prevBtn.addEventListener("click", prevSlide);
+      }
+
+      document.addEventListener("keydown", (e) => {
+        switch (e.key) {
+          case "ArrowRight":
+          case "ArrowDown":
+          case " ":
+            e.preventDefault();
+            nextSlide();
+            break;
+          case "ArrowLeft":
+          case "ArrowUp":
+            e.preventDefault();
+            prevSlide();
+            break;
+          case "Home":
+            e.preventDefault();
+            currentSlide = 0;
+            showSlide(currentSlide);
+            resetControlsTimer();
+            break;
+          case "End":
+            e.preventDefault();
+            currentSlide = totalSlides - 1;
+            showSlide(currentSlide);
+            resetControlsTimer();
+            break;
+          case "Escape":
+            window.location.href = `/slide/${window.location.pathname.split("/")[2]}`;
+            break;
+        }
+      });
     });
   </script>
 </Layout>
