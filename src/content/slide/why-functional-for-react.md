@@ -78,6 +78,8 @@ Monad? (함수형 프로그래밍을 들어본 적이 있다면)
 
 ![side-effects](../../assets/why-functional-for-react/side-effects.png)
 
+---
+
 - 수학의 세계에서는 모든 함수들이 순수 함수 (닫힌 함수)이지만 현실 세계에서는 그렇지 않음
   - I/O interrupt, 하드웨어 오류, 네트워크... 등등
 - 컴퓨터 세계에서 쌓아진 모든 레이어들이 완벽하게 동작하지 않을 가능성
@@ -179,7 +181,7 @@ After: `compose(a_sec(a), b_sec(b)) -> view`
   - effect를 바깥으로 밀어내고
   - render를 더 순수하게 만드는 방향으로 감
 
-- 즉 React Best Practice는 프레임워크의 취향이 아니라, 함수형 사고를 따를 때 자연스럽게 나오는 결과물에 가까움
+- 즉 React Best Practice는 프레임워크의 취향이 아니라, 함수형 사고를 따를 때 자연스럽게 나오는 결과물
 
 ---
 
@@ -195,14 +197,14 @@ After: `compose(a_sec(a), b_sec(b)) -> view`
 
 ---
 
-예를 들어 장바구니 UI를 만든다면
+장바구니 UI를 만든다면...
 
-- Test Case
+- **Test Case**
   - 상품이 0개면 empty view가 보여야 한다
   - 상품이 3개면 total count는 3이어야 한다
   - 할인 코드가 적용되면 total price가 다시 계산되어야 한다
 
-- Constraint
+- **Constraint**
   - total price는 item들의 합과 항상 일치해야 한다
   - 음수 가격은 보여주면 안 된다
   - 서버 응답이 늦어도 UI는 깨지면 안 된다
@@ -212,6 +214,7 @@ After: `compose(a_sec(a), b_sec(b)) -> view`
 함수형 사고는 이런 요구사항을
 
 - “어떤 함수가 어떤 입력을 받아 어떤 출력을 내야 하는가”
+- "각각의 요소들을 어떤 함수로 쪼개고, 어떤 파이프라인으로 합성해야 하는가"
 - “어떤 제약이 항상 유지되어야 하는가”
 
 로 바꾸어 생각하게 만듦
@@ -253,7 +256,7 @@ raw_data
 React에서도 비슷함
 
 - API 응답을 그대로 렌더하지 않기
-- 중간에 domain model / view model을 만들기
+- 중간에 view model, hooks를 만들기
 - render 함수는 최대한 “보여주기”에 집중하기
 - effect는 마지막 동기화 단계로 밀어내기
 
