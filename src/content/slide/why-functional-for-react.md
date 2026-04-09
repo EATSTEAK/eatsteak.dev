@@ -3,7 +3,7 @@ title: 함수형 사고는 왜 필요한가?
 description: 함수형 사고란 무엇이고 왜 필요한지에 대해 React 개발자의 관점에서 바라봅니다. Monad, Funtor 같은 실제 FP 개념은 다루지 않습니다.
 category: dev
 pubDate: 2026-04-07T07:58:42.393Z
-hidden: true
+hidden: false
 topics:
   - development
   - functional
