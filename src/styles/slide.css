@@ -2,24 +2,6 @@
 
 .slide-document svg[data-marpit-svg] {
   margin: 0.5rem 0;
-  counter-increment: slide-counter;
-}
-
-/* 슬라이드 번호 표시 */
-.slide-document svg[data-marpit-svg] foreignObject > section::before {
-  content: counter(slide-counter);
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  background: rgb(var(--color-border) / 10%);
-  color: rgb(var(--color-text) / 60%);
-  padding: 0.25rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 /* Enhanced image styling with theme support */

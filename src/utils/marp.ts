@@ -35,6 +35,8 @@ type RenderMarpOptions = {
 
 const ASSET_IMPORT_PREFIX = "/src/assets/";
 const ASSET_REFERENCE_MARKER = "assets/";
+const DEFAULT_PAGINATE_DIRECTIVE = "<!-- paginate: true -->\n\n";
+const YAML_FRONTMATTER_PATTERN = /^(---\r?\n)([\s\S]*?)(\r?\n---)(\r?\n|$)/;
 
 function normalizePath(path: string): string {
   return path.replace(/\\/g, "/");
@@ -51,6 +53,27 @@ function splitPathAndSuffix(src: string): { path: string; suffix: string } {
     path: src.slice(0, suffixIndex),
     suffix: src.slice(suffixIndex),
   };
+}
+
+function hasGlobalPaginateDirective(markdown: string): boolean {
+  const yamlFrontmatter = markdown.match(YAML_FRONTMATTER_PATTERN)?.[2];
+
+  return Boolean(
+    yamlFrontmatter?.match(/^\s*paginate\s*:/im) ||
+    markdown.match(/<!--\s*paginate\s*:/i),
+  );
+}
+
+function applyDefaultPagination(markdown: string): string {
+  if (hasGlobalPaginateDirective(markdown)) return markdown;
+
+  const yamlFrontmatter = markdown.match(YAML_FRONTMATTER_PATTERN);
+  if (!yamlFrontmatter) return `${DEFAULT_PAGINATE_DIRECTIVE}${markdown}`;
+
+  const [, opening, body, closing, trailingNewline] = yamlFrontmatter;
+  const frontmatter = `${opening}${body.trimEnd()}\npaginate: true${closing}${trailingNewline}`;
+
+  return `${frontmatter}${markdown.slice(yamlFrontmatter[0].length)}`;
 }
 
 function isExternalOrResolvedPath(path: string): boolean {
@@ -239,7 +262,7 @@ export function renderMarpSlides(
     },
   });
 
-  const result = marp.render(markdown);
+  const result = marp.render(applyDefaultPagination(markdown));
   const dom = new JSDOM(result.html);
   const { document } = dom.window;
 
