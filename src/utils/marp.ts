@@ -1,4 +1,5 @@
 import { Marp } from "@marp-team/marp-core";
+import { normalizeMermaidHtml } from "@/utils/mermaid";
 
 export interface ParsedSlide {
   html: string;
@@ -76,8 +77,10 @@ export function renderMarpSlides(
   // Render the full document
   const result = marp.render(markdown);
 
-  // Process image paths in the rendered HTML using Vite asset mapping
-  const processedHtml = processImagePaths(result.html, imageMapping);
+  // 렌더링된 HTML의 이미지 경로와 Mermaid 블록을 처리합니다.
+  const processedHtml = normalizeMermaidHtml(
+    processImagePaths(result.html, imageMapping),
+  );
 
   // Extract individual slides from the processed HTML
   const slides: ParsedSlide[] = [];

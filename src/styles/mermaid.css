@@ -1,0 +1,47 @@
+@reference "@/styles/global.css";
+
+.mermaid-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.mermaid-wrapper .mermaid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  margin: 0;
+  background: transparent !important;
+}
+
+.mermaid-wrapper .mermaid svg {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.content .mermaid-wrapper {
+  margin: 2em 0;
+}
+
+.content pre.mermaid {
+  padding: 0;
+  border-radius: 0;
+  counter-reset: none;
+  counter-increment: none;
+  overflow: visible;
+}
+
+.slide-document .mermaid-wrapper {
+  margin: 1rem 0;
+}
+
+.slide-document .mermaid-wrapper svg {
+  counter-increment: none;
+}
+
+.slide-viewport .mermaid-wrapper {
+  width: 100%;
+  margin: 0.75rem 0;
+}

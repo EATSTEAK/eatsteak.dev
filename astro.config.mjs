@@ -13,6 +13,41 @@ import {
 } from "@shikijs/transformers";
 import { remarkCallout } from "@r4ai/remark-callout";
 
+function escapeHtml(value) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function createMermaidMarkup(value) {
+  return `<div class="mermaid-wrapper"><pre class="mermaid" data-mermaid-pending>${escapeHtml(value)}</pre></div>`;
+}
+
+function transformMermaidCodeBlocks(node) {
+  if (!node || typeof node !== "object") return;
+
+  if (node.type === "code" && node.lang?.toLowerCase() === "mermaid") {
+    node.type = "html";
+    node.value = createMermaidMarkup(node.value ?? "");
+    delete node.lang;
+    delete node.meta;
+    return;
+  }
+
+  if (Array.isArray(node.children)) {
+    for (const child of node.children) {
+      transformMermaidCodeBlocks(child);
+    }
+  }
+}
+
+function remarkMermaid() {
+  return transformMermaidCodeBlocks;
+}
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://eatsteak.dev",
@@ -25,7 +60,7 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    remarkPlugins: [remarkCallout],
+    remarkPlugins: [remarkCallout, remarkMermaid],
     rehypePlugins: [sectionize],
     remarkRehype: {
       footnoteLabel: "각주",

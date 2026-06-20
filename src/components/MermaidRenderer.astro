@@ -1,0 +1,47 @@
+---
+import "@/styles/mermaid.css";
+---
+
+<script>
+  import mermaid from "mermaid";
+
+  const globalWindow = window as typeof window & {
+    __eatsteakMermaidRenderer?: boolean;
+    __eatsteakMermaidInitialized?: boolean;
+  };
+
+  async function renderMermaid() {
+    if (!globalWindow.__eatsteakMermaidInitialized) {
+      mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: "strict",
+        theme: "base",
+      });
+      globalWindow.__eatsteakMermaidInitialized = true;
+    }
+
+    const nodes = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        ".mermaid[data-mermaid-pending]:not([data-processed='true']):not([data-mermaid-error='true'])",
+      ),
+    );
+
+    for (const node of nodes) {
+      try {
+        await mermaid.run({ nodes: [node] });
+      } catch (error) {
+        node.dataset.mermaidError = "true";
+        console.warn("Mermaid diagram rendering failed.", error);
+      }
+    }
+  }
+
+  if (!globalWindow.__eatsteakMermaidRenderer) {
+    globalWindow.__eatsteakMermaidRenderer = true;
+    document.addEventListener("astro:page-load", () => {
+      void renderMermaid();
+    });
+  }
+
+  void renderMermaid();
+</script>

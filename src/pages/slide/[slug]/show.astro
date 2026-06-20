@@ -9,6 +9,7 @@ import { ReadingMode } from "@/icons/ReadingMode";
 import { ArrowPrevious } from "@/icons/ArrowPrevious";
 import { ArrowNext } from "@/icons/ArrowNext";
 import { FullscreenMaximize } from "@/icons/FullscreenMaximize";
+import MermaidRenderer from "@/components/MermaidRenderer.astro";
 
 // Import all images from src/assets using Vite's glob import
 const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -82,6 +83,8 @@ const marpResult = renderMarpSlides(slide.body!, imageMapping);
       }
     </div>
   </div>
+
+  <MermaidRenderer />
 
   <script>
     document.addEventListener("astro:page-load", () => {

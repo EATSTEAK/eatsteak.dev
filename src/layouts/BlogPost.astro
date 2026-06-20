@@ -15,6 +15,7 @@ import { MinutesRead } from "@/components/MinutesRead";
 import type { MarkdownHeading } from "astro";
 import { TableOfContents } from "@/components/TableOfContents";
 import Series from "@/components/post/Series.astro";
+import MermaidRenderer from "@/components/MermaidRenderer.astro";
 import type { TocHeading } from "../types";
 import { cn } from "@/utils/cn";
 
@@ -137,6 +138,7 @@ const toc = buildToc(headings);
           <div class="content">
             <slot />
           </div>
+          <MermaidRenderer />
         </section>
         <hr class="my-8" />
         {

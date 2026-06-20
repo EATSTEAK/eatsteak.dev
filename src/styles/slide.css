@@ -1,12 +1,12 @@
 @reference "@/styles/global.css";
 
-.slide-document svg {
+.slide-document svg[data-marpit-svg] {
   margin: 0.5rem 0;
   counter-increment: slide-counter;
 }
 
-/* Add slide number indicator */
-.slide-document section::before {
+/* 슬라이드 번호 표시 */
+.slide-document svg[data-marpit-svg] foreignObject > section::before {
   content: counter(slide-counter);
   position: absolute;
   top: 1rem;

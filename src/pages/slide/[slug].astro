@@ -5,6 +5,7 @@ import type { MarkdownHeading } from "astro";
 import type { ImageMetadata } from "astro";
 import "@/styles/slide.css";
 import BlogSlide from "@/layouts/BlogSlide.astro";
+import MermaidRenderer from "@/components/MermaidRenderer.astro";
 import { getReadingTime } from "@/utils/reading-time";
 import { JSDOM } from "jsdom";
 
@@ -90,4 +91,5 @@ const headings = extractHeadingsFromSlides(marpResult.slides);
 <BlogSlide slug={slide.id} {...slide.data} {minutesRead} {headings}>
   <style set:html={marpResult.css}></style>
   <section class="slide-document prose" set:html={processedHtml} />
+  <MermaidRenderer />
 </BlogSlide>
