@@ -10,6 +10,123 @@ import "@/styles/mermaid.css";
     __eatsteakMermaidInitialized?: boolean;
   };
 
+  const MIN_SLIDE_DIAGRAM_HEIGHT = 160;
+
+  function toPixels(value: string): number {
+    const pixels = Number.parseFloat(value);
+    return Number.isFinite(pixels) ? pixels : 0;
+  }
+
+  function outerHeight(element: HTMLElement): number {
+    const style = window.getComputedStyle(element);
+    return (
+      element.offsetHeight +
+      toPixels(style.marginTop) +
+      toPixels(style.marginBottom)
+    );
+  }
+
+  function getSvgIntrinsicSize(svg: SVGSVGElement) {
+    const { width, height } = svg.viewBox.baseVal;
+    if (width > 0 && height > 0) return { width, height };
+
+    const rect = svg.getBoundingClientRect();
+    if (rect.width > 0 && rect.height > 0) {
+      return { width: rect.width, height: rect.height };
+    }
+
+    return undefined;
+  }
+
+  function resetMermaidSvg(svg: SVGSVGElement) {
+    svg.style.removeProperty("width");
+    svg.style.removeProperty("height");
+    svg.style.removeProperty("max-width");
+    svg.style.removeProperty("max-height");
+  }
+
+  function fitSlideMermaidSection(section: HTMLElement) {
+    const wrappers = Array.from(
+      section.querySelectorAll<HTMLElement>(".mermaid-wrapper"),
+    );
+    if (!wrappers.length) return;
+
+    const diagrams = wrappers.flatMap((wrapper) => {
+      const svg = wrapper.querySelector<SVGSVGElement>(".mermaid svg");
+      if (!svg) return [];
+
+      resetMermaidSvg(svg);
+      return [{ wrapper, svg }];
+    });
+    if (!diagrams.length) return;
+
+    const sectionStyle = window.getComputedStyle(section);
+    const contentWidth =
+      section.clientWidth -
+      toPixels(sectionStyle.paddingLeft) -
+      toPixels(sectionStyle.paddingRight);
+    const contentHeight =
+      section.clientHeight -
+      toPixels(sectionStyle.paddingTop) -
+      toPixels(sectionStyle.paddingBottom);
+
+    const occupiedHeight = Array.from(section.children).reduce(
+      (total, child) => {
+        if (!(child instanceof HTMLElement)) return total;
+        const hasMermaidWrapper = wrappers.some(
+          (wrapper) => wrapper === child || child.contains(wrapper),
+        );
+        if (hasMermaidWrapper) return total;
+
+        return total + outerHeight(child);
+      },
+      0,
+    );
+    const wrapperMargins = diagrams.reduce((total, { wrapper }) => {
+      const style = window.getComputedStyle(wrapper);
+      return total + toPixels(style.marginTop) + toPixels(style.marginBottom);
+    }, 0);
+    const maxDiagramHeight = Math.max(
+      MIN_SLIDE_DIAGRAM_HEIGHT,
+      (contentHeight - occupiedHeight - wrapperMargins) / diagrams.length,
+    );
+
+    for (const { wrapper, svg } of diagrams) {
+      const size = getSvgIntrinsicSize(svg);
+      if (!size) continue;
+
+      const wrapperWidth = wrapper.clientWidth || contentWidth;
+      const maxWidth = Math.max(1, Math.min(contentWidth, wrapperWidth));
+      const scale = Math.min(
+        1,
+        maxWidth / size.width,
+        maxDiagramHeight / size.height,
+      );
+
+      svg.style.width = `${Math.floor(size.width * scale)}px`;
+      svg.style.height = `${Math.floor(size.height * scale)}px`;
+      svg.style.maxWidth = "100%";
+      svg.style.maxHeight = `${Math.floor(maxDiagramHeight)}px`;
+      svg.dataset.mermaidFitScale = scale.toFixed(3);
+    }
+  }
+
+  function fitSlideMermaidDiagrams() {
+    const sections = document.querySelectorAll<HTMLElement>(
+      ".slide-viewport section",
+    );
+
+    for (const section of sections) {
+      fitSlideMermaidSection(section);
+    }
+  }
+
+  function scheduleSlideMermaidFit() {
+    window.requestAnimationFrame(() => {
+      fitSlideMermaidDiagrams();
+    });
+  }
+
   async function renderMermaid() {
     if (!globalWindow.__eatsteakMermaidInitialized) {
       mermaid.initialize({
@@ -34,6 +151,8 @@ import "@/styles/mermaid.css";
         console.warn("Mermaid diagram rendering failed.", error);
       }
     }
+
+    scheduleSlideMermaidFit();
   }
 
   if (!globalWindow.__eatsteakMermaidRenderer) {
@@ -41,6 +160,7 @@ import "@/styles/mermaid.css";
     document.addEventListener("astro:page-load", () => {
       void renderMermaid();
     });
+    window.addEventListener("resize", scheduleSlideMermaidFit);
   }
 
   void renderMermaid();

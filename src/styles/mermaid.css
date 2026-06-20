@@ -44,4 +44,13 @@
 .slide-viewport .mermaid-wrapper {
   width: 100%;
   margin: 0.75rem 0;
+  overflow: hidden;
+}
+
+.slide-viewport .mermaid-wrapper .mermaid {
+  overflow: visible;
+}
+
+.slide-viewport .mermaid-wrapper .mermaid svg {
+  flex: 0 1 auto;
 }
