@@ -32,10 +32,7 @@ function createMermaidElement(
   return wrapper;
 }
 
-export function normalizeMermaidHtml(html: string): string {
-  const dom = new JSDOM(html);
-  const { document } = dom.window;
-
+export function normalizeMermaidDocument(document: Document): void {
   const mermaidBlocks = Array.from(document.querySelectorAll("pre")).filter(
     (pre): pre is HTMLPreElement => isMermaidPre(pre as HTMLPreElement),
   );
@@ -47,6 +44,13 @@ export function normalizeMermaidHtml(html: string): string {
     const source = code?.textContent ?? pre.textContent ?? "";
     pre.replaceWith(createMermaidElement(document, source));
   }
+}
+
+export function normalizeMermaidHtml(html: string): string {
+  const dom = new JSDOM(html);
+  const { document } = dom.window;
+
+  normalizeMermaidDocument(document);
 
   return document.body.innerHTML;
 }

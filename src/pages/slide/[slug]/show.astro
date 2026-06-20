@@ -1,10 +1,10 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import { renderMarpSlides } from "@/utils/marp";
+import { createImageAssetMap, renderMarpSlides } from "@/utils/marp";
 import type { ImageMetadata } from "astro";
 import "@/styles/show.css";
-import { Button } from "@/components/ui/Button";
+import { Button, buttonClassName } from "@/components/ui/Button";
 import { ReadingMode } from "@/icons/ReadingMode";
 import { ArrowPrevious } from "@/icons/ArrowPrevious";
 import { ArrowNext } from "@/icons/ArrowNext";
@@ -31,17 +31,9 @@ type Props = {
 
 const { slide } = Astro.props;
 
-// Create image path mapping for Vite assets
-const imageMapping: Record<string, string> = {};
-for (const [path, module] of Object.entries(images)) {
-  // Extract filename from the import path
-  const filename = path.split("/").pop();
-  if (filename) {
-    imageMapping[filename] = module.default.src;
-  }
-}
+const imageMap = createImageAssetMap(images);
 
-const marpResult = renderMarpSlides(slide.body!, imageMapping);
+const marpResult = renderMarpSlides(slide.body!, { imageMap });
 ---
 
 <Layout title={slide.data.title} description={slide.data.description}>
@@ -52,67 +44,103 @@ const marpResult = renderMarpSlides(slide.body!, imageMapping);
     <div
       class="slideshow-controls fixed bottom-5 right-5 z-30 flex gap-3 items-center backdrop-blur-sm transition-all spring-bounce-10 spring-duration-200 pointer-events-auto p-3 rounded-md overflow-hidden bg-primary-bg/50"
     >
-      <Button id="prev-slide" class="cursor-pointer"
-        ><ArrowPrevious class="size-4" /></Button
+      <button
+        id="prev-slide"
+        type="button"
+        class={buttonClassName("cursor-pointer")}
+        aria-label="이전 슬라이드"
       >
+        <ArrowPrevious class="size-4" />
+      </button>
       <span id="slide-counter">1 / {marpResult.slides.length}</span>
-      <Button id="next-slide" class="cursor-pointer"
-        ><ArrowNext class="size-4" /></Button
+      <button
+        id="next-slide"
+        type="button"
+        class={buttonClassName("cursor-pointer")}
+        aria-label="다음 슬라이드"
       >
-      <Button href={`/slide/${slide.id}`}
-        ><ReadingMode class="size-4" /></Button
+        <ArrowNext class="size-4" />
+      </button>
+      <Button href={`/slide/${slide.id}`} aria-label="읽기 모드로 보기">
+        <ReadingMode class="size-4" />
+      </Button>
+      <button
+        id="fullscreen"
+        type="button"
+        class={buttonClassName("cursor-pointer")}
+        aria-label="전체 화면 전환"
       >
-      <Button id="fullscreen" class="cursor-pointer"
-        ><FullscreenMaximize class="size-4" /></Button
-      >
+        <FullscreenMaximize class="size-4" />
+      </button>
     </div>
 
-    <div class="slide-viewport marpit">
-      {
-        marpResult.slides.map((slideItem, index) => (
-          <svg
-            class={`slide ${index === 0 ? "active" : ""}`}
-            data-marpit-svg=""
-            viewBox="0 0 1280 720"
-          >
-            <foreignObject width="1280" height="720">
-              <section data-slide-index={index} set:html={slideItem.html} />
-            </foreignObject>
-          </svg>
-        ))
-      }
-    </div>
+    <div class="slide-viewport marpit" set:html={marpResult.presentationHtml} />
   </div>
 
   <MermaidRenderer />
 
   <script>
-    document.addEventListener("astro:page-load", () => {
+    type SlideshowState = {
+      bound?: boolean;
+      cleanup?: () => void;
+    };
+
+    const globalWindow = window as typeof window & {
+      __eatsteakSlideshow?: SlideshowState;
+    };
+
+    const slideshowState = (globalWindow.__eatsteakSlideshow ??= {});
+
+    function setupSlideshow(): (() => void) | undefined {
       let currentSlide = 0;
-      const slides = document.querySelectorAll(".slide");
-      if (!slides.length) return;
+      const slides = Array.from(
+        document.querySelectorAll<SVGElement>(".slide"),
+      );
+      if (!slides.length) return undefined;
+
       const totalSlides = slides.length;
       const counter = document.getElementById("slide-counter");
       const prevBtn = document.getElementById("prev-slide");
       const nextBtn = document.getElementById("next-slide");
-      const controls = document.querySelector(
+      const fullscreenBtn = document.getElementById("fullscreen");
+      const controls = document.querySelector<HTMLElement>(
         ".slideshow-controls",
-      ) as HTMLElement;
+      );
+      const abortController = new AbortController();
+      const { signal } = abortController;
+      const timeouts = new Set<number>();
+      let controlsTimeout: number | undefined;
 
-      let controlsTimeout: number | null = null;
+      function scheduleTimeout(callback: () => void, delay: number): number {
+        const timeout = window.setTimeout(() => {
+          timeouts.delete(timeout);
+          callback();
+        }, delay);
+        timeouts.add(timeout);
+        return timeout;
+      }
+
+      function clearScheduledTimeout(timeout: number | undefined) {
+        if (timeout === undefined) return;
+
+        window.clearTimeout(timeout);
+        timeouts.delete(timeout);
+      }
 
       function showSlide(index: number) {
-        const currentActiveSlide = document.querySelector(".slide.active");
+        const currentActiveSlide =
+          document.querySelector<SVGElement>(".slide.active");
         const targetSlide = slides[index];
+        if (!targetSlide) return;
 
         if (currentActiveSlide && currentActiveSlide !== targetSlide) {
           currentActiveSlide.classList.add("slide-exiting");
 
-          setTimeout(() => {
+          scheduleTimeout(() => {
             currentActiveSlide.classList.remove("active", "slide-exiting");
             targetSlide.classList.add("active", "slide-entering");
 
-            setTimeout(() => {
+            scheduleTimeout(() => {
               targetSlide.classList.remove("slide-entering");
             }, 300);
           }, 150);
@@ -154,19 +182,14 @@ const marpResult = renderMarpSlides(slide.body!, imageMapping);
       }
 
       function resetControlsTimer() {
-        if (controlsTimeout) {
-          clearTimeout(controlsTimeout);
-        }
+        clearScheduledTimeout(controlsTimeout);
 
         showControls();
 
-        controlsTimeout = window.setTimeout(() => {
+        controlsTimeout = scheduleTimeout(() => {
           hideControls();
         }, 3000);
       }
-
-      showControls();
-      resetControlsTimer();
 
       function fullscreenHandler() {
         const slideshowContainer = document.querySelector(
@@ -181,33 +204,29 @@ const marpResult = renderMarpSlides(slide.body!, imageMapping);
         }
       }
 
-      const fullscreenBtn = document.getElementById("fullscreen");
-      if (fullscreenBtn) {
-        fullscreenBtn.addEventListener("click", fullscreenHandler);
-      }
+      function keydownHandler(e: KeyboardEvent) {
+        const target = e.target as HTMLElement | null;
+        const isInteractiveTarget = Boolean(
+          target?.closest("a, button, input, select, textarea"),
+        );
 
-      document.addEventListener("mousemove", resetControlsTimer);
-      document.addEventListener("click", resetControlsTimer);
+        if (isInteractiveTarget && (e.key === " " || e.key === "Enter")) {
+          return;
+        }
 
-      if (nextBtn) {
-        nextBtn.addEventListener("click", nextSlide);
-      }
-      if (prevBtn) {
-        prevBtn.addEventListener("click", prevSlide);
-      }
-
-      document.addEventListener("keydown", (e) => {
         switch (e.key) {
           case "ArrowRight":
           case "ArrowDown":
           case " ":
             e.preventDefault();
             nextSlide();
+            resetControlsTimer();
             break;
           case "ArrowLeft":
           case "ArrowUp":
             e.preventDefault();
             prevSlide();
+            resetControlsTimer();
             break;
           case "Home":
             e.preventDefault();
@@ -225,7 +244,43 @@ const marpResult = renderMarpSlides(slide.body!, imageMapping);
             window.location.href = `/slide/${window.location.pathname.split("/")[2]}`;
             break;
         }
-      });
-    });
+      }
+
+      showControls();
+      resetControlsTimer();
+
+      fullscreenBtn?.addEventListener("click", fullscreenHandler, { signal });
+      nextBtn?.addEventListener("click", nextSlide, { signal });
+      prevBtn?.addEventListener("click", prevSlide, { signal });
+      document.addEventListener("mousemove", resetControlsTimer, { signal });
+      document.addEventListener("click", resetControlsTimer, { signal });
+      document.addEventListener("keydown", keydownHandler, { signal });
+
+      return () => {
+        abortController.abort();
+        for (const timeout of timeouts) {
+          window.clearTimeout(timeout);
+        }
+        timeouts.clear();
+      };
+    }
+
+    function cleanupCurrentSlideshow() {
+      slideshowState.cleanup?.();
+      slideshowState.cleanup = undefined;
+    }
+
+    function initializeCurrentPage() {
+      cleanupCurrentSlideshow();
+      slideshowState.cleanup = setupSlideshow();
+    }
+
+    if (!slideshowState.bound) {
+      slideshowState.bound = true;
+      document.addEventListener("astro:page-load", initializeCurrentPage);
+      document.addEventListener("astro:before-swap", cleanupCurrentSlideshow);
+    }
+
+    initializeCurrentPage();
   </script>
 </Layout>

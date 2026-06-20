@@ -1,13 +1,12 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import { renderMarpSlides } from "@/utils/marp";
+import { createImageAssetMap, renderMarpSlides } from "@/utils/marp";
 import type { MarkdownHeading } from "astro";
 import type { ImageMetadata } from "astro";
 import "@/styles/slide.css";
 import BlogSlide from "@/layouts/BlogSlide.astro";
 import MermaidRenderer from "@/components/MermaidRenderer.astro";
 import { getReadingTime } from "@/utils/reading-time";
-import { JSDOM } from "jsdom";
 
 // Import all images from src/assets using Vite's glob import
 const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -29,67 +28,28 @@ type Props = {
 
 const { slide } = Astro.props;
 
-// Create image path mapping for Vite assets
-const imageMapping: Record<string, string> = {};
-for (const [path, module] of Object.entries(images)) {
-  // Extract filename from the import path
-  const filename = path.split("/").pop();
-  if (filename) {
-    imageMapping[filename] = module.default.src;
-  }
-}
+const imageMap = createImageAssetMap(images);
 
 const minutesRead = getReadingTime(slide.body!);
 
-const marpResult = renderMarpSlides(slide.body!, imageMapping);
+const marpResult = renderMarpSlides(slide.body!, { imageMap });
 
-// Add anchor IDs to slide sections for ToC navigation
-let processedHtml = marpResult.html;
-let slideIndex = 0;
-processedHtml = processedHtml.replace(/<section([^>]*)>/g, (_, attributes) => {
-  const slideId = `slide-${slideIndex}`;
-  slideIndex++;
-  return `<section id="${slideId}"${attributes}>`;
+// Build ToC from the first heading in each Marp slide.
+const headings: MarkdownHeading[] = marpResult.slides.flatMap((slideItem) => {
+  if (!slideItem.firstHeadingText) return [];
+
+  return [
+    {
+      depth: 2,
+      slug: slideItem.id,
+      text: slideItem.firstHeadingText,
+    },
+  ];
 });
-
-// Build ToC from slide headings with proper anchor links
-function extractHeadingsFromSlides(slides: { html: string }[]): MarkdownHeading[] {
-  const headings: MarkdownHeading[] = [];
-
-  slides.forEach((slideItem, slideIndex) => {
-    const htmlContent = slideItem.html;
-
-    // Use JSDOM to parse HTML content
-    const dom = new JSDOM(htmlContent);
-    const document = dom.window.document;
-
-    // Find all heading elements (h1-h6)
-    const headingElements = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-
-    if (headingElements.length > 0) {
-      // Only use the first heading per slide for ToC
-      const firstHeading = headingElements[0];
-      const text = firstHeading.textContent?.trim() || "";
-      const slug = `slide-${slideIndex}`; // Use heading id or fallback to slide index
-
-      if (text) {
-        headings.push({
-          depth: 2, // Adjust depth for ToC hierarchy
-          slug, // Use the heading's id attribute
-          text,
-        });
-      }
-    }
-  });
-
-  return headings;
-}
-
-const headings = extractHeadingsFromSlides(marpResult.slides);
 ---
 
 <BlogSlide slug={slide.id} {...slide.data} {minutesRead} {headings}>
   <style set:html={marpResult.css}></style>
-  <section class="slide-document prose" set:html={processedHtml} />
+  <section class="slide-document prose" set:html={marpResult.html} />
   <MermaidRenderer />
 </BlogSlide>
