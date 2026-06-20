@@ -234,15 +234,13 @@ function buildPresentationHtml(slideSections: HTMLElement[]): string {
       if (!svg) return "";
 
       const clone = svg.cloneNode(true) as Element;
-      clone.classList.add("slide");
+      const classes = ["slide", "marpit"];
 
       if (index === 0) {
-        clone.classList.add("active");
-      } else {
-        clone.classList.remove("active");
+        classes.push("active");
       }
 
-      return clone.outerHTML;
+      return `<div class="${classes.join(" ")}">${clone.outerHTML}</div>`;
     })
     .join("");
 }

@@ -94,7 +94,7 @@ const marpResult = renderMarpSlides(slide.body!, { imageMap });
     function setupSlideshow(): (() => void) | undefined {
       let currentSlide = 0;
       const slides = Array.from(
-        document.querySelectorAll<SVGElement>(".slide"),
+        document.querySelectorAll<HTMLElement>(".slide"),
       );
       if (!slides.length) return undefined;
 
@@ -129,7 +129,7 @@ const marpResult = renderMarpSlides(slide.body!, { imageMap });
 
       function showSlide(index: number) {
         const currentActiveSlide =
-          document.querySelector<SVGElement>(".slide.active");
+          document.querySelector<HTMLElement>(".slide.active");
         const targetSlide = slides[index];
         if (!targetSlide) return;
 
