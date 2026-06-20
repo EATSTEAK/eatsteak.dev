@@ -20,7 +20,7 @@ theme: default
 
 Spring Boot 기반 예약 서비스와 100석 티켓팅 데모
 
-영상 발표 개요
+> 20211561 구효민 / 고급자바프로그래밍 발표
 
 <!--
 발표 메모:
@@ -160,13 +160,13 @@ DB 접근은 Repository로 분리하고, Reservation이나 WaitlistEntry 같은 
 
 기존 예약 도메인을 공연 티켓팅으로 해석했습니다.
 
-| 예약 시스템 | 티켓팅 데모 |
-| --- | --- |
-| `ResourceType` | 공연 |
-| `Resource` | 좌석 |
-| `ResourceSlot` | 특정 공연 시간의 좌석 판매 슬롯 |
-| `Reservation` | 예매 티켓 |
-| `WaitlistEntry` | 매진 좌석 대기 신청 |
+| 예약 시스템     | 티켓팅 데모                     |
+| --------------- | ------------------------------- |
+| `ResourceType`  | 공연                            |
+| `Resource`      | 좌석                            |
+| `ResourceSlot`  | 특정 공연 시간의 좌석 판매 슬롯 |
+| `Reservation`   | 예매 티켓                       |
+| `WaitlistEntry` | 매진 좌석 대기 신청             |
 
 <!--
 발표 메모:
@@ -336,13 +336,13 @@ DB 연동은 Spring Data JPA를 사용했습니다.
 
 프런트엔드와 백엔드는 REST API로 통신합니다.
 
-| 기능 | API |
-| --- | --- |
-| 로그인 | `POST /api/auth/login` |
-| 예약 생성 | `POST /api/reservations` |
-| 내 예약 조회 | `GET /api/reservations/me` |
-| 예약 취소 | `DELETE /api/reservations/{reservationId}` |
-| 관리자 통계 | `GET /api/admin/statistics/reservations` |
+| 기능         | API                                        |
+| ------------ | ------------------------------------------ |
+| 로그인       | `POST /api/auth/login`                     |
+| 예약 생성    | `POST /api/reservations`                   |
+| 내 예약 조회 | `GET /api/reservations/me`                 |
+| 예약 취소    | `DELETE /api/reservations/{reservationId}` |
+| 관리자 통계  | `GET /api/admin/statistics/reservations`   |
 
 <!--
 발표 메모:
